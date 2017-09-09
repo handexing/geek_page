@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>geek home</title>
+		
+	<link rel="stylesheet" href="plugins/mdui/css/mdui.min.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<link rel="icon" href="img/logo.png" type="image/x-icon">
+	
+	</head>
+	
+	<body class="mdui-appbar-with-toolbar">
+		<!--head menu-->
+		<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
+		  	<div class="mdui-toolbar mdui-color-blue">
+			    <a href="javascript:;"><img src="img/logo.png" width="50" height="50" id="logo"/></a>
+			   	<a href="javascript:;" class="mdui-typo-headline">GEEK</a>
+			   	<a href="javascript:;" class="mdui-typo-title">首页</a>
+			   	<a href="javascript:;" class="mdui-typo-title">开源</a>
+			   	<a href="javascript:;" class="mdui-typo-title">博客</a>
+			   	<a href="javascript:;" class="mdui-typo-title">问与答</a>
+			   	<a href="javascript:;" class="mdui-typo-title">标签节点</a>
+			   	<input type="hidden" id="userId" />
+			    <div class="mdui-toolbar-spacer"></div>
+			    <div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
+					<button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe8b6;</i></button>
+					<input class="mdui-textfield-input" type="text" placeholder="请输入你要搜索的内容..."/>
+					<button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe5cd;</i></button>
+				</div>
+
+				<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe853;</i></a>
+				<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#demo-attr-cascade'}"><i class="mdui-icon material-icons">&#xe5d4;</i></a>
+
+				<ul class="mdui-menu" id="demo-attr-cascade" style="margin-top: 60px;">
+  					<li class="mdui-menu-item">
+				    	<a href="javascript:;" class="mdui-ripple">
+				      		<i class="mdui-menu-item-icon mdui-icon material-icons">&#xe417;</i>个人设置
+				    	</a>
+				  	</li>
+				  	<li class="mdui-divider"></li>
+				  	<li class="mdui-menu-item">
+				    	<a href="login.html" class="mdui-ripple">
+				    		<i class="mdui-menu-item-icon mdui-icon material-icons">&#xe6dd;</i>退出登录
+				    	</a>
+				  	</li>
+				</ul>
+		  	</div>
+		</div>
+		
+		<div class="mdui-container" style="border: 1px solid red; width: 100%;height: 1500px;margin-top: 10px;padding: 0px;">
+			<iframe id="m_Iframe" frameborder="0" width="100%" height="100%" marginheight="0" marginwidth="0" scrolling="no"></iframe>
+  		</div>
+		
+		<!--弹出菜单-->
+		<!--<div class="mdui-fab-wrapper" id="fab">
+		    <button class="mdui-fab mdui-ripple mdui-color-pink-accent">
+		      	<i class="mdui-icon material-icons">&#xe145</i>
+		      	<i class="mdui-icon mdui-fab-opened material-icons">&#xe254</i>
+		    </button>
+    		<div class="mdui-fab-dial">
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">&#xe864</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red" id="addArticle"><i class="mdui-icon material-icons">&#xe0e0</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange" id="addRemind"><i class="mdui-icon material-icons">&#xe191</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">&#xe913</i></button>
+    		</div>
+  		</div>-->
+  		
+	</body>
+	
+	<script type="text/javascript" src="js/jquery.min.js" ></script>
+	<script type="text/javascript" src="plugins/mdui/js/mdui.min.js" ></script>
+	<script type="text/javascript" src="js/indexConfig.js" ></script>
+	
+	<script type="application/javascript">
+		
+		$(function(){
+			new indexConfig();
+		});
+		
+	</script>
+	
+</html>
