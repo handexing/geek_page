@@ -20,6 +20,10 @@ function indexConfig(){
 			$("#m_Iframe").attr("src","view/lableNodePage.html").attr("name","lableNodePage");
 		});
 		
+		$('#questionsAnswersPage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","lableNodePage");
+		});
+		
 	}
 	
 	self.init();
