@@ -10,7 +10,15 @@ function indexConfig(){
 	
 	this.init=function(){
 		
-		$("#m_Iframe").attr("src","view/indexPage.html").attr("name","welcome");
+		$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
+		
+		$('#indexPage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/indexPage.html").attr("name","lableNodePage");
+		});
+		
+		$('#lableNodePage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/lableNodePage.html").attr("name","lableNodePage");
+		});
 		
 	}
 	
