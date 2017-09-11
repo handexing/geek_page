@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>开源</title>
+		
+		<link rel="stylesheet" href="../plugins/mdui/css/mdui.min.css" />
+		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/openSourcePage.css" />
+		
+	</head>
+	<body>
+		<div class="mdui-container" style="padding: 0px; height: 2100px;">
+			<div class="mdui-card small_card">
+	  			<div class="crad_title">开源</div>
+	  			<div class="mdui-tab" mdui-tab>
+	  				<a href="#java" class="mdui-ripple">JAVA</a>
+				 	<a href="#technology" class="mdui-ripple">Python</a>
+				  	<a href="#node" class="mdui-ripple">JS</a>
+				  	<a href="#node" class="mdui-ripple">C#</a>
+				  	<a href="#node" class="mdui-ripple">Ruby</a>
+				  	<a href="#node" class="mdui-ripple">GO</a>
+				  	<a href="#node" class="mdui-ripple">PHP</a>
+				  	<a href="#node" class="mdui-ripple">更多</a>
+				</div>
+				<div id="java" class="mdui-m-t-1">
+					<div class="crad_title">本类推荐</div>
+					<div class="mdui-row-xs-4 mdui-m-t-1">
+					  	<div class="mdui-col">
+							<div class="mdui-grid-tile">
+							  	<a href="javascript:;"><img src="../img/test.jpg"/></a>
+							  	<div class="mdui-grid-tile-actions">
+								    <div class="mdui-grid-tile-text">
+								      	<div class="mdui-grid-tile-title">定时任务调度系统 OpenCron</div>
+								    </div>
+							  	</div>
+							</div>
+					  	</div>
+					  	<div class="mdui-col">
+					  		<div class="mdui-grid-tile">
+							  	<a href="javascript:;"><img src="../img/test.jpg"/></a>
+							  	<div class="mdui-grid-tile-actions">
+								    <div class="mdui-grid-tile-text">
+								      	<div class="mdui-grid-tile-title">微信开发 Java SDK Weixin Java Tools </div>
+								    </div>
+							  	</div>
+							</div>
+					  	</div>
+					  	<div class="mdui-col">
+					  		<div class="mdui-grid-tile">
+							  	<a href="javascript:;"><img src="../img/test.jpg"/></a>
+							  	<div class="mdui-grid-tile-actions">
+								    <div class="mdui-grid-tile-text">
+								      	<div class="mdui-grid-tile-title">JFinal 快速开发平台 EOVA </div>
+								    </div>
+							  	</div>
+							</div>
+					  	</div>
+					  	<div class="mdui-col">
+					  		<div class="mdui-grid-tile">
+							  	<a href="javascript:;"><img src="../img/test.jpg"/></a>
+							  	<div class="mdui-grid-tile-actions">
+								    <div class="mdui-grid-tile-text">
+								      	<div class="mdui-grid-tile-title">JAVA 极速WEB+ORM框架 JFinal</div>
+								    </div>
+							  	</div>
+							</div>
+					  	</div>
+					</div>	
+					<div class="mdui-divider mdui-m-t-1"></div>
+				</div>
+				
+				<div id="technology" class="mdui-m-t-1">
+						
+				</div>
+				<div class="mdui-valign">
+				  	<div id="paging" class="mdui-center"></div>
+				</div>
+	  		</div>		
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="../js/jquery.min.js" ></script>
+	<script type="text/javascript" src="../plugins/mdui/js/mdui.min.js" ></script>
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	
+	<script type="application/javascript">
+		
+		$(function(){
+			layui.use(['laypage', 'layer'], function(){
+	  			var laypage = layui.laypage;
+	  			layer = layui.layer;
+	  			
+			  	laypage({
+			    	cont: 'paging'
+			    	,pages: 100 //得到总页数
+			    	,jump: function(obj){
+	//		    		self.attachList(obj.curr-1,false);
+						console.log(obj);
+			    	}
+			  	});
+	  
+			});
+		});
+		
+		
+	</script>
+
+</html>

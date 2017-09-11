@@ -21,7 +21,11 @@ function indexConfig(){
 		});
 		
 		$('#questionsAnswersPage').bind('click',function(){
-			$("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","lableNodePage");
+			$("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","questionsAnswersPage");
+		});
+		
+		$('#openSourcePage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/openSourcePage.html").attr("name","openSourcePage");
 		});
 		
 	}
