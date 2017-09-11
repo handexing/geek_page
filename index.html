@@ -6,6 +6,7 @@
 		
 	<link rel="stylesheet" href="plugins/mdui/css/mdui.min.css" />
 	<link rel="stylesheet" href="css/index.css" />
+	<link rel="stylesheet" href="plugins/flickerplate/css/flickerplate.css"/>
 	<link rel="icon" href="img/logo.png" type="image/x-icon">
 	
 	</head>
@@ -13,19 +14,19 @@
 	<body class="mdui-appbar-with-toolbar">
 		<!--head menu-->
 		<div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-hide">
-		  	<div class="mdui-toolbar mdui-color-blue">
+		  	<div class="mdui-toolbar mdui-color-white">
 			    <a href="javascript:;"><img src="img/logo.png" width="50" height="50" id="logo"/></a>
-			   	<a href="javascript:;" class="mdui-typo-headline">极客屋</a>
-			   	<a href="javascript:;" class="mdui-typo-title">首页</a>
-			   	<a href="javascript:;" class="mdui-typo-title">开源</a>
-			   	<a href="javascript:;" class="mdui-typo-title">博客</a>
-			   	<a href="javascript:;" class="mdui-typo-title">问与答</a>
-			   	<a href="javascript:;" class="mdui-typo-title">标签节点</a>
+			   	<a href="javascript:;" class="mdui-typo-headline" style="font-size: 30px;">极客屋</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title">首页</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title">开源</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title">博客</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title">问与答</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title">标签节点</a>
 			   	<input type="hidden" id="userId" />
 			    <div class="mdui-toolbar-spacer"></div>
 			    <div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
 					<button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe8b6;</i></button>
-					<input class="mdui-textfield-input" type="text" placeholder="请输入你要搜索的内容..."/>
+					<input class="mdui-textfield-input" type="text" placeholder="   请输入你要搜索的内容..."/>
 					<button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe5cd;</i></button>
 				</div>
 
@@ -48,11 +49,31 @@
 		  	</div>
 		</div>
 		
-		<div class="mdui-container" style="border: 1px solid red; width: 100%;height: 1500px;margin-top: 10px;padding: 0px;">
+		<div class="mdui-container" style="height: 2120px;margin-top: 10px;padding: 0px;">
 			<iframe id="m_Iframe" frameborder="0" width="100%" height="100%" marginheight="0" marginwidth="0" scrolling="no"></iframe>
   		</div>
-  		<div id="footer" class="mdui-valign">
-  			<p class="mdui-center">QQ群：49422384, 邮箱:908716835@qq.com <br /><br />Copyright © 2017-2017 geekhome.com 版权所有</p>
+  		<div id="footer" class="mdui-color-white">
+  			<div class="mdui-container" style="padding: 0px;">
+	  			<div style="float: left;">
+	  				<ul>
+		  				<li><a href="#">关于</a></li>
+		  				<li><a href="#">我们的愿景</a></li>
+		  				<li><a href="#">广告投放</a></li>
+		  				<li><a href="#">鸣谢</a></li>
+		  				<li><b class="mdui-text-color-light-blue-a100">2721</b> <a href="#">人在线</a></li>
+		  				<li><a href="#">最高记录</a> <b class="mdui-text-color-light-blue-a100">50000</b></li>
+	  				</ul>
+	  				<br/>
+		  			<p style="margin-top: 30px;color: gray;">创意工作者们的社区</p>
+					<p style="color:gray;">World is powered by solitude</p>
+					<p style="margin-top: 30px;color: gray;">VERSION: 0.0.0.1 · 17ms · UTC 01:50 · PVG 09:50 · LAX 18:50 · JFK 21:50</p>
+					<p style="color: gray;">♥ Do have faith in what you're doing.</p>
+					<p style="margin-top: 30px;color:#4C4C4C;">沪ICP备xxxxxxx号-1</p>
+	  			</div>
+	  			<div style="float: right;">
+	  				<img src="img/logo.png" width="200" height="200"/>
+	  			</div>
+  			</div>
   		</div>
 		
 		<!--弹出菜单-->
@@ -79,6 +100,11 @@
 		
 		$(function(){
 			new indexConfig();
+			$('.flicker-example').flickerplate({
+	            auto_flick 				: true,
+	            auto_flick_delay 		: 8,
+	            flick_animation 		: 'transform-slide'
+        	});
 		});
 		
 	</script>

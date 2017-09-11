@@ -1,1 +1,13 @@
+body{background: ghostwhite;font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;}
 #logo{margin-top: 25px;}
+.menu_title{font-weight:600;}
+
+
+#footer{border: 1px solid ghostwhite;height: 280px;margin-top: 20px;}
+#footer ul{margin: 0px;padding: 0px;margin-left: 20px;margin-top: 30px;}
+#footer ul li{float: left;padding-right: 35px;font-size: 16px;font-weight: bold;}
+
+#footer ul li a:link {color:#4C4C4C;text-decoration:blink;}
+#footer ul li a:visited {color:#4C4C4C;}
+#footer ul li a:hover {color:#0d47a1;text-decoration:none;}
+#footer ul li a:active {color:red;text-decoration:none;}
