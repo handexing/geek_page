@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="plugins/mdui/css/mdui.min.css" />
 	<link rel="stylesheet" href="css/index.css" />
 	<link rel="stylesheet" href="plugins/flickerplate/css/flickerplate.css"/>
+	<link rel="stylesheet" href="plugins/sliderVerification/css/drag.css"/>
 	<link rel="icon" href="img/logo.png" type="image/x-icon">
 	
 	</head>
@@ -30,7 +31,7 @@
 					<button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe5cd;</i></button>
 				</div>
 
-				<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">&#xe853;</i></a>
+				<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#loginDialog'}"><i class="mdui-icon material-icons">&#xe853;</i></a>
 				<a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#demo-attr-cascade'}"><i class="mdui-icon material-icons">&#xe5d4;</i></a>
 
 				<ul class="mdui-menu" id="demo-attr-cascade" style="margin-top: 60px;">
@@ -47,6 +48,67 @@
 				  	</li>
 				</ul>
 		  	</div>
+		</div>
+		
+		<div class="mdui-dialog flip-container" id="loginDialog" style="width: 500px;">
+			<div class="flipper">
+				<div class="front">
+					<!-- 前面内容 -->
+				  	<div class="mdui-dialog-content" style="width: 500px;">
+				  		<div class="mdui-valign">
+					  		<span class="mdui-center"><b style="font-size: 25px;">极客屋</b><img src="img/logo.png" width="50" height="50" /></span>
+				  		</div>
+				  		<div class="mdui-valign mdui-m-t-2">
+					  		<span class="mdui-center" style="font-size: 16px;color: gray;"><i style="color: gainsboro;">—————————</i>&nbsp;&nbsp;使用第三方帐号登录&nbsp;&nbsp;<i style="color: gainsboro;">—————————</i></span><br />
+				  		</div>
+				  		<div class="mdui-valign mdui-m-t-1">
+					  		<a href="#" title="微博帐号登录" rel="nofollow" class="weibo mdui-center"></a>
+					  		<a href="#" title="QQ帐号登录" rel="nofollow" class="qzone mdui-center"></a>
+					  		<a href="#" title="微信帐号登录" rel="nofollow" class="wechat mdui-center"></a>
+				  		</div>
+				  		<div class="mdui-valign mdui-m-t-1">
+					  		<span class="mdui-center" style="font-size: 16px;color: gray;"><i style="color: gainsboro;">—————————</i>&nbsp;&nbsp;使用邮箱登录&nbsp;&nbsp;<i style="color: gainsboro;">—————————</i></span><br />
+				  		</div>
+					  	<div class="mdui-textfield">
+							<i class="mdui-icon material-icons">account_circle</i>
+							<input class="mdui-textfield-input" type="email" placeholder="请输入邮箱账号..."/>
+						</div>
+						<div class="mdui-textfield">
+							<i class="mdui-icon material-icons">lock</i>
+							<input class="mdui-textfield-input" type="email" placeholder="密码..."/>
+						</div>
+						<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-red">登录</button>
+						<div class="mdui-m-t-3 login_register">
+							<span class="mdui-float-left"><a href="#" id="forgetPsw">忘记密码>></a></span>
+							<span class="mdui-float-right" onclick="document.querySelector('#loginDialog').classList.toggle('hover');">还没有极客屋账号？<a href="javascript:void(0);" id="register">点击注册>></a></span>
+						</div>
+				  	</div>
+				</div>
+				<div class="back">
+					<!-- 背面内容 -->
+					<div class="mdui-dialog-content" style="width: 500px;">
+						<div class="mdui-valign">
+				  			<span class="mdui-center"><b style="font-size: 25px;">极客屋</b><img src="img/logo.png" width="50" height="50" /></span>
+			  			</div>
+			  			<div class="mdui-textfield">
+							<i class="mdui-icon material-icons">&#xeb41;</i>
+							<input class="mdui-textfield-input" type="email" placeholder="请输入用户名..."/>
+						</div>
+			  			<div class="mdui-textfield">
+							<i class="mdui-icon material-icons">account_circle</i>
+							<input class="mdui-textfield-input" type="email" placeholder="请输入邮箱账号..."/>
+						</div>
+						<div class="mdui-textfield">
+							<i class="mdui-icon material-icons">lock</i>
+							<input class="mdui-textfield-input" type="email" placeholder="密码..."/>
+						</div>
+						<div id="drag"></div>
+						<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-red">登录</button>
+						<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-blue" onclick="document.querySelector('#loginDialog').classList.toggle('hover');">返回登陆</button>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 		
 		<div class="mdui-container" style="height: 2120px;margin-top: 10px;padding: 0px;">
@@ -94,9 +156,12 @@
 	
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
 	<script type="text/javascript" src="plugins/mdui/js/mdui.min.js" ></script>
+	<script type="text/javascript" src="plugins/sliderVerification/js/drag.js"></script>
 	<script type="text/javascript" src="js/indexConfig.js" ></script>
 	
 	<script type="application/javascript">
+		
+		$('#drag').drag();
 		
 		$(function(){
 			new indexConfig();
