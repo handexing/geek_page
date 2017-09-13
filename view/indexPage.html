@@ -6,8 +6,8 @@
 		
 		<link rel="stylesheet" href="../plugins/mdui/css/mdui.min.css" />
 		<link rel="stylesheet" href="../plugins/flickerplate/css/flickerplate.css" />
-		<!--<link rel="stylesheet" href="../css/indexPage.css" />	
-		<link rel="stylesheet" href="../css/common.css" />-->
+		<link rel="stylesheet" href="../css/indexPage.css" />	
+		<link rel="stylesheet" href="../css/common.css" />
 		
 	</head>
 	<body>
@@ -461,15 +461,20 @@
 	<script type="text/javascript" src="../plugins/flickerplate/js/min/modernizr-custom-v2.7.1.min.js" ></script>
 	<script type="text/javascript" src="../plugins/flickerplate/js/min/hammer-v2.0.3.min.js" ></script>
 	<script type="text/javascript" src="../plugins/flickerplate/js/min/flickerplate.min.js" ></script>
+	<script type="text/javascript" src="../js/indexPage.js" ></script>
 	
 	<script type="application/javascript">
 		
 		$(function(){
+			
+			new indexPage();
+			
 			$('.flicker-example').flickerplate({
 	            auto_flick 				: true,
 	            auto_flick_delay 		: 8,
 	            flick_animation 		: 'transform-slide'
         	});
+        	
 		});
 		
 	</script>

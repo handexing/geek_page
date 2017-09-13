@@ -4,7 +4,6 @@
 function indexConfig(){
 	
 	var self=this;
-	var userId;
 	
 	var fab = new mdui.Fab('#fab');
 	
