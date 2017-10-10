@@ -7,9 +7,7 @@ function indexPage(){
 	
 	this.init=function(){
 		
-		
-		
-		$.ajax({  
+		/*$.ajax({  
             type:'post',  
             url:'http://127.0.0.1:8888/index/test',  
             dataType:'jsonp',  
@@ -20,7 +18,7 @@ function indexPage(){
             error:function (err) {  
                 alert('出现错误了!!!');  
             }  
-        });
+        });*/
 		
 			/*$.ajax({
 				type : "POST",
