@@ -7,6 +7,8 @@ function indexConfig(){
 	
 	var fab = new mdui.Fab('#fab');
 	
+	var loginDialog = new mdui.Dialog('#loginDialog');
+	
 	this.init=function(){
 		
 		$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
@@ -34,7 +36,11 @@ function indexConfig(){
         $('.userLogin').bind('click',function(){
         	self.userLogin();
         });
-		
+        
+         $('.headImg').bind('click',function(){
+        	loginDialog.open();
+        });
+        
 	}
 	
 	/**
@@ -116,7 +122,6 @@ function indexConfig(){
 					
 				var html = "<img class=\"mdui-img-circle\" src='"+result.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
 				$(".headImg").html(html);
-				$(".headImg").removeAttr("mdui-dialog");
 				$(".user_more").show();
 				
 				$("#userId").val(result.id);
@@ -128,6 +133,9 @@ function indexConfig(){
 				$("#birthday").val(result.birthday);
 				$("#phone").val(result.phone);
 				$("#createTime").val(result.createTime);
+				
+				loginDialog.close();
+				$(".headImg").unbind("click");
 			} else{
 				layer.msg('程序异常！', {icon: 5});
 			}

@@ -40,7 +40,7 @@
 				<input type="hidden" id="phone" />
 				<input type="hidden" id="createTime" />
 				
-				<a href="javascript:;" class="mdui-btn mdui-btn-icon headImg" mdui-dialog="{target: '#loginDialog'}">
+				<a href="javascript:;" class="mdui-btn mdui-btn-icon headImg">
 					<i class="mdui-icon material-icons">&#xe853;</i>
 				</a>
 				
@@ -104,17 +104,17 @@
 			  			</div>
 						<div class="mdui-textfield">
 						  <i class="mdui-icon material-icons">account_circle</i>
-						  <input class="mdui-textfield-input userName" type="text" required/>
+						  <input class="mdui-textfield-input userName" type="text" placeholder="请输入用户名..." required/>
 						  <div class="mdui-textfield-error">用户名不能为空</div>
 						</div>
 						<div class="mdui-textfield">
 							<i class="mdui-icon material-icons">lock</i>
-						  <input class="mdui-textfield-input password" type="password" pattern="^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$" required/>
+						  <input class="mdui-textfield-input password" type="password" placeholder="请输入密码..." pattern="^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$" required/>
 						  <div class="mdui-textfield-error">密码至少 6 位，且包含大小写字母</div>
 						</div>
 						<div class="mdui-textfield">
 						  <i class="mdui-icon material-icons">&#xe0be;</i>
-						  <input class="mdui-textfield-input email" type="email" required/>
+						  <input class="mdui-textfield-input email" type="email" placeholder="请输入邮箱..." required/>
 						  <div class="mdui-textfield-error">邮箱格式错误</div>
 						</div>
 						<!--<div id="drag" class="mdui-m-t-3"></div>-->
