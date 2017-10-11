@@ -67,6 +67,7 @@ function questionAnswersConfig(){
 							$("#tab_title_"+id).append(li);
 							
 						});
+						
 						tabContent="";
 						tabContent += "<ul class=\"mdui-list mdui-list-dense\">";
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
@@ -90,8 +91,20 @@ function questionAnswersConfig(){
 					}
 					
 				});
+				
+				htmlContent = "<a href='#tab_all' class=\"mdui-ripple\" data-id=all>全部</a>";
+				$(".mdui-tab").append(htmlContent);
+				tabContent = "<div id='tab_all'></div>";
+				$("#tab_content").append(tabContent);
+				tabContent = "<div class=\"crad_title\"><ul id='tab_title_all'></ul></div>";
+				$("#tab_all").append(tabContent);
+				$("#tab_title_all").append("<li>全部节点</li>");
+				
 				var inst = new mdui.Tab('#q_a_tab');
 				inst.show(0);
+				
+				
+					
 			}
 		});
 	}
