@@ -13,7 +13,7 @@ function labelConfig(){
 	
 	this.initLabelList=function(){
 		
-		$.post(HOST_URL+"/label/labelList",{},function(data){
+		$.post(HOST_URL+"/label/labelList",{"type":1},function(data){
 			if(data.success){
 				
 				var result = data.data;
@@ -37,13 +37,13 @@ function labelConfig(){
 						ulHtml += "</div>";
 						ulHtml += "<div class=\"mdui-clearfix\"></div>";
 						$("#lable").append(ulHtml);
+						ulHtml = "";
 						var childs=result[index].childs;
 						$.each(childs, function(index, itemobj) {
 							var c_id=childs[index].id;  
 							name=childs[index].lableName;
 							var liHtml = "<li data-id="+c_id+">"+name+"</li>";
 							$("#ul-"+id).append(liHtml);
-							
 						});
 					}
 					

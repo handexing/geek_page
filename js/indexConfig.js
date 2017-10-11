@@ -118,7 +118,6 @@ function indexConfig(){
 			if(data.success){
 				
 				var result = data.data;
-				console.log(result);
 					
 				var html = "<img class=\"mdui-img-circle\" src='"+result.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
 				$(".headImg").html(html);
@@ -133,6 +132,8 @@ function indexConfig(){
 				$("#birthday").val(result.birthday);
 				$("#phone").val(result.phone);
 				$("#createTime").val(result.createTime);
+				
+				$.cookie('geek_home_user',JSON.stringify(result), {expires: 7});
 				
 				loginDialog.close();
 				$(".headImg").unbind("click");
