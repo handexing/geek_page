@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="css/index.css" />
 	<link rel="stylesheet" href="plugins/flickerplate/css/flickerplate.css"/>
 	<!--<link rel="stylesheet" href="plugins/sliderVerification/css/drag.css"/>-->
+	<link rel="stylesheet" href="plugins/Hui-iconfont/1.0.8/iconfont.css"  />
 	<link rel="icon" href="img/logo.png" type="image/x-icon">
 	
 	</head>
@@ -53,7 +54,7 @@
 					</li>
 					<li class="mdui-divider"></li>
 					<li class="mdui-menu-item">
-					   	<a href="login.html" class="mdui-ripple">
+					   	<a href="javascript:void(0);" class="mdui-ripple" id="logout">
 					    	<i class="mdui-menu-item-icon mdui-icon material-icons">&#xe6dd;</i>退出登录
 					    </a>
 					</li>
@@ -155,18 +156,24 @@
   		</div>
 		
 		<!--弹出菜单-->
-		<!--<div class="mdui-fab-wrapper" id="fab">
+		<div class="mdui-fab-wrapper" id="fab">
 		    <button class="mdui-fab mdui-ripple mdui-color-pink-accent">
 		      	<i class="mdui-icon material-icons">&#xe145</i>
 		      	<i class="mdui-icon mdui-fab-opened material-icons">&#xe254</i>
 		    </button>
     		<div class="mdui-fab-dial">
-      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">&#xe864</i></button>
-      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red" id="addArticle"><i class="mdui-icon material-icons">&#xe0e0</i></button>
-      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange" id="addRemind"><i class="mdui-icon material-icons">&#xe191</i></button>
-      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">&#xe913</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink" id="add_open_source_btn"><i class="Hui-iconfont">&#xe6d1;</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red" id="add_blog_btn"><i class="mdui-icon material-icons">&#xe0e0</i></button>
+      			<button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue" id="questions_answers_btn"><i class="Hui-iconfont">&#xe6c5;</i></button>
     		</div>
-  		</div>-->
+  		</div>
+  		
+  		<div class="mdui-dialog" id="noLoginDialog" style="width: 300px;">
+		  	<div class="mdui-dialog-content">
+		  		<i class="Hui-iconfont" style="font-size: 40px;color: red;">&#xe6e0;</i> 
+		  		<span style="font-size: 20px;color: red;margin-left: 10px;">登录后才可以操作！</span>
+		  	</div>
+		</div>
   		
 	</body>
 	

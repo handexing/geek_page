@@ -73,7 +73,7 @@ function questionAnswersConfig(){
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
 						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../img/logo.png\"/></div>";
 						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
-						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"mdui-icon material-icons\">&#xe0c9;</i></a><span style=\"font-size: 12px;\">33</span></div>";
+						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">33</span></div>";
 						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">mysql 数据库同步有什么好多方案吗？</div>";
 						      		tabContent += "<div class=\"mdui-list-item-text\">";
 						      			tabContent += "<div class=\"subtitle\">";

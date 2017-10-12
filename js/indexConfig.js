@@ -4,17 +4,19 @@
 function indexConfig(){
 	
 	var self=this;
-	
 	var fab = new mdui.Fab('#fab');
-	
 	var loginDialog = new mdui.Dialog('#loginDialog');
+	var noLoginDialog = new mdui.Dialog('#noLoginDialog');
+	var user = null;
 	
 	this.init=function(){
+		
+		self.checkUser();
 		
 		$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
 		
 		$('#indexPage').bind('click',function(){
-			$("#m_Iframe").attr("src","view/indexPage.html").attr("name","lableNodePage");
+			$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
 		});
 		
 		$('#lableNodePage').bind('click',function(){
@@ -37,10 +39,68 @@ function indexConfig(){
         	self.userLogin();
         });
         
-         $('.headImg').bind('click',function(){
+        $('.headImg').bind('click',function(){
         	loginDialog.open();
         });
         
+        $('#logout').bind('click',function(){
+        	$.cookie('geek_home_user', null);
+        	var html = "<i class=\"mdui-icon material-icons\">&#xe853;</i>";
+			$(".headImg").html(html);
+			$(".user_more").hide();
+			location.reload();
+        });
+        
+        $('#add_open_source_btn').bind('click',function(){
+        	if(!self.checkUser()){
+        		noLoginDialog.open();
+        		return;
+        	}
+        	$("#m_Iframe").attr("src","view/addOpenSource.html").attr("name","addOpenSource");
+        });
+        
+        $('#add_blog_btn').bind('click',function(){
+        	if(!self.checkUser()){
+        		noLoginDialog.open();
+        		return;
+        	}
+        	$("#m_Iframe").attr("src","view/addBlogPage.html").attr("name","addBlogPage");
+        });
+        
+        $('#questions_answers_btn').bind('click',function(){
+        	if(!self.checkUser()){
+        		noLoginDialog.open();
+        		return;
+        	}
+        	$("#m_Iframe").attr("src","view/addQuestionsAnswersPage.html").attr("name","addQuestionsAnswersPage");
+        });
+        
+	}
+	
+	/**
+	 * 检查用户是否存在
+	 */
+	this.checkUser=function(){
+		user = $.cookie('geek_home_user'); 
+		if(user == null || user == "null"){
+        	return false;
+        }
+		user = $.parseJSON(user);
+		$("#userId").val(user.id);
+		$("#userName").val(user.userName);
+		$("#headImgUrl").val(user.headImgUrl);
+		$("#sex").val(user.sex);
+		$("#email").val(user.email);
+		$("#brief").val(user.brief);
+		$("#birthday").val(user.birthday);
+		$("#phone").val(user.phone);
+		$("#createTime").val(user.createTime);
+		
+		var html = "<img class=\"mdui-img-circle\" src='"+user.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
+		$(".headImg").html(html);
+		$(".user_more").show();
+		$(".headImg").unbind("click");
+		return true;
 	}
 	
 	/**
