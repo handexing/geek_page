@@ -8,6 +8,19 @@ function addQuestionAnswersConfig(){
 	this.init=function(){
 		
 		self.initMarkdown();
+		
+		$('#addLabelNodeBtn').bind('click',function(){
+        	layer.open({
+	            type: 2,
+	            title: '选择标签节点',
+	            offset: ['100px', '30%'],
+	            shadeClose: true,
+	            shade: false,
+	            maxmin: true, //开启最大化最小化按钮
+	            area: ['400px', '600px'],
+	            content: 'labelDialogPage.html'
+        	});
+        });
 	}
 	
 	/**
@@ -34,7 +47,12 @@ function addQuestionAnswersConfig(){
             toc : true,
             emoji : true,       
             taskList : true,
-            path   : '../plugins/editor/lib/'
+            path   : '../plugins/editor/lib/',
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : HOST_URL+"/questionAnswers/uploadImage",
+//          crossDomainUpload : true,
+//  		uploadCallbackURL : "upload_callback.html"
         });
 	}
 	

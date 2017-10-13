@@ -148,14 +148,18 @@
                     loading(true);
 
                     var submitHandler = function() {
-
-                        var uploadIframe = document.getElementById(iframeName);
+						debugger
+                        var uploadIframe = document.getElementById("editormd-image-iframe");
 
                         uploadIframe.onload = function() {
 
                             loading(false);
-
+							debugger
+							var a = uploadIframe.contentDocument;
+							console.log(a);
+							
                             var body = (uploadIframe.contentWindow ? uploadIframe.contentWindow : uploadIframe.contentDocument).document.body;
+                            
                             var json = (body.innerText) ? body.innerText : ( (body.textContent) ? body.textContent : null);
 
                             json = (typeof JSON.parse !== "undefined") ? JSON.parse(json) : eval("(" + json + ")");
