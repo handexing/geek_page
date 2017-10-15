@@ -48,11 +48,9 @@ function addQuestionAnswersConfig(){
             emoji : true,       
             taskList : true,
             path   : '../plugins/editor/lib/',
-            imageUpload : true,
-            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : HOST_URL+"/questionAnswers/uploadImage",
-//          crossDomainUpload : true,
-//  		uploadCallbackURL : "upload_callback.html"
+            imageUpload       : true,
+		    imageFormats      : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+		    imageUploadURL 	  : HOST_URL+"/questionAnswers/uploadImage"
         });
 	}
 	
