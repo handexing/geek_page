@@ -22,14 +22,14 @@
 					  <span class="mdui-chip-title" id="labelName">选择所属标签节点...</span>
 					</div>
 	  				
-	  				<button mdui-tooltip="{content: '存为草稿'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe161;</i></button>
-	  				<button mdui-tooltip="{content: '发布'}" class="mdui-btn mdui-btn-icon mdui-color-green mdui-ripple mdui-float-right mdui-m-r-1"><i class="mdui-icon material-icons">&#xe437;</i></button>
+	  				<button id="saveDraftBtn" mdui-tooltip="{content: '存为草稿'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe161;</i></button>
+	  				<button id="saveQaBtn" mdui-tooltip="{content: '发布'}" class="mdui-btn mdui-btn-icon mdui-color-green mdui-ripple mdui-float-right mdui-m-r-1"><i class="mdui-icon material-icons">&#xe437;</i></button>
 	  			</div>
 	  			<div style="padding: 10px;">
 	  				<!--<button class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple"><i class="mdui-icon material-icons">add</i></button>-->
 	  				<div class="mdui-textfield mdui-textfield-floating-label">
 					  	<label class="mdui-textfield-label"> 标题</label>
-					  	<input class="mdui-textfield-input" type="text" maxlength="50"/>
+					  	<input class="mdui-textfield-input" id="title" type="text" maxlength="50"/>
 					</div>
 		  			<div id="editormd">                
 				        <textarea style="display:none;"></textarea>
@@ -43,6 +43,7 @@
 	<script type="text/javascript" src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
 	<script type="text/javascript" src="../plugins/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
 	<script type="text/javascript" src="../plugins/editor/editormd.js" ></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
 	<script type="text/javascript" src="../js/addQuestionAnswersConfig.js" ></script>

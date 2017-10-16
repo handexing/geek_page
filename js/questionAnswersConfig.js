@@ -9,10 +9,6 @@ function questionAnswersConfig(){
 		
 		self.initTab();
 		
- 		$('.mdui-tab a').bind('click',function(){
-        	alert("123");
-        });
-		
 		layui.use(['laypage', 'layer'], function(){
 	  		var laypage = layui.laypage;
 	  		layer = layui.layer;
@@ -26,6 +22,22 @@ function questionAnswersConfig(){
 			});
 	  
 		});
+		
+	}
+	
+	/**
+	 * 初始化列表信息
+	 */
+	this.initTabDataList=function(){
+		var labelId = $("#q_a_tab a").first().attr("data-id");
+		alert(labelId);
+	}
+	
+	/**
+	 * tab切换，重新获取列表数据
+	 */
+	this.switchTab=function(id){
+		alert(id);
 	}
 	
 	this.initTab=function(){
@@ -49,7 +61,7 @@ function questionAnswersConfig(){
 					
 					if(parentId == 0){
 						
-						htmlContent = "<a href='#tab_"+id+"' class=\"mdui-ripple\" data-id="+id+">"+name+"</a>";
+						htmlContent = "<a href='#tab_"+id+"' onclick=\"question_answers_config.switchTab("+id+")\" class=\"mdui-ripple\" data-id="+id+">"+name+"</a>";
 						$(".mdui-tab").append(htmlContent);
 						
 						tabContent = "<div id='tab_"+id+"'></div>";
@@ -102,9 +114,7 @@ function questionAnswersConfig(){
 				
 				var inst = new mdui.Tab('#q_a_tab');
 				inst.show(0);
-				
-				
-					
+				self.initTabDataList();
 			}
 		});
 	}
