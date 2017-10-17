@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>标签节点</title>
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+</head>
+<body>
+	<div style="padding: 15px;">
+		<div id="labelTree"></div>
+	</div>
+	
+	<script type="text/javascript" src="../js/jquery.min.js" ></script>
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap-treeview/1.1.0/bootstrap-treeview.min.js"></script>
+	<script type="text/javascript" src="../js/treeview.js" ></script>
+	<script type="text/javascript" src="../js/commonConfig.js" ></script>
+	
+	<script type="text/javascript">
+	
+	var tree = [
+		  {
+		    text: "Parent 1",
+		    nodes: [
+		      {
+		        text: "Child 1",
+		        nodes: [
+		          {
+		            text: "Grandchild 1"
+		          },
+		          {
+		            text: "Grandchild 2"
+		          }
+		        ]
+		      },
+		      {
+		        text: "Child 2"
+		      }
+		    ]
+		  },
+		  {
+		    text: "Parent 2"
+		  },
+		  {
+		    text: "Parent 3"
+		  },
+		  {
+		    text: "Parent 4"
+		  },
+		  {
+		    text: "Parent 5"
+		  }
+		];
+		
+	    $(function () {
+	    	$.post(HOST_URL+'/label/labelTree', {"type":3}, function (data) {
+		        if(data.success){
+		        	console.log(data.data);
+		            $('#labelTree').treeview({
+		                data : data.data,
+		                highlightSelected:true,
+		                onNodeSelected: function (event, data) {
+		                	console.log(data);
+		                	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		                	parent.$('#labelName').text(data.text);
+		                	parent.$('#labelName').attr("data-id",data.labelId);
+						    parent.layer.close(index);
+						}
+		            });
+		        }
+		    });
+	    });
+	</script>
+</body>
+</html>
