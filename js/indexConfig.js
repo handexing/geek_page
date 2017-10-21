@@ -31,9 +31,9 @@ function indexConfig(){
 			$("#m_Iframe").attr("src","view/openSourcePage.html").attr("name","openSourcePage");
 		});
 		
-		$('.registerBtn').bind('click',function(){
+		/*$('.registerBtn').bind('click',function(){
         	self.userRegister();
-        });
+        });*/
         
         $('.userLogin').bind('click',function(){
         	self.userLogin();
@@ -75,7 +75,55 @@ function indexConfig(){
         	$("#m_Iframe").attr("src","view/addQuestionsAnswersPage.html").attr("name","addQuestionsAnswersPage");
         });
         
+        $('#register').bind('click',function(){
+        	document.querySelector('#loginDialog').classList.toggle('hover');
+        });
+        
+        self.startCaptcha();
+        
 	}
+	
+	
+	/**
+	 * API1会检查极验云服务器是否能正常连接，将可用状态返回给客户端，并且缓存在session中。
+	 */
+	this.startCaptcha=function(){
+//		$("#captcha").html("");
+		$.ajax({
+		    url: HOST_URL+"/user/startCaptcha?t=" + (new Date()).getTime(), // 加随机数防止缓存
+		    type: "get",
+		    dataType: "json",
+		    success: function (data) {
+		        initGeetest({
+		            gt: data.gt,
+		            challenge: data.challenge,
+		            new_captcha: data.new_captcha, // 用于宕机时表示是新验证码的宕机
+		            offline: !data.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
+		            product: "float", // 产品形式，包括：float，popup
+		            width: "100%"
+		        }, registerHandler);
+		    }
+		});
+	}
+	
+	var registerHandler = function (captchaObj) {
+        $(".registerBtn").click(function (e) {
+	        var result = captchaObj.getValidate();
+	        if (!result) {
+	            layer.msg('点击按钮进行验证！');
+	            e.preventDefault();
+	        }else{
+	            self.userRegister();
+	            captchaObj.reset(); // 调用该接口进行重置
+	        }
+            
+        });
+	    // 将验证码加到id为captcha的元素里，同时会有三个input的值用于表单提交
+	    captchaObj.appendTo("#captcha");
+	    captchaObj.onReady(function () {
+	        $("#wait").hide();
+	    });
+    };
 	
 	/**
 	 * 检查用户是否存在
@@ -109,25 +157,21 @@ function indexConfig(){
 	this.userRegister=function(){
 
 		var userName = $.trim($(".userName").val());
-		var email = $.trim($(".email").val());
 		var password = $.trim($(".password").val());
 		
 		if(userName==null || userName==""){
-			return;
-		}
-		
-		if(email==null || email==""){
+			layer.msg('用户名不能为空！');
 			return;
 		}
 		
 		if(password==null || password==""){
+			layer.msg('密码不能为空！');
 			return;
 		}
 		
 		var user={};
 		user.userName = userName;
 		user.password = password;
-		user.email = email;
 		
 		$.ajax({
 			url:HOST_URL+'/user/userRegister',  
@@ -145,6 +189,8 @@ function indexConfig(){
 				if(responseData.data==1){
 					layer.msg('注册完成请登录！', {icon: 1});
 					$(".returnLogin").trigger("click");
+					$(".userName").val("");
+					$(".password").val("");
 				}else if(responseData.data==-1){
 					layer.msg('用户名已存在,请修改！', {icon: 7});
 				}else{
