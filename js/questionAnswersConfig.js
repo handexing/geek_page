@@ -17,7 +17,6 @@ function questionAnswersConfig(){
 	this.initTabDataList=function(labelId,pageNum,flag){
 		$.post(HOST_URL+"/questionAnswers/questionAnswersList",{"labelId":labelId,"page":pageNum},function(data){
 			
-			console.log(data);
 			var result = data.data;
 			var tabContent="";
 			
@@ -33,17 +32,20 @@ function questionAnswersConfig(){
 				var userName=result[index].userName;
 				var labelName=result[index].labelName;
 				var createTime=result[index].createTime;
+				var commentCnt=result[index].commentCnt;
+				
+				createTime = createTime.replace(/ /,"T");
 				
 						tabContent += "<ul class=\"mdui-list mdui-list-dense\">";
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
 						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../"+headImgUrl+"\"/></div>";
 						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
-						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">33</span></div>";
+						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">"+commentCnt+"</span></div>";
 						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">"+title+"</div>";
 						      		tabContent += "<div class=\"mdui-list-item-text\">";
 						      			tabContent += "<div class=\"subtitle\">";
 						      				tabContent += "<span class=\"lable\">"+labelName+"</span>";
-						      				tabContent += "•  <b>"+userName+"</b>  •  2 分钟前 ";
+						      				tabContent += "•  <b>"+userName+"</b>  •  <time class=timeago datetime=\""+createTime+"Z+08:00\"></time>";
 						      			tabContent += "</div>";
 						      		tabContent += "</div>";
 						    	tabContent += "</div>";
@@ -58,11 +60,12 @@ function questionAnswersConfig(){
 				var tabContent="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
 			}
 			$("#q_a_list_"+labelId).html(tabContent);
-			
 	  
 			if(flag){
 				self.pageable(labelId,data.totalPageNumber);
 			}
+			
+			$(".timeago").timeago();
 		});
 	}
 	
@@ -73,11 +76,11 @@ function questionAnswersConfig(){
   			layer = layui.layer;
   			
 		  	laypage({
-		    	cont: 'paging'
-		    	,pages: totalPageNumber //得到总页数
-		    	,jump: function(obj){
-		    		console.log(obj.curr);
-		    		self.initTabDataList(labelId,obj.curr,false);
+		    	cont: 'paging',
+		    	pages: totalPageNumber, //得到总页数
+		    	jump: function(obj){
+		    		console.log(obj);
+		    		self.initTabDataList(labelId,obj.curr-1,false);
 		    	}
 		  	});
   
@@ -88,7 +91,7 @@ function questionAnswersConfig(){
 	 * tab切换，重新获取列表数据
 	 */
 	this.switchTab=function(id){
-		self.initTabDataList(id,1,true);
+		self.initTabDataList(id,0,true);
 	}
 	
 	this.initTab=function(){
@@ -128,7 +131,6 @@ function questionAnswersConfig(){
 							$("#tab_title_"+id).append(li);
 							
 						});
-						
 						tabContent="<div id=\"q_a_list_"+id+"\"></div>";
 						$("#tab_"+id).append(tabContent);
 						
@@ -148,7 +150,7 @@ function questionAnswersConfig(){
 				inst.show(0);
 				
 				var labelId = $("#q_a_tab a").first().attr("data-id");
-				self.initTabDataList(labelId,1,true);
+				self.initTabDataList(labelId,0,true);
 			}
 		});
 	}

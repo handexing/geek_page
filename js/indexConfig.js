@@ -40,7 +40,10 @@ function indexConfig(){
         });
         
         $('.headImg').bind('click',function(){
-        	loginDialog.open();
+        	if(!self.checkUser()){
+        		loginDialog.open();
+        		return;
+        	}
         });
         
         $('#logout').bind('click',function(){
