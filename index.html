@@ -2,14 +2,31 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>geek home</title>
+		<title>极客屋</title>
 		
 	<link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.3.0/css/mdui.min.css">
 	<link rel="stylesheet" href="css/index.css" />
 	<link rel="stylesheet" href="plugins/flickerplate/css/flickerplate.css"/>
-	<!--<link rel="stylesheet" href="plugins/sliderVerification/css/drag.css"/>-->
 	<link rel="stylesheet" href="plugins/Hui-iconfont/1.0.8/iconfont.css"  />
 	<link rel="icon" href="img/logo.png" type="image/x-icon">
+	
+	<style>
+		 #captcha{
+            width: 100%;
+            display: inline-block;
+        }
+        .show {
+            display: block;
+        }
+        .hide {
+            display: none;
+        }
+       #wait {
+            text-align: left;
+            color: #666;
+            margin: 0;
+        }
+	</style>
 	
 	</head>
 	
@@ -93,7 +110,7 @@
 						<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-red userLogin">登录</button>
 						<div class="mdui-m-t-3 login_register">
 							<span class="mdui-float-left"><a href="#" id="forgetPsw">忘记密码>></a></span>
-							<span class="mdui-float-right" onclick="document.querySelector('#loginDialog').classList.toggle('hover');">还没有极客屋账号？<a href="javascript:void(0);" id="register">点击注册>></a></span>
+							<span class="mdui-float-right">还没有极客屋账号？<a href="javascript:void(0);" id="register">点击注册>></a></span>
 						</div>
 				  	</div>
 				</div>
@@ -104,21 +121,18 @@
 				  			<span class="mdui-center"><b style="font-size: 25px;">极客屋</b><img src="img/logo.png" width="50" height="50" /></span>
 			  			</div>
 						<div class="mdui-textfield">
-						  <i class="mdui-icon material-icons">account_circle</i>
-						  <input class="mdui-textfield-input userName" type="text" placeholder="请输入用户名..." required/>
-						  <div class="mdui-textfield-error">用户名不能为空</div>
+						  	<i class="mdui-icon material-icons">account_circle</i>
+						  	<input class="mdui-textfield-input userName" type="text" placeholder="请输入用户名..."/>
 						</div>
 						<div class="mdui-textfield">
 							<i class="mdui-icon material-icons">lock</i>
-						  <input class="mdui-textfield-input password" type="password" placeholder="请输入密码..." pattern="^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$" required/>
-						  <div class="mdui-textfield-error">密码至少 6 位，且包含大小写字母</div>
+						  	<input class="mdui-textfield-input password" type="password" placeholder="请输入密码..."/>
 						</div>
 						<div class="mdui-textfield">
-						  <i class="mdui-icon material-icons">&#xe0be;</i>
-						  <input class="mdui-textfield-input email" type="email" placeholder="请输入邮箱..." required/>
-						  <div class="mdui-textfield-error">邮箱格式错误</div>
+							<div id="captcha">
+					            <p id="wait" class="show">正在加载验证码......</p>
+					        </div>
 						</div>
-						<!--<div id="drag" class="mdui-m-t-3"></div>-->
 						<button class="mdui-m-t-3 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-red registerBtn">注册</button>
 						<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-blue returnLogin" onclick="document.querySelector('#loginDialog').classList.toggle('hover');">返回登陆</button>
 					</div>
@@ -143,7 +157,7 @@
 		  				<li><a href="#">最高记录</a> <b class="mdui-text-color-light-blue-a100">50000</b></li>
 	  				</ul>
 	  				<br/>
-		  			<p style="margin-top: 30px;color: gray;">创意工作者们的社区</p>
+		  			<p style="margin-top: 30px;color: gray;"><i class="Hui-iconfont">&#xe6d1;</i>创意工作者们的社区</p>
 					<p style="color:gray;">World is powered by solitude</p>
 					<p style="margin-top: 30px;color: gray;">VERSION: 0.0.0.1 · 17ms · UTC 01:50 · PVG 09:50 · LAX 18:50 · JFK 21:50</p>
 					<p style="color: gray;">♥ Do have faith in what you're doing.</p>
@@ -174,20 +188,18 @@
 		  		<span style="font-size: 20px;color: red;margin-left: 10px;">登录后才可以操作！</span>
 		  	</div>
 		</div>
-  		
+		
 	</body>
 	
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
 	<script src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
 	<script type="text/javascript" src="plugins/layer/2.4/layer.js"></script>
-	<!--<script type="text/javascript" src="plugins/sliderVerification/js/drag.js"></script>-->
 	<script type="text/javascript" src="js/jquery.cookie.js" ></script>
+	<script type="text/javascript" src="js/gt.js" ></script>
 	<script type="text/javascript" src="js/commonConfig.js" ></script>
 	<script type="text/javascript" src="js/indexConfig.js" ></script>
 	
 	<script type="application/javascript">
-		
-		//$('#drag').drag();
 		
 		$(function(){
 			new indexConfig();

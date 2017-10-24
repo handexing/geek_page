@@ -20,52 +20,16 @@
 	
 	<script type="text/javascript">
 	
-	var tree = [
-		  {
-		    text: "Parent 1",
-		    nodes: [
-		      {
-		        text: "Child 1",
-		        nodes: [
-		          {
-		            text: "Grandchild 1"
-		          },
-		          {
-		            text: "Grandchild 2"
-		          }
-		        ]
-		      },
-		      {
-		        text: "Child 2"
-		      }
-		    ]
-		  },
-		  {
-		    text: "Parent 2"
-		  },
-		  {
-		    text: "Parent 3"
-		  },
-		  {
-		    text: "Parent 4"
-		  },
-		  {
-		    text: "Parent 5"
-		  }
-		];
-		
 	    $(function () {
 	    	$.post(HOST_URL+'/label/labelTree', {"type":3}, function (data) {
 		        if(data.success){
-		        	console.log(data.data);
 		            $('#labelTree').treeview({
 		                data : data.data,
 		                highlightSelected:true,
 		                onNodeSelected: function (event, data) {
-		                	console.log(data);
-		                	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		                	parent.$('#labelName').text(data.text);
 		                	parent.$('#labelName').attr("data-id",data.labelId);
+		                	var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 						    parent.layer.close(index);
 						}
 		            });

@@ -8,36 +8,90 @@ function questionAnswersConfig(){
 	this.init=function(){
 		
 		self.initTab();
-		
-		layui.use(['laypage', 'layer'], function(){
-	  		var laypage = layui.laypage;
-	  		layer = layui.layer;
-			laypage({
-			    cont: 'paging',
-			    pages: 100 ,//得到总页数
-			    jump: function(obj){
-	//		    	self.attachList(obj.curr-1,false);
-					console.log(obj);
-			    }
-			});
-	  
-		});
-		
+
 	}
 	
 	/**
 	 * 初始化列表信息
 	 */
-	this.initTabDataList=function(){
-		var labelId = $("#q_a_tab a").first().attr("data-id");
-		alert(labelId);
+	this.initTabDataList=function(labelId,pageNum,flag){
+		$.post(HOST_URL+"/questionAnswers/questionAnswersList",{"labelId":labelId,"page":pageNum},function(data){
+			
+			var result = data.data;
+			var tabContent="";
+			
+			if(result.length>0){
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var browseCount=result[index].browseCount;
+				var collectCount=result[index].collectCount;
+				var headImgUrl=result[index].headImgUrl;
+				var labelId=result[index].labelId;
+				var title=result[index].title;
+				var userId=result[index].userId;
+				var userName=result[index].userName;
+				var labelName=result[index].labelName;
+				var createTime=result[index].createTime;
+				var commentCnt=result[index].commentCnt;
+				
+				createTime = createTime.replace(/ /,"T");
+				
+						tabContent += "<ul class=\"mdui-list mdui-list-dense\">";
+						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
+						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../"+headImgUrl+"\"/></div>";
+						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
+						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">"+commentCnt+"</span></div>";
+						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">"+title+"</div>";
+						      		tabContent += "<div class=\"mdui-list-item-text\">";
+						      			tabContent += "<div class=\"subtitle\">";
+						      				tabContent += "<span class=\"lable\">"+labelName+"</span>";
+						      				tabContent += "•  <b>"+userName+"</b>  •  <time class=timeago datetime=\""+createTime+"Z+08:00\"></time>";
+						      			tabContent += "</div>";
+						      		tabContent += "</div>";
+						    	tabContent += "</div>";
+						  	tabContent += "</li>";
+	  						tabContent += "<li class=\"mdui-divider-inset mdui-m-y-0\"></li>";
+						tabContent += "</ul>";
+						
+				
+			});
+				
+			}else{
+				var tabContent="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
+			}
+			$("#q_a_list_"+labelId).html(tabContent);
+	  
+			if(flag){
+				self.pageable(labelId,data.totalPageNumber);
+			}
+			
+			$(".timeago").timeago();
+		});
+	}
+	
+	//分页
+	this.pageable=function(labelId,totalPageNumber){
+		layui.use(['laypage', 'layer'], function(){
+  			var laypage = layui.laypage;
+  			layer = layui.layer;
+  			
+		  	laypage({
+		    	cont: 'paging',
+		    	pages: totalPageNumber, //得到总页数
+		    	jump: function(obj){
+		    		console.log(obj);
+		    		self.initTabDataList(labelId,obj.curr-1,false);
+		    	}
+		  	});
+  
+		});
 	}
 	
 	/**
 	 * tab切换，重新获取列表数据
 	 */
 	this.switchTab=function(id){
-		alert(id);
+		self.initTabDataList(id,0,true);
 	}
 	
 	this.initTab=function(){
@@ -48,8 +102,6 @@ function questionAnswersConfig(){
 				var result = data.data;
 				var htmlContent="";
 				var tabContent="";
-				console.log(result);
-				var flag = 0;
 				
 				$.each(result, function(index, itemobj) {
 					var id=result[index].id;  
@@ -79,27 +131,9 @@ function questionAnswersConfig(){
 							$("#tab_title_"+id).append(li);
 							
 						});
-						
-						tabContent="";
-						tabContent += "<ul class=\"mdui-list mdui-list-dense\">";
-						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
-						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../img/logo.png\"/></div>";
-						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
-						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">33</span></div>";
-						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">mysql 数据库同步有什么好多方案吗？</div>";
-						      		tabContent += "<div class=\"mdui-list-item-text\">";
-						      			tabContent += "<div class=\"subtitle\">";
-						      				tabContent += "<span class=\"lable\">mysql</span>";
-						      				tabContent += "•  <b>handx</b>  •  2 分钟前  •  最后回复来自 <b>jack</b>";
-						      			tabContent += "</div>";
-						      		tabContent += "</div>";
-						    	tabContent += "</div>";
-						  	tabContent += "</li>";
-	  						tabContent += "<li class=\"mdui-divider-inset mdui-m-y-0\"></li>";
-						tabContent += "</ul>";
-						
+						tabContent="<div id=\"q_a_list_"+id+"\"></div>";
 						$("#tab_"+id).append(tabContent);
-						tabContent="";
+						
 					}
 					
 				});
@@ -114,7 +148,9 @@ function questionAnswersConfig(){
 				
 				var inst = new mdui.Tab('#q_a_tab');
 				inst.show(0);
-				self.initTabDataList();
+				
+				var labelId = $("#q_a_tab a").first().attr("data-id");
+				self.initTabDataList(labelId,0,true);
 			}
 		});
 	}
