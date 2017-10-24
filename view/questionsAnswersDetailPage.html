@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>问与答</title>
+		
+		<link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.3.0/css/mdui.min.css">
+		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
+		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
+		<link rel="stylesheet" href="../plugins/editor/css/editormd.preview.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
+		
+	</head>
+	<body>
+		<div class="mdui-container" style="padding: 0px; height: 2100px;">
+			<div class="mdui-card small_card">
+	  			<div class="q_a_title">
+	  				<span style="color: #636363;">geek</span> › <span style="color: #636363;">分享创造</span>
+	  				<button id="saveDraftBtn" mdui-tooltip="{content: '收藏'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe87e;</i></button>
+	  				<p style="font-size: 28px;" class="mdui-m-t-2">程序员 1024 快乐，一起加班庆祝吧</p>
+	  				<div class="mdui-m-t-2">
+						<img class="mdui-img-circle" src='../img/logo.png' width="70" height="70" style="border: 1px solid ghostwhite;"/>
+						<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> · 
+						<span style="color: grey;">2 小时 20 分钟前 </span>   · 
+						<span style="color: grey;">139 次点击 </span>
+	  				</div>
+	  			</div>
+	  			<div style="padding: 10px;">
+		  			<div id="editormd">                
+				        <textarea style="display:none;font-size: 20px;">
+#### 就是自己学其他语言或者自己使用的小脚本，是否需要遵循代码规范。:blush:
+> 比如一个 Node.js 的小脚本，调用其他网站的 API 的 Serect，是否需要按照规范把这些变成配置文件。 还是之间作为 Magic number 硬编码在代码之中。
+脚本的代码量不超过 100 行。我觉得假如不开源，只有一个人使用，应该使用糙快猛的风格。先快速把自己要的功能全部实现。等到要开源时候再次修改，这样也不会花太多时间。而女友则认为无论如何都需要遵循 coding style。不能让步。
+你们写小脚本的时候是怎么样抉择的？
+				        </textarea>
+			        </div>
+	  			</div>
+	  			<div class="line"></div>
+	  			<div>
+	  				<div class="q_a_title">
+	  					<div class="mdui-chip">
+						  	<span class="mdui-chip-title">评论专区</span>
+						</div>	
+	  				</div>
+					<ul class="mdui-list mdui-list-dense">
+						<li class="mdui-list-item mdui-ripple">
+						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
+						    <div class="mdui-list-item-content">
+						    	<div class="mdui-float-right">
+						    		<div class="mdui-chip" style="background-color: ghostwhite;">
+									  	<span class="mdui-chip-title" style="color: #5C5C5C;">1</span>
+									</div>
+						    	</div>
+						      	<div class="mdui-list-item-title">
+						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
+						      		<span style="color: grey;">2 小时 20 分钟前 </span>
+						      	</div>
+						      	<div class="mdui-list-item-text mdui-list-item-two-line">
+						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
+						      	</div>
+						    </div>
+						</li>
+						<div class="line"></div>
+						<li class="mdui-list-item mdui-ripple">
+						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
+						    <div class="mdui-list-item-content">
+						    	<div class="mdui-float-right">
+						    		<div class="mdui-chip" style="background-color: ghostwhite;">
+									  	<span class="mdui-chip-title" style="color: #5C5C5C;">2</span>
+									</div>
+						    	</div>
+						      	<div class="mdui-list-item-title">
+						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
+						      		<span style="color: grey;">2 小时 20 分钟前 </span>
+						      	</div>
+						      	<div class="mdui-list-item-text mdui-list-item-two-line">
+						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
+						      	</div>
+						    </div>
+						</li>
+						<div class="line"></div>
+						<li class="mdui-list-item mdui-ripple">
+						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
+						    <div class="mdui-list-item-content">
+						    	<div class="mdui-float-right">
+						    		<div class="mdui-chip" style="background-color: ghostwhite;">
+									  	<span class="mdui-chip-title" style="color: #5C5C5C;">3</span>
+									</div>
+						    	</div>
+						      	<div class="mdui-list-item-title">
+						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
+						      		<span style="color: grey;">2 小时 20 分钟前 </span>
+						      	</div>
+						      	<div class="mdui-list-item-text mdui-list-item-two-line">
+						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
+						      	</div>
+						    </div>
+						</li>
+						<div class="line"></div>
+						<li class="mdui-list-item mdui-ripple">
+						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
+						    <div class="mdui-list-item-content">
+						    	<div class="mdui-float-right">
+						    		<div class="mdui-chip" style="background-color: ghostwhite;">
+									  	<span class="mdui-chip-title" style="color: #5C5C5C;">4</span>
+									</div>
+						    	</div>
+						      	<div class="mdui-list-item-title">
+						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
+						      		<span style="color: grey;">2 小时 20 分钟前 </span>
+						      	</div>
+						      	<div class="mdui-list-item-text mdui-list-item-two-line">
+						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
+						      	</div>
+						    </div>
+						</li>
+						<div class="line"></div>
+						<li class="mdui-list-item mdui-ripple">
+						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
+						    <div class="mdui-list-item-content">
+						    	<div class="mdui-float-right">
+						    		<div class="mdui-chip" style="background-color: ghostwhite;">
+									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
+									</div>
+						    	</div>
+						      	<div class="mdui-list-item-title">
+						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
+						      		<span style="color: grey;">2 小时 20 分钟前 </span>
+						      	</div>
+						      	<div class="mdui-list-item-text mdui-list-item-two-line">
+						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
+						      	</div>
+						    </div>
+						</li>
+						<div class="line"></div>
+					</ul>
+					
+					<div class="mdui-valign">
+				  		<div id="paging" class="mdui-center"></div>
+					</div>
+					
+	  			</div>
+	  		</div>		
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="../js/jquery.min.js" ></script>
+	<script type="text/javascript" src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+	<script type="text/javascript" src="../plugins/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+	<script src="../plugins/editor/lib/marked.min.js"></script>
+    <script src="../plugins/editor/lib/prettify.min.js"></script>
+    <script src="../plugins/editor/lib/raphael.min.js"></script>
+    <script src="../plugins/editor/lib/underscore.min.js"></script>
+    <script src="../plugins/editor/lib/sequence-diagram.min.js"></script>
+    <script src="../plugins/editor/lib/flowchart.min.js"></script>
+    <script src="../plugins/editor/lib/jquery.flowchart.min.js"></script>
+	<script type="text/javascript" src="../plugins/editor/editormd.js" ></script>
+	<script type="text/javascript" src="../js/commonConfig.js" ></script>
+	<script type="text/javascript" src="../js/questionAnswersDetailConfig.js" ></script>
+	
+	<script type="application/javascript">
+		
+		$(function(){
+			new questionAnswersDetailConfig();
+		});
+		
+	</script>
+
+</html>

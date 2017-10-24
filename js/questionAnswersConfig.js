@@ -36,7 +36,7 @@ function questionAnswersConfig(){
 				
 				createTime = createTime.replace(/ /,"T");
 				
-						tabContent += "<ul class=\"mdui-list mdui-list-dense\">";
+						tabContent += "<ul class=\"mdui-list mdui-list-dense\" onclick=\"question_answers_config.questionAnswersDetailed("+id+")\">";
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
 						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../"+headImgUrl+"\"/></div>";
 						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
@@ -50,7 +50,7 @@ function questionAnswersConfig(){
 						      		tabContent += "</div>";
 						    	tabContent += "</div>";
 						  	tabContent += "</li>";
-	  						tabContent += "<li class=\"mdui-divider-inset mdui-m-y-0\"></li>";
+	  						tabContent += "<div class=\"line\"></div>";
 						tabContent += "</ul>";
 						
 				
@@ -79,7 +79,6 @@ function questionAnswersConfig(){
 		    	cont: 'paging',
 		    	pages: totalPageNumber, //得到总页数
 		    	jump: function(obj){
-		    		console.log(obj);
 		    		self.initTabDataList(labelId,obj.curr-1,false);
 		    	}
 		  	});
@@ -92,6 +91,19 @@ function questionAnswersConfig(){
 	 */
 	this.switchTab=function(id){
 		self.initTabDataList(id,0,true);
+	}
+	
+	/**
+	 * tab切换，重新获取列表数据
+	 */
+	this.questionAnswersDetailed=function(id){
+		
+		$.post(HOST_URL+"/questionAnswers/getQuestionAnswersById",{"id":id},function(data){
+			if(data.success){
+				$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersDetailPage.html").attr("name","questionsAnswersDetailPage");
+			}
+		});
+			
 	}
 	
 	this.initTab=function(){
@@ -133,7 +145,6 @@ function questionAnswersConfig(){
 						});
 						tabContent="<div id=\"q_a_list_"+id+"\"></div>";
 						$("#tab_"+id).append(tabContent);
-						
 					}
 					
 				});
