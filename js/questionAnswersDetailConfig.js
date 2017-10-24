@@ -5,35 +5,57 @@ function questionAnswersDetailConfig(){
 	
 	var self=this;
 	var m_Editor;
-	var user;
+	var questionId;
 	
 	this.init=function(){
 		
-		self.initMarkdown();
+		questionId = getUrlVars()['id'];
 		
-		$('#addLabelNodeBtn').bind('click',function(){
-        	layer.open({
-	            type: 2,
-	            title: '选择标签节点',
-	            offset: ['100px', '30%'],
-	            shadeClose: true,
-	            shade: false,
-	            maxmin: true, //开启最大化最小化按钮
-	            area: ['400px', '600px'],
-	            content: 'labelDialogPage.html'
-        	});
-        });
-        
-        /**
+		self.initContent(questionId);
+		
+		self.browseCnt(questionId);
+		self.pageable(1,123);
+		
+		 /**
          * 存为草稿
          */
-        $('#saveDraftBtn').bind('click',function(){
-        	self.saveQuestionAnswers(2);
+        $('#collectBtn').bind('click',function(){
+          	var id = $('#collectBtn').attr("data-id");
+          	/*<i class="mdui-icon material-icons">&#xe87e;</i>    空心
+          	<i class="mdui-icon material-icons">&#xe87d;</i>*/
+          	
+          	$('#collectBtn').html("<i class=\"mdui-icon material-icons\">&#xe87d;</i>");
         });
         
-        self.pageable(1,12);
+        $('#commentContent').bind('keyup',function(event){
+          	if (event.shiftKey &&event.keyCode == 50){ 
+	          	alert('你按下了@'); 
+	        } 
+        });
+        
+        
+        
 	}
 
+	/**
+	 * 初始化页面内容
+	 */
+	this.initContent=function(questionId){
+       $.post(HOST_URL+"/questionAnswers/getQuestionAnswersById",{"id":questionId},function(data){
+			if(data.success){
+				$("#title").text(data.data.title);
+				$("#userName").text(data.data.userName);
+				$("#createTime").text(data.data.createTime);
+				$("#head_img").attr("src","../"+data.data.headImgUrl)
+				$("#collectBtn").attr("data-id",data.data.id)
+				$("#browseCount").text(data.data.browseCount+"次点击");
+				$("#content").val(data.data.content);
+				$("#labelName").text(data.data.labelName);
+				self.initMarkdown();
+				
+			}
+		});
+	}
 	
 	/**
 	 * 初始化markdown编辑器
@@ -48,6 +70,15 @@ function questionAnswersDetailConfig(){
             flowChart       : true,  // 默认不解析
             sequenceDiagram : true,  // 默认不解析
         });
+	}
+	
+	/**
+	 * 浏览量+1
+	 */
+	this.browseCnt=function(questionId){
+       $.post(HOST_URL+"/questionAnswers/addQuestionAnswersBrowseCnt",{"id":questionId},function(data){
+			
+		});
 	}
 	
 	//分页

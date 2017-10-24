@@ -94,16 +94,10 @@ function questionAnswersConfig(){
 	}
 	
 	/**
-	 * tab切换，重新获取列表数据
+	 * 跳转到问与答详情页
 	 */
 	this.questionAnswersDetailed=function(id){
-		
-		$.post(HOST_URL+"/questionAnswers/getQuestionAnswersById",{"id":id},function(data){
-			if(data.success){
-				$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersDetailPage.html").attr("name","questionsAnswersDetailPage");
-			}
-		});
-			
+		$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersDetailPage.html?id="+id).attr("name","questionsAnswersDetailPage");
 	}
 	
 	this.initTab=function(){
