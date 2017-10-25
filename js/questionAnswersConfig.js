@@ -21,20 +21,20 @@ function questionAnswersConfig(){
 			var tabContent="";
 			
 			if(result.length>0){
-			$.each(result, function(index, itemobj) {
-				var id=result[index].id;  
-				var browseCount=result[index].browseCount;
-				var collectCount=result[index].collectCount;
-				var headImgUrl=result[index].headImgUrl;
-				var labelId=result[index].labelId;
-				var title=result[index].title;
-				var userId=result[index].userId;
-				var userName=result[index].userName;
-				var labelName=result[index].labelName;
-				var createTime=result[index].createTime;
-				var commentCnt=result[index].commentCnt;
-				
-				createTime = createTime.replace(/ /,"T");
+				$.each(result, function(index, itemobj) {
+					var id=result[index].id;  
+					var browseCount=result[index].browseCount;
+					var collectCount=result[index].collectCount;
+					var headImgUrl=result[index].headImgUrl;
+					var labelId=result[index].labelId;
+					var title=result[index].title;
+					var userId=result[index].userId;
+					var userName=result[index].userName;
+					var labelName=result[index].labelName;
+					var createTime=result[index].createTime;
+					var commentCnt=result[index].commentCnt;
+					
+					createTime = createTime.replace(/ /,"T");
 				
 						tabContent += "<ul class=\"mdui-list mdui-list-dense\" onclick=\"question_answers_config.questionAnswersDetailed("+id+")\">";
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
@@ -54,11 +54,11 @@ function questionAnswersConfig(){
 						tabContent += "</ul>";
 						
 				
-			});
-				
+				});
 			}else{
 				var tabContent="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
 			}
+			
 			$("#q_a_list_"+labelId).html(tabContent);
 	  
 			if(flag){

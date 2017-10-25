@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
 		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
 		<link rel="stylesheet" href="../plugins/editor/css/editormd.preview.css" />
+		<link rel="stylesheet" href="../plugins/editor/css/editormd.css" />
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
 		
@@ -18,7 +19,7 @@
 	  			<div class="q_a_title">
 	  				<span style="color: #636363;">geek</span> › <span style="color: #636363;" id="labelName">分享创造</span>
 	  				<button id="collectBtn" data-id="" mdui-tooltip="{content: '收藏'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe87e;</i></button>
-	  				<p style="font-size: 28px;" class="mdui-m-t-2" id="title">程序员 1024 快乐，一起加班庆祝吧</p>
+	  				<p style="font-size: 28px;" class="mdui-m-t-2" id="title" data-id="">程序员 1024 快乐，一起加班庆祝吧</p>
 	  				<div class="mdui-m-t-2">
 						<img class="mdui-img-circle" id="head_img" src='../img/logo.png' width="70" height="70" style="border: 1px solid ghostwhite;"/>
 						<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;" id="userName">handx</span> · 
@@ -43,259 +44,8 @@
 						  	<span class="mdui-chip-title">评论专区</span>
 						</div>	
 	  				</div>
-					<ul class="mdui-list mdui-list-dense">
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">1</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">2</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">3</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">4</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
-						<li class="mdui-list-item mdui-ripple">
-						    <div class="mdui-list-item-avatar"><img src="../img/headImg.png"/></div>
-						    <div class="mdui-list-item-content">
-						    	<div class="mdui-float-right">
-						    		<div class="mdui-chip" style="background-color: ghostwhite;">
-									  	<span class="mdui-chip-title" style="color: #5C5C5C;">5</span>
-									</div>
-						    	</div>
-						      	<div class="mdui-list-item-title">
-						      		<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;">handx</span> 
-						      		<span style="color: grey;">2 小时 20 分钟前 </span>
-						      	</div>
-						      	<div class="mdui-list-item-text mdui-list-item-two-line">
-						      		<span class="mdui-text-color-theme-text mdui-p-l-1" style="font-size: 16px;">这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？这是啥？这写的都是啥？</span>
-						      	</div>
-						    </div>
-						</li>
-						<div class="line"></div>
+					<ul class="mdui-list mdui-list-dense" id="comment_ul_content">
+						
 					</ul>
 					
 					<div class="mdui-valign">
@@ -311,8 +61,11 @@
 						</div>	
 						<span style="color: grey;">请尽量让自己的回复能够对别人有帮助回复</span>
 	  				</div>
-	  				<textarea id="commentContent" class="mdui-center mdui-m-t-1" style="width: 98%;height: 200px;border-radius: 5px;border: 1px solid gainsboro;padding-left: 5px;padding-top: 3px;"></textarea>
-	  				<button class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-t-2 mdui-m-r-1 mdui-float-right">回复</button>
+	  				<div style="clear: both;"></div>
+	  				<div id="comment_editormd" class="mdui-center mdui-m-t-1" style="border-radius: 5px;border: 1px solid gainsboro;">                
+				        <textarea style="display:none;"></textarea>
+			        </div>
+	  				<button class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-r-1 mdui-float-right" id="commentBtn">回复</button>
 	  			</div>
 	  			
 	  		</div>		
@@ -332,6 +85,7 @@
     <script src="../plugins/editor/lib/flowchart.min.js"></script>
     <script src="../plugins/editor/lib/jquery.flowchart.min.js"></script>
 	<script type="text/javascript" src="../plugins/editor/editormd.js" ></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
 	<script type="text/javascript" src="../js/questionAnswersDetailConfig.js" ></script>
 	

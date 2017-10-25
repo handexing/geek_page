@@ -50,7 +50,7 @@ function addQuestionAnswersConfig(){
 		var content = m_Editor.getMarkdown();
 		
 		user = $.cookie('geek_home_user'); 
-		   labelId
+		   
 		if(labelId==null || labelId==""){
 			layer.msg('请选择所属标签节点！', {icon: 7});
 			return;
@@ -126,6 +126,8 @@ function addQuestionAnswersConfig(){
             toc : true,
             emoji : true,       
             taskList : true,
+            lineNumbers : false,
+            placeholder: "输入您要问得内容...",
             path   : '../plugins/editor/lib/',
             imageUpload       : true,
 		    imageFormats      : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
