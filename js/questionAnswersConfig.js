@@ -21,22 +21,22 @@ function questionAnswersConfig(){
 			var tabContent="";
 			
 			if(result.length>0){
-			$.each(result, function(index, itemobj) {
-				var id=result[index].id;  
-				var browseCount=result[index].browseCount;
-				var collectCount=result[index].collectCount;
-				var headImgUrl=result[index].headImgUrl;
-				var labelId=result[index].labelId;
-				var title=result[index].title;
-				var userId=result[index].userId;
-				var userName=result[index].userName;
-				var labelName=result[index].labelName;
-				var createTime=result[index].createTime;
-				var commentCnt=result[index].commentCnt;
+				$.each(result, function(index, itemobj) {
+					var id=result[index].id;  
+					var browseCount=result[index].browseCount;
+					var collectCount=result[index].collectCount;
+					var headImgUrl=result[index].headImgUrl;
+					var labelId=result[index].labelId;
+					var title=result[index].title;
+					var userId=result[index].userId;
+					var userName=result[index].userName;
+					var labelName=result[index].labelName;
+					var createTime=result[index].createTime;
+					var commentCnt=result[index].commentCnt;
+					
+					createTime = createTime.replace(/ /,"T");
 				
-				createTime = createTime.replace(/ /,"T");
-				
-						tabContent += "<ul class=\"mdui-list mdui-list-dense\">";
+						tabContent += "<ul class=\"mdui-list mdui-list-dense\" onclick=\"question_answers_config.questionAnswersDetailed("+id+")\">";
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
 						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../"+headImgUrl+"\"/></div>";
 						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
@@ -50,15 +50,15 @@ function questionAnswersConfig(){
 						      		tabContent += "</div>";
 						    	tabContent += "</div>";
 						  	tabContent += "</li>";
-	  						tabContent += "<li class=\"mdui-divider-inset mdui-m-y-0\"></li>";
+	  						tabContent += "<div class=\"line\"></div>";
 						tabContent += "</ul>";
 						
 				
-			});
-				
+				});
 			}else{
 				var tabContent="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
 			}
+			
 			$("#q_a_list_"+labelId).html(tabContent);
 	  
 			if(flag){
@@ -79,7 +79,6 @@ function questionAnswersConfig(){
 		    	cont: 'paging',
 		    	pages: totalPageNumber, //得到总页数
 		    	jump: function(obj){
-		    		console.log(obj);
 		    		self.initTabDataList(labelId,obj.curr-1,false);
 		    	}
 		  	});
@@ -92,6 +91,13 @@ function questionAnswersConfig(){
 	 */
 	this.switchTab=function(id){
 		self.initTabDataList(id,0,true);
+	}
+	
+	/**
+	 * 跳转到问与答详情页
+	 */
+	this.questionAnswersDetailed=function(id){
+		$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersDetailPage.html?id="+id).attr("name","questionsAnswersDetailPage");
 	}
 	
 	this.initTab=function(){
@@ -133,7 +139,6 @@ function questionAnswersConfig(){
 						});
 						tabContent="<div id=\"q_a_list_"+id+"\"></div>";
 						$("#tab_"+id).append(tabContent);
-						
 					}
 					
 				});

@@ -3112,11 +3112,11 @@
 
 .editormd-preview-container, .editormd-html-preview {
   text-align: left;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.6;
   padding: 20px;
   overflow: auto;
-  width: 100%;
+  width: 98%;
   background-color: #fff;
 }
 .editormd-preview-container blockquote, .editormd-html-preview blockquote {
