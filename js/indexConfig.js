@@ -91,6 +91,9 @@ function indexConfig(){
         
         self.startCaptcha();
         
+        $('#settingBtn').bind('click',function(){
+        	$("#m_Iframe").attr("src","view/settingPage.html").attr("name","settingPage");
+        });
 	}
 	
 	
@@ -154,7 +157,7 @@ function indexConfig(){
 		$("#phone").val(user.phone);
 		$("#createTime").val(user.createTime);
 		
-		var html = "<img class=\"mdui-img-circle\" src='"+user.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
+		var html = "<img class=\"mdui-img-circle\" src='"+user.headImgUrl+"' width=\"45\" height=\"45\"/>";
 		$(".headImg").html(html);
 		$(".user_more").show();
 		$(".headImg").unbind("click");

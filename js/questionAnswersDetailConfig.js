@@ -140,7 +140,7 @@ function questionAnswersDetailConfig(){
 	 */
 	this.initCommentContent=function(questionId,pageNum,flag){
 		
-		$.post(HOST_URL+"/questionAnswers/commentList",{"id":questionId,"page":pageNum},function(data){
+		$.post(HOST_URL+"/questionAnswers/commentList",{"id":questionId,"page":pageNum,"rows":10},function(data){
 			
 			var result = data.data;
 			var htmlContent = "";
@@ -156,7 +156,7 @@ function questionAnswersDetailConfig(){
 					var themeId=result[index].themeId;
 					
 					htmlContent += "<li class=\"mdui-list-item mdui-ripple\">";
-						htmlContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../"+headImgUrl+"\"/></div>";
+						htmlContent += "<div class=\"mdui-img-circle\"><img src=\"../"+headImgUrl+"\" width=\"50\" height=\"50\"/></div>";
 						    htmlContent += "<div class=\"mdui-list-item-content\">";
 						    	htmlContent += "<div class=\"mdui-float-right\">";
 						    		htmlContent += "<div class=\"mdui-chip\" style=\"background-color: ghostwhite;\">";

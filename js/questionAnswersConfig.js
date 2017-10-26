@@ -15,7 +15,7 @@ function questionAnswersConfig(){
 	 * 初始化列表信息
 	 */
 	this.initTabDataList=function(labelId,pageNum,flag){
-		$.post(HOST_URL+"/questionAnswers/questionAnswersList",{"labelId":labelId,"page":pageNum},function(data){
+		$.post(HOST_URL+"/questionAnswers/questionAnswersList",{"labelId":labelId,"page":pageNum,"rows":10},function(data){
 			
 			var result = data.data;
 			var tabContent="";
@@ -38,8 +38,8 @@ function questionAnswersConfig(){
 				
 						tabContent += "<ul class=\"mdui-list mdui-list-dense\" onclick=\"question_answers_config.questionAnswersDetailed("+id+")\">";
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
-						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../"+headImgUrl+"\"/></div>";
-						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
+						    	tabContent += "<div class=\"mdui-img-circle\"><img src=\"../"+headImgUrl+"\" width=\"50\" height=\"50\"/></div>";
+						    	tabContent += "<div class=\"mdui-list-item-content mdui-m-l-2\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
 						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">"+commentCnt+"</span></div>";
 						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">"+title+"</div>";
 						      		tabContent += "<div class=\"mdui-list-item-text\">";
