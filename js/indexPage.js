@@ -7,46 +7,20 @@ function indexPage(){
 	
 	this.init=function(){
 		
-		/*$.ajax({  
-            type:'post',  
-            url:'http://127.0.0.1:8888/index/test',  
-            dataType:'jsonp',  
-            jsonp:"callback",  
-            success:function (data) {  
-                console.log(data);
-            },  
-            error:function (err) {  
-                alert('出现错误了!!!');  
-            }  
-        });*/
+		$('.more_blog').bind('click',function(){
+			$(window.parent.document).find("#m_Iframe").attr("src","view/blogPage.html").attr("name","blogPage");
+		});
 		
-			/*$.ajax({
-				type : "POST",
-				url : "http://127.0.0.1:8888/index/test",
-				async:true,
-				dataType : "jsonp",
-				timeout: 10000,
-				cache: false,
-				scriptCharset: 'UTF-8',
-				contentType: 'application/json;charset=UTF-8',
-				jsonp: "callback",//服务端用于接收callback调用的function名的参数
-				jsonpCallback:"success_jsonpCallback",//callback的function名称
-				success : function(data){
-					alert(data);
-				},
-				error:function(){
-					alert('fail');
-				}
-			});
-		*/
+		$('.more_q_a').bind('click',function(){
+			$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","questionsAnswersPage");
+		});
+		
+		$('.more_special').bind('click',function(){
+			$(window.parent.document).find("#m_Iframe").attr("src","view/specialPage.html").attr("name","specialPage");
+		});
+		
 	}
 	
 	self.init();
 	
-}
-
-
-function success_jsonpCallback(data){
-    //处理data数据
-    alert(data);
 }

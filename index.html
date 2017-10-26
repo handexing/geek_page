@@ -36,19 +36,39 @@
 			} else { 
 				eval('pTar = ' + down + ';'); 
 			} 
-			if (pTar && !window.opera){ 
-				//begin resizing iframe 
-				pTar.style.display="block" 
-				if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){ 
-					//ns6 syntax 
-					pTar.height = pTar.contentDocument.body.offsetHeight +20; 
-					pTar.width = pTar.contentDocument.body.scrollWidth+20; 
-				} else if (pTar.Document && pTar.Document.body.scrollHeight){ 
-					//ie5+ syntax 
-					pTar.height = pTar.Document.body.scrollHeight; 
-					pTar.width = pTar.Document.body.scrollWidth; 
+			
+			var name = $("#m_Iframe").attr("name");
+			
+			if(name == "indexPage"){
+				if (pTar && !window.opera){ 
+					//begin resizing iframe 
+					pTar.style.display="block" 
+					if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){ 
+						//ns6 syntax 
+						pTar.height = pTar.contentDocument.body.offsetHeight +20; 
+						pTar.width = pTar.contentDocument.body.scrollWidth+20; 
+					} else if (pTar.Document && pTar.Document.body.scrollHeight){ 
+						//ie5+ syntax 
+						pTar.height = pTar.Document.body.scrollHeight; 
+						pTar.width = pTar.Document.body.scrollWidth; 
+					} 
 				} 
-			} 
+			} else {
+				if (pTar && !window.opera){ 
+					//begin resizing iframe 
+					pTar.style.display="block" 
+					if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){ 
+						//ns6 syntax 
+						pTar.height = pTar.contentDocument.body.offsetHeight +20; 
+						pTar.width = pTar.contentDocument.body.scrollWidth+20; 
+					} else if (pTar.Document && pTar.Document.body.scrollHeight){ 
+						//ie5+ syntax 
+						pTar.height = pTar.Document.body.scrollHeight; 
+						pTar.width = pTar.Document.body.scrollWidth; 
+					} 
+				} 
+			}
+			
 		}
 	</script> 
 	
@@ -64,6 +84,7 @@
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="openSourcePage">开源</a>
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="blogPage">博客</a>
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="questionsAnswersPage">问与答</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="specialPage">专题</a>
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="lableNodePage">标签节点</a>
 			    <div class="mdui-toolbar-spacer"></div>
 			    <div class="mdui-textfield mdui-textfield-expandable mdui-float-right">

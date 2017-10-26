@@ -34,6 +34,10 @@ function indexConfig(){
 			$("#m_Iframe").attr("src","view/blogPage.html").attr("name","blogPage");
 		});
 		
+		$('#specialPage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/specialPage.html").attr("name","specialPage");
+		});
+		
 		/*$('.registerBtn').bind('click',function(){
         	self.userRegister();
         });*/
