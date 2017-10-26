@@ -37,54 +37,50 @@ function questionAnswersDetailConfig(){
         
         $('#commentBtn').bind('click',function(){
           	
-		var themeId = $("#title").attr("data-id");
-		var content = c_Editor.getMarkdown();
-		
-		user = $.cookie('geek_home_user'); 
-		
-		if(user == null || user == "null"){
-			layer.msg('请登录！', {icon: 7});
-        	return;
-        }
-		
-		if(content==null || content==""){
-			layer.msg('问与答内容不能为空！', {icon: 7});
-			return;
-		}
-		
-		
-		
-		user = $.parseJSON(user);
-		
-		var comment={};
-		comment.userId = user.id;
-		comment.content = content;
-		comment.themeId = themeId;
-		
-		console.log(comment);
-		
-		$.ajax({
-			url:HOST_URL+'/questionAnswers/saveComment',  
-            type: "POST",
-            dataType: "json",//跨域ajax请求,返回数据格式为json
-            cache: false,
-            timeout: 10000,//请求超时时间,单位为毫秒
-            async: true,
-            global: false,//禁用Jquery全局事件
-            scriptCharset: 'UTF-8',
-            //processData : false,         // 告诉jQuery不要去处理发送的数据
-            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
-			data:JSON.stringify(comment),
-			success:function(responseData, status){
-				if(responseData.success){
-					self.initCommentContent(questionId,0,true);
-					c_Editor.setValue("");
-				}else{
-					layer.msg('操作失败！', {icon: 5});
-				}
+			var themeId = $("#title").attr("data-id");
+			var content = c_Editor.getMarkdown();
+			
+			user = $.cookie('geek_home_user'); 
+			
+			if(user == null || user == "null"){
+				layer.msg('请登陆！');
+	        	return;
+	        }
+			
+			if(content==null || content==""){
+				layer.msg('评论内容不能为空！');
+				return;
 			}
-		});
-		
+			
+			user = $.parseJSON(user);
+			
+			var comment={};
+			comment.userId = user.id;
+			comment.content = content;
+			comment.themeId = themeId;
+			
+			$.ajax({
+				url:HOST_URL+'/questionAnswers/saveComment',  
+	            type: "POST",
+	            dataType: "json",//跨域ajax请求,返回数据格式为json
+	            cache: false,
+	            timeout: 10000,//请求超时时间,单位为毫秒
+	            async: true,
+	            global: false,//禁用Jquery全局事件
+	            scriptCharset: 'UTF-8',
+	            //processData : false,         // 告诉jQuery不要去处理发送的数据
+	            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
+				data:JSON.stringify(comment),
+				success:function(responseData, status){
+					if(responseData.success){
+						self.initCommentContent(questionId,0,true);
+						c_Editor.setValue("");
+					}else{
+						layer.msg('操作失败！', {icon: 5});
+					}
+				}
+			});
+			
 	
         });
         

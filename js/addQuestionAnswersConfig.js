@@ -52,22 +52,22 @@ function addQuestionAnswersConfig(){
 		user = $.cookie('geek_home_user'); 
 		   
 		if(labelId==null || labelId==""){
-			layer.msg('请选择所属标签节点！', {icon: 7});
+			layer.msg('请选择所属标签节点！');
 			return;
 		}
 		
 		if(title==null || title==""){
-			layer.msg('标题不能为空！', {icon: 7});
+			layer.msg('标题不能为空！');
 			return;
 		}
 		
 		if(content==null || content==""){
-			layer.msg('问与答内容不能为空！', {icon: 7});
+			layer.msg('问与答内容不能为空！');
 			return;
 		}
 		
 		if(user == null || user == "null"){
-			layer.msg('请登录！', {icon: 7});
+			layer.msg('请登录！');
         	return;
         }
 		user = $.parseJSON(user);
@@ -122,7 +122,7 @@ function addQuestionAnswersConfig(){
             			"code",/*"preformatted-text",*/"code-block","table","datetime", "emoji"/*,"html-entities"*/,"|",/*"goto-line",*/"search","preview", "watch",/* "|", "fullscreen",*/ "file", "faicon"]
        		},
 			width  : "100%",
-            height : 700,
+            height : 500,
             toc : true,
             emoji : true,       
             taskList : true,

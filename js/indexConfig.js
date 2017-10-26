@@ -6,7 +6,6 @@ function indexConfig(){
 	var self=this;
 	var fab = new mdui.Fab('#fab');
 	var loginDialog = new mdui.Dialog('#loginDialog');
-	var noLoginDialog = new mdui.Dialog('#noLoginDialog');
 	var user = null;
 	
 	this.init=function(){
@@ -29,6 +28,10 @@ function indexConfig(){
 		
 		$('#openSourcePage').bind('click',function(){
 			$("#m_Iframe").attr("src","view/openSourcePage.html").attr("name","openSourcePage");
+		});
+		
+		$('#blogPage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/blogPage.html").attr("name","blogPage");
 		});
 		
 		/*$('.registerBtn').bind('click',function(){
@@ -56,7 +59,7 @@ function indexConfig(){
         
         $('#add_open_source_btn').bind('click',function(){
         	if(!self.checkUser()){
-        		noLoginDialog.open();
+        		layer.msg("登录后才可以操作！");
         		return;
         	}
         	$("#m_Iframe").attr("src","view/addOpenSource.html").attr("name","addOpenSource");
@@ -64,7 +67,7 @@ function indexConfig(){
         
         $('#add_blog_btn').bind('click',function(){
         	if(!self.checkUser()){
-        		noLoginDialog.open();
+        		layer.msg("登录后才可以操作！");
         		return;
         	}
         	$("#m_Iframe").attr("src","view/addBlogPage.html").attr("name","addBlogPage");
@@ -72,7 +75,7 @@ function indexConfig(){
         
         $('#questions_answers_btn').bind('click',function(){
         	if(!self.checkUser()){
-        		noLoginDialog.open();
+        		layer.msg("登录后才可以操作！");
         		return;
         	}
         	$("#m_Iframe").attr("src","view/addQuestionsAnswersPage.html").attr("name","addQuestionsAnswersPage");
@@ -213,12 +216,12 @@ function indexConfig(){
 		var password = $.trim($(".pwd").val());
 		
 		if(userName==null || userName==""){
-			layer.msg('用户名不能为空！', {icon: 7});
+			layer.msg('用户名不能为空！');
 			return;
 		}
 		
 		if(password==null || password==""){
-			layer.msg('密码不能为空！', {icon: 7});
+			layer.msg('密码不能为空！');
 			return;
 		}
 		
