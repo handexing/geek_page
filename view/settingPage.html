@@ -8,13 +8,132 @@
 		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
 		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
 		<link rel="stylesheet" href="../css/common.css" />
-		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
+		<link rel="stylesheet" href="../css/settingPage.css" />
 		
 	</head>
 	<body>
-		<div class="mdui-card small_card">
-	  		<div class="q_a_title">『个人设置』</div>
-	  		<div style="height: 800px;"></div>
+		<div class="mdui-card small_card mdui-p-b-4">
+	  		<div class="q_a_title">『个人主页』</div>
+	  		<div class="mdui-tab mdui-tab-full-width" mdui-tab>
+	  			<a href="#setting" class="mdui-ripple">个人设置</a>
+	  			<a href="#node" class="mdui-ripple">我的博客</a>
+				<a href="#node" class="mdui-ripple">我的提问</a>
+				<a href="#node" class="mdui-ripple">我的开源</a>
+				<a href="#node" class="mdui-ripple">我的收藏</a>
+				<a href="#node" class="mdui-ripple">最近回复</a>
+	  		</div>
+	  		
+	  		<div id="setting" class="mdui-m-t-1">
+					<div class="crad_title">个人信息</div>
+					<ul class="mdui-list">
+					  	<li class="mdui-list-item">
+						    <div class="dui-img-circle"><img src="../img/1.png" width="80" height="80"/></div>
+						    <div class="mdui-list-item-content mdui-m-l-2">
+						        <div class="mdui-list-item-title" style="font-size: 25px;"><span style="font-weight: bold;color: gray;">handx</span></div>
+						        <div class="mdui-list-item-text mdui-list-item-one-line mdui-m-t-2">GEEK HOME 第 <span style="font-weight: bold;color: gray;">15689</span> 号会员，加入于 2016-09-19 13:44:02 +08:00，今日活跃度排名 4007</div>
+						        <div class="mdui-list-item-text mdui-list-item-one-line mdui-m-t-1"><span style="font-weight: bold;color: gray;">签名：</span>我们终此一生，就是要摆脱他人的期待，找到真正的自己。</div>
+						    </div>
+					  	</li>
+					</ul>
+					<div class="line"></div>
+					<div class="mdui-m-l-2 mdui-m-t-2 mdui-m-b-2 user_info">
+						<span><button id="collectBtn" data-id="" mdui-tooltip="{content: '所在公司'}" class="mdui-btn mdui-btn-icon mdui-color-green-900 mdui-ripple"><i class="Hui-iconfont">&#xe643;</i></button><span class="mdui-m-l-1" style="font-weight: bold;color: gray;">阿里</span></span>
+						<span class="mdui-m-l-1"><button id="collectBtn" mdui-tooltip="{content: '个人网站'}" class="mdui-btn mdui-btn-icon mdui-color-red-800 mdui-ripple"><i class="Hui-iconfont">&#xe67f;</i></button><span class="mdui-m-l-1" style="font-weight: bold;color: gray;">www.geekuser.com</span></span>
+						<span class="mdui-m-l-1"><button id="collectBtn" mdui-tooltip="{content: '所在地'}" class="mdui-btn mdui-btn-icon mdui-color-deep-orange mdui-ripple"><i class="Hui-iconfont">&#xe671;</i></button><span class="mdui-m-l-1" style="font-weight: bold;color: gray;">上海</span></span>
+						<span class="mdui-m-l-1"><button id="collectBtn" mdui-tooltip="{content: 'GitHub'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple"><i class="Hui-iconfont">&#xe6d1;</i></button><span class="mdui-m-l-1" style="font-weight: bold;color: gray;">handx</span></span>
+					</div>
+					<div class="line"></div>
+					<div class="crad_title mdui-m-t-2">修改个人信息</div>
+					<div class="mdui-p-l-1 mdui-p-r-1 mdui-p-b-2">
+						
+						<div class="mdui-row">
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+						  		<div class="mdui-textfield">
+									<i class="mdui-icon material-icons">email</i>
+									<input class="mdui-textfield-input" type="email" placeholder="Email"/>
+								</div>
+						  	</div>
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+								<div class="mdui-textfield">
+									<i class="mdui-icon material-icons">phone</i>
+									<input class="mdui-textfield-input" type="text" placeholder="请输入手机号码..."/>
+								</div>
+						  	</div>
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+								<div class="mdui-textfield">
+								  	<i class="Hui-iconfont mdui-icon">&#xe643;</i>
+									<input class="mdui-textfield-input" type="text" placeholder="请输入所在公司名称..."/>
+								</div>
+						  	</div>
+						</div>
+						
+						<div class="mdui-row">
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+						  		<div class="mdui-textfield">
+						  			<i class="Hui-iconfont mdui-icon">&#xe67f;</i>
+								  	<input class="mdui-textfield-input" type="text" placeholder="请输入个人网站地址..."/>
+								</div>
+						  	</div>
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+								<div class="mdui-textfield">
+						  			<i class="Hui-iconfont mdui-icon">&#xe671;</i>
+								  	<input class="mdui-textfield-input" type="text" placeholder="请输入所在地..."/>
+								</div>
+						  	</div>
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+								<div class="mdui-textfield">
+						  			<i class="Hui-iconfont mdui-icon">&#xe6d1;</i>
+								  	<input class="mdui-textfield-input" type="text" placeholder="请输入GitHub地址..."/>
+								</div>
+						  	</div>
+						</div>
+						<div class="mdui-textfield">
+						  	<i class="Hui-iconfont mdui-icon">&#xe6c1;</i>
+						  	<input class="mdui-textfield-input" type="text" placeholder="签名"/>
+						</div>
+						<button style="margin-left: 60px;" class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-t-2"><i class="mdui-icon material-icons">&#xe161;</i>保存设置</button>
+					</div>
+					<div class="line"></div>
+					<div class="crad_title mdui-m-t-2">修改个人头像</div>
+					<div class="mdui-p-l-1 mdui-p-r-1 mdui-p-b-2 mdui-m-t-2">
+						当前头像：<img src="../img/1.png"  width="100" height="100"/>
+						<img src="../img/1.png"  width="60" height="60" class="mdui-m-l-2"/>
+						<img src="../img/1.png"  width="30" height="30" class="mdui-m-l-2"/>
+						<div class="mdui-float-right mdui-m-r-5">
+							<p style="font-weight: bold;font-size: 22px;">关于头像的规则:</p>
+							<p class="mdui-m-t-2" style="color: #2C2C2C;font-size: 18px;">1、极客屋禁止使用任何低俗或者敏感图片作为头像。</p>
+							<p class="mdui-m-t-2" style="color: #2C2C2C;font-size: 18px;">2、如果你是男的，请不要用女人的照片作为头像，这样可能会对其他会员产生误导。</p>
+						</div><br />
+						<button style="margin-left: 60px;" class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-t-2"><i class="mdui-icon material-icons">&#xe2c3;</i>上传新头像</button>
+					</div>
+					
+					<div class="line"></div>
+					<div class="crad_title mdui-m-t-2">修改密码</div>
+					<div class="mdui-p-l-1 mdui-p-r-1 mdui-p-b-2 mdui-m-t-2">
+						
+						<div class="mdui-row">
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+						  		<div class="mdui-textfield">
+								  	<i class="mdui-icon material-icons">&#xe898;</i>
+								  	<input class="mdui-textfield-input" type="email" placeholder="请输入当前密码..."/>
+								</div>
+						  	</div>
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+								<div class="mdui-textfield">
+								  	<i class="mdui-icon material-icons">&#xe897;</i>
+								  	<input class="mdui-textfield-input" type="email" placeholder="请输入新密码..."/>
+								</div>
+						  	</div>
+						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
+								<div class="mdui-textfield">
+								  	<i class="mdui-icon material-icons">&#xe897;</i>
+								  	<input class="mdui-textfield-input" type="email" placeholder="请输再次入新密码..."/>
+								</div>
+						  	</div>
+						</div>
+						<button style="margin-left: 60px;" class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-t-2"><i class="mdui-icon material-icons">&#xe6df;</i>更改密码</button>
+					</div>
+			</div>
 	  	</div>		
 	</body>
 	

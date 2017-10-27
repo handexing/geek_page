@@ -18,3 +18,5 @@
 #test{width: 100%; height: 400px;}
 
 .lable{border: 1px solid gainsboro; border-radius: 10px;padding: 3px 5px;}
+
+.questions_title{display:block;width:52em;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}

@@ -109,6 +109,16 @@ function questionAnswersConfig(){
 				var htmlContent="";
 				var tabContent="";
 				
+				htmlContent = "<a href='#tab_0' class=\"mdui-ripple\" onclick=\"question_answers_config.switchTab(0)\" data-id=0>最热</a>";
+				$(".mdui-tab").append(htmlContent);
+				tabContent = "<div id='tab_0'></div>";
+				$("#tab_content").append(tabContent);
+				tabContent = "<div class=\"crad_title\"><ul id='tab_title_0'></ul></div>";
+				$("#tab_0").append(tabContent);
+				$("#tab_title_0").append("<li>最热话题排行</li>");
+				tabContent="<div id=\"q_a_list_0\"></div>";
+				$("#tab_0").append(tabContent);
+				
 				$.each(result, function(index, itemobj) {
 					var id=result[index].id;  
 					var name=result[index].lableName;
@@ -142,14 +152,6 @@ function questionAnswersConfig(){
 					}
 					
 				});
-				
-				htmlContent = "<a href='#tab_all' class=\"mdui-ripple\" data-id=all>全部</a>";
-				$(".mdui-tab").append(htmlContent);
-				tabContent = "<div id='tab_all'></div>";
-				$("#tab_content").append(tabContent);
-				tabContent = "<div class=\"crad_title\"><ul id='tab_title_all'></ul></div>";
-				$("#tab_all").append(tabContent);
-				$("#tab_title_all").append("<li>全部节点</li>");
 				
 				var inst = new mdui.Tab('#q_a_tab');
 				inst.show(0);
