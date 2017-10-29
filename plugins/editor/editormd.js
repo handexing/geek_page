@@ -2800,7 +2800,7 @@
         var settings = this.settings || {dialogShowMask : true};
         
         dialog.css({
-            //top  : ($(window).height() - dialog.height()) / 2 + "px",
+			top  : ($(window).height() - dialog.height()) / 2 + "px",
             left : ($(window).width()  - dialog.width())  / 2 + "px"
         });
 
@@ -4322,7 +4322,7 @@
 
         var dialogPosition = function(){
             dialog.css({
-//              top    : ($(window).height() - dialog.height()) / 2 + "px",handx
+                top    : ($(window).height() - dialog.height()) + "px",//handx
                 left   : ($(window).width() - dialog.width()) / 2 + "px"
             });
         };
@@ -4412,7 +4412,7 @@
                 userUnselect($("body"));
                 userUnselect(dialog);
                 dialog[0].style.left = left + "px";
-//              dialog[0].style.top  = top + "px";//handx
+                dialog[0].style.top  = top + "px";//handx
             };
 
             document.onmouseup = function() {                            
@@ -4440,7 +4440,7 @@
                     var orig = e.originalEvent;
 
                     $(this).parent().css({
-//                      top  : orig.changedTouches[0].pageY - offset.y,//handx
+                        top  : orig.changedTouches[0].pageY - offset.y,//handx
                         left : orig.changedTouches[0].pageX - offset.x
                     });
                 };

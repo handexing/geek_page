@@ -27,6 +27,50 @@
             margin: 0;
         }
 	</style>
+	<script language="javascript" type="text/javascript"> 
+	
+		function dyniframesize(down) { 
+			var pTar = null; 
+			if (document.getElementById){ 
+				pTar = document.getElementById(down); 
+			} else { 
+				eval('pTar = ' + down + ';'); 
+			} 
+			
+			//var name = $("#m_Iframe").attr("name");
+			
+//			if(name == "indexPage"){
+//				if (pTar && !window.opera){ 
+//					//begin resizing iframe 
+//					pTar.style.display="block" 
+//					if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){ 
+//						//ns6 syntax 
+//						pTar.height = pTar.contentDocument.body.offsetHeight +20; 
+//						pTar.width = pTar.contentDocument.body.scrollWidth+20; 
+//					} else if (pTar.Document && pTar.Document.body.scrollHeight){ 
+//						//ie5+ syntax 
+//						pTar.height = pTar.Document.body.scrollHeight; 
+//						pTar.width = pTar.Document.body.scrollWidth; 
+//					} 
+//				} 
+//			} else {
+				if (pTar && !window.opera){ 
+					//begin resizing iframe 
+					pTar.style.display="block" 
+					if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){ 
+						//ns6 syntax 
+						pTar.height = pTar.contentDocument.body.offsetHeight +20; 
+						pTar.width = pTar.contentDocument.body.scrollWidth+20; 
+					} else if (pTar.Document && pTar.Document.body.scrollHeight){ 
+						//ie5+ syntax 
+						pTar.height = pTar.Document.body.scrollHeight; 
+						pTar.width = pTar.Document.body.scrollWidth; 
+					} 
+				} 
+//			}
+			
+		}
+	</script> 
 	
 	</head>
 	
@@ -38,8 +82,9 @@
 			   	<a href="javascript:;" class="mdui-typo-headline" style="font-size: 30px;">极客屋</a>
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="indexPage">首页</a>
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="openSourcePage">开源</a>
-			   	<a href="javascript:;" class="mdui-typo-title menu_title">博客</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="blogPage">博客</a>
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="questionsAnswersPage">问与答</a>
+			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="specialPage">专题</a>
 			   	<a href="javascript:;" class="mdui-typo-title menu_title" id="lableNodePage">标签节点</a>
 			    <div class="mdui-toolbar-spacer"></div>
 			    <div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
@@ -65,8 +110,8 @@
 				<a href="javascript:;" style="display: none;" class="mdui-btn mdui-btn-icon user_more" mdui-menu="{target: '#demo-attr-cascade'}"><i class="mdui-icon material-icons">&#xe5d4;</i></a>
 				<ul class="mdui-menu" id="demo-attr-cascade" style="margin-top: 60px;">
 	  				<li class="mdui-menu-item">
-					    <a href="javascript:;" class="mdui-ripple">
-					      	<i class="mdui-menu-item-icon mdui-icon material-icons">&#xe417;</i>个人设置
+					    <a href="javascript:;" class="mdui-ripple" id="settingBtn">
+					      	<i class="mdui-menu-item-icon mdui-icon material-icons">&#xe417;</i>个人主页
 					    </a>
 					</li>
 					<li class="mdui-divider"></li>
@@ -141,8 +186,8 @@
 			
 		</div>
 		
-		<div class="mdui-container" style="height: 2120px;margin-top: 10px;padding: 0px;">
-			<iframe id="m_Iframe" frameborder="0" width="100%" height="100%" marginheight="0" marginwidth="0" scrolling="no"></iframe>
+		<div class="mdui-container" style="margin-top: 10px;padding: 0px;">
+			<iframe id="m_Iframe" onload="javascript:dyniframesize('m_Iframe');" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 100%;"></iframe>
   		</div>
   		
   		<div id="footer" class="mdui-color-white">
@@ -182,13 +227,6 @@
     		</div>
   		</div>
   		
-  		<div class="mdui-dialog" id="noLoginDialog" style="width: 300px;">
-		  	<div class="mdui-dialog-content">
-		  		<i class="Hui-iconfont" style="font-size: 40px;color: red;">&#xe6e0;</i> 
-		  		<span style="font-size: 20px;color: red;margin-left: 10px;">登录后才可以操作！</span>
-		  	</div>
-		</div>
-		
 	</body>
 	
 	<script type="text/javascript" src="js/jquery.min.js" ></script>

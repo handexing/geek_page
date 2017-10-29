@@ -13,7 +13,7 @@ function labelConfig(){
 	
 	this.initLabelList=function(){
 		
-		$.post(HOST_URL+"/label/labelList",{"type":1},function(data){
+		$.post(HOST_URL+"/label/getAllLabel",{},function(data){
 			if(data.success){
 				
 				var result = data.data;
@@ -29,7 +29,7 @@ function labelConfig(){
 					var sort=result[index].sort;
 					
 					if(parentId == 0){
-						htmlContent = "<div class=\"crad_title mdui-m-t-2\" data-id="+id+">"+name+"</div>";
+						htmlContent = "<div style=\"font-weight: bold;\" class=\"crad_title mdui-m-t-2\" data-id="+id+">"+name+"</div>";
 						$("#lable").append(htmlContent);
 						ulHtml += "<div>";
 							ulHtml += "<ul class=\"mdui-m-t-2\" id='ul-"+id+"'>";

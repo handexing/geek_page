@@ -11,11 +11,44 @@ function questionAnswersConfig(){
 
 	}
 	
+	//分页
+	this.pageable=function(labelId,totalPageNumber){
+		layui.use(['laypage', 'layer'], function(){
+  			var laypage = layui.laypage;
+  			layer = layui.layer;
+  			
+		  	laypage({
+		    	cont: 'paging',
+		    	pages: totalPageNumber, //得到总页数
+		    	jump: function(obj){
+		    		self.initTabDataList(labelId,null,obj.curr-1,false);
+		    	}
+		  	});
+  
+		});
+	}
+	
 	/**
 	 * 初始化列表信息
 	 */
-	this.initTabDataList=function(labelId,pageNum,flag){
-		$.post(HOST_URL+"/questionAnswers/questionAnswersList",{"labelId":labelId,"page":pageNum},function(data){
+	this.initTabDataList=function(labelId,childId,pageNum,flag){
+		
+		if(childId != null){
+			self.getQuestionAnswersData(labelId,childId,pageNum,flag);
+		} else {
+			self.getQuestionAnswersData(labelId,null,pageNum,flag);
+		}
+		
+	}
+	
+	//根据labelID查询问与答
+	this.getQuestionAnswersData=function(labelId,childId,pageNum,flag){
+		
+		debugger
+		
+		var num = childId == null?labelId:childId;
+		
+		$.post(HOST_URL+"/questionAnswers/questionAnswersList",{"labelId":num,"page":pageNum,"rows":10},function(data){
 			
 			var result = data.data;
 			var tabContent="";
@@ -38,8 +71,8 @@ function questionAnswersConfig(){
 				
 						tabContent += "<ul class=\"mdui-list mdui-list-dense\" onclick=\"question_answers_config.questionAnswersDetailed("+id+")\">";
 						  	tabContent += "<li class=\"mdui-list-item mdui-ripple\">";
-						    	tabContent += "<div class=\"mdui-list-item-avatar\"><img src=\"../"+headImgUrl+"\"/></div>";
-						    	tabContent += "<div class=\"mdui-list-item-content\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
+						    	tabContent += "<div class=\"mdui-img-circle\"><img src=\"../"+headImgUrl+"\" width=\"50\" height=\"50\"/></div>";
+						    	tabContent += "<div class=\"mdui-list-item-content mdui-m-l-2\" style=\"padding-bottom: 20px;padding-top: 15px;\">";
 						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">"+commentCnt+"</span></div>";
 						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">"+title+"</div>";
 						      		tabContent += "<div class=\"mdui-list-item-text\">";
@@ -62,27 +95,10 @@ function questionAnswersConfig(){
 			$("#q_a_list_"+labelId).html(tabContent);
 	  
 			if(flag){
-				self.pageable(labelId,data.totalPageNumber);
+				self.pageable(num,data.totalPageNumber);
 			}
 			
 			$(".timeago").timeago();
-		});
-	}
-	
-	//分页
-	this.pageable=function(labelId,totalPageNumber){
-		layui.use(['laypage', 'layer'], function(){
-  			var laypage = layui.laypage;
-  			layer = layui.layer;
-  			
-		  	laypage({
-		    	cont: 'paging',
-		    	pages: totalPageNumber, //得到总页数
-		    	jump: function(obj){
-		    		self.initTabDataList(labelId,obj.curr-1,false);
-		    	}
-		  	});
-  
 		});
 	}
 	
@@ -90,7 +106,14 @@ function questionAnswersConfig(){
 	 * tab切换，重新获取列表数据
 	 */
 	this.switchTab=function(id){
-		self.initTabDataList(id,0,true);
+		self.initTabDataList(id,null,0,true);
+	}
+	
+	/**
+	 * 选择label查询
+	 */
+	this.switchLabel=function(labelId,childId){
+		self.initTabDataList(labelId,childId,0,true);
 	}
 	
 	/**
@@ -108,6 +131,16 @@ function questionAnswersConfig(){
 				var result = data.data;
 				var htmlContent="";
 				var tabContent="";
+				
+				htmlContent = "<a href='#tab_0' class=\"mdui-ripple\" onclick=\"question_answers_config.switchTab(0)\" data-id=0>最热</a>";
+				$(".mdui-tab").append(htmlContent);
+				tabContent = "<div id='tab_0'></div>";
+				$("#tab_content").append(tabContent);
+				tabContent = "<div class=\"crad_title\"><ul id='tab_title_0'></ul></div>";
+				$("#tab_0").append(tabContent);
+				$("#tab_title_0").append("<li>最热话题排行</li>");
+				tabContent="<div id=\"q_a_list_0\"></div>";
+				$("#tab_0").append(tabContent);
 				
 				$.each(result, function(index, itemobj) {
 					var id=result[index].id;  
@@ -133,7 +166,7 @@ function questionAnswersConfig(){
 							var c_id=childs[index].id;  
 							name=childs[index].lableName;
 							
-							var li = "<li data-id="+c_id+">"+name+"</li>";
+							var li = "<li onclick=\"question_answers_config.switchLabel("+id+","+c_id+")\" data-id="+c_id+">"+name+"</li>";
 							$("#tab_title_"+id).append(li);
 							
 						});
@@ -143,19 +176,11 @@ function questionAnswersConfig(){
 					
 				});
 				
-				htmlContent = "<a href='#tab_all' class=\"mdui-ripple\" data-id=all>全部</a>";
-				$(".mdui-tab").append(htmlContent);
-				tabContent = "<div id='tab_all'></div>";
-				$("#tab_content").append(tabContent);
-				tabContent = "<div class=\"crad_title\"><ul id='tab_title_all'></ul></div>";
-				$("#tab_all").append(tabContent);
-				$("#tab_title_all").append("<li>全部节点</li>");
-				
 				var inst = new mdui.Tab('#q_a_tab');
 				inst.show(0);
 				
 				var labelId = $("#q_a_tab a").first().attr("data-id");
-				self.initTabDataList(labelId,0,true);
+				self.initTabDataList(labelId,null,0,true);
 			}
 		});
 	}

@@ -6,7 +6,6 @@ function indexConfig(){
 	var self=this;
 	var fab = new mdui.Fab('#fab');
 	var loginDialog = new mdui.Dialog('#loginDialog');
-	var noLoginDialog = new mdui.Dialog('#noLoginDialog');
 	var user = null;
 	
 	this.init=function(){
@@ -29,6 +28,14 @@ function indexConfig(){
 		
 		$('#openSourcePage').bind('click',function(){
 			$("#m_Iframe").attr("src","view/openSourcePage.html").attr("name","openSourcePage");
+		});
+		
+		$('#blogPage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/blogPage.html").attr("name","blogPage");
+		});
+		
+		$('#specialPage').bind('click',function(){
+			$("#m_Iframe").attr("src","view/specialPage.html").attr("name","specialPage");
 		});
 		
 		/*$('.registerBtn').bind('click',function(){
@@ -56,7 +63,7 @@ function indexConfig(){
         
         $('#add_open_source_btn').bind('click',function(){
         	if(!self.checkUser()){
-        		noLoginDialog.open();
+        		layer.msg("登录后才可以操作！");
         		return;
         	}
         	$("#m_Iframe").attr("src","view/addOpenSource.html").attr("name","addOpenSource");
@@ -64,7 +71,7 @@ function indexConfig(){
         
         $('#add_blog_btn').bind('click',function(){
         	if(!self.checkUser()){
-        		noLoginDialog.open();
+        		layer.msg("登录后才可以操作！");
         		return;
         	}
         	$("#m_Iframe").attr("src","view/addBlogPage.html").attr("name","addBlogPage");
@@ -72,7 +79,7 @@ function indexConfig(){
         
         $('#questions_answers_btn').bind('click',function(){
         	if(!self.checkUser()){
-        		noLoginDialog.open();
+        		layer.msg("登录后才可以操作！");
         		return;
         	}
         	$("#m_Iframe").attr("src","view/addQuestionsAnswersPage.html").attr("name","addQuestionsAnswersPage");
@@ -84,6 +91,9 @@ function indexConfig(){
         
         self.startCaptcha();
         
+        $('#settingBtn').bind('click',function(){
+        	$("#m_Iframe").attr("src","view/settingPage.html").attr("name","settingPage");
+        });
 	}
 	
 	
@@ -147,7 +157,7 @@ function indexConfig(){
 		$("#phone").val(user.phone);
 		$("#createTime").val(user.createTime);
 		
-		var html = "<img class=\"mdui-img-circle\" src='"+user.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
+		var html = "<img class=\"mdui-img-circle\" src='"+user.headImgUrl+"' width=\"45\" height=\"45\"/>";
 		$(".headImg").html(html);
 		$(".user_more").show();
 		$(".headImg").unbind("click");
@@ -213,12 +223,12 @@ function indexConfig(){
 		var password = $.trim($(".pwd").val());
 		
 		if(userName==null || userName==""){
-			layer.msg('用户名不能为空！', {icon: 7});
+			layer.msg('用户名不能为空！');
 			return;
 		}
 		
 		if(password==null || password==""){
-			layer.msg('密码不能为空！', {icon: 7});
+			layer.msg('密码不能为空！');
 			return;
 		}
 		
