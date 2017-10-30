@@ -44,8 +44,6 @@ function questionAnswersConfig(){
 	//根据labelID查询问与答
 	this.getQuestionAnswersData=function(labelId,childId,pageNum,flag){
 		
-		debugger
-		
 		var num = childId == null?labelId:childId;
 		
 		$.post(HOST_URL+"/questionAnswers/questionAnswersList",{"labelId":num,"page":pageNum,"rows":10},function(data){

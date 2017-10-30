@@ -7,8 +7,38 @@ function openSourcesConfig(){
 	
 	this.init=function(){
         self.pageable(123);
+        
+        self.initTab();
 	}
 
+	//初始化tab
+	this.initTab=function(){
+		$.post(HOST_URL+"/openSource/getOpenSourcelabelList",{"size":10},function(data){
+			
+			var result = data.data;
+			var tab="";
+			var tabContent="";
+			
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var name=result[index].name;
+				tab = "<a href='#tab_"+id+"' class=\"mdui-ripple\" data-id="+id+">"+name+"</a>";
+				$(".mdui-tab").append(tab);
+				
+				tabContent = "<div id='tab_"+id+"'></div>";
+				$("#tab_content").append(tabContent);
+				
+			});
+			
+			tab = "<a href='#tab_0' class=\"mdui-ripple\" data-id=0>全部</a>";
+			$(".mdui-tab").append(tab);
+			
+	  		var inst = new mdui.Tab('.mdui-tab');
+			inst.show(0);
+			
+		});
+	}
+	
 	//开源详情页
 	this.openSourceDetail=function(){
 		$(window.parent.document).find("#m_Iframe").attr("src","view/openSourceDetailPage.html").attr("name","openSourceDetailPage");

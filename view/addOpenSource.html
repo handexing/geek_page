@@ -2,30 +2,63 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>添加开源信息</title>
+		<title>编写open source</title>
 		
 		<link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.3.0/css/mdui.min.css">
 		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
 		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
+		<link rel="stylesheet" href="../plugins/editor/css/editormd.css" />
 		<link rel="stylesheet" href="../css/common.css" />
-		<link rel="stylesheet" href="../css/openSourcePage.css" />
+		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
 		
 	</head>
 	<body>
-		<div class="mdui-card small_card">
-	  		<div class="crad_title">添加开源信息</div>
-	  		<div style="height: 500px;"></div>
-	  	</div>		
+			<div class="mdui-card small_card">
+	  			<div class="q_a_title">
+	  				添加open source
+	  				
+	  				<button id="saveDraftBtn" mdui-tooltip="{content: '存为草稿'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe161;</i></button>
+	  				<button id="saveQaBtn" mdui-tooltip="{content: '发布'}" class="mdui-btn mdui-btn-icon mdui-color-green mdui-ripple mdui-float-right mdui-m-r-1"><i class="mdui-icon material-icons">&#xe437;</i></button>
+	  			</div>
+	  			<div style="padding: 10px;">
+	  				所属类别：
+					<select class="mdui-select" mdui-select>
+					  	<option value="0">请选择所属类别</option>
+					  	<option value="1">java</option>
+					  	<option value="2">spring</option>
+					  	<option value="3">c#</option>
+					  	<option value="4">Go</option>
+					  	<option value="5">CSS</option>
+					  	<option value="6">JavaScript</option>
+					</select>
+	  				<div class="mdui-textfield">
+					  	<i class="mdui-icon material-icons">&#xeb3e;</i>
+					  	<input class="mdui-textfield-input" type="email" placeholder="请输入标题..."/>
+					</div>
+					<div class="mdui-textfield">
+						<i class="mdui-icon material-icons">&#xe6dd;</i>
+					  	<textarea class="mdui-textfield-input" placeholder="请输入副标题"></textarea>
+					</div>
+		  			<div id="editormd">                
+				        <textarea style="display:none;"></textarea>
+			        </div>
+	  			</div>
+	  		</div>		
 	</body>
 	
 	<script type="text/javascript" src="../js/jquery.min.js" ></script>
-	<script src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+	<script type="text/javascript" src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+	<script type="text/javascript" src="../plugins/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+	<script type="text/javascript" src="../plugins/editor/editormd.js" ></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
+	<script type="text/javascript" src="../js/addOpenSourceConfig.js" ></script>
 	
 	<script type="application/javascript">
 		
 		$(function(){
+			new addOpenSourceConfig();
 		});
 		
 	</script>

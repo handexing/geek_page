@@ -2,30 +2,53 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>添加博客</title>
+		<title>编写blog</title>
 		
 		<link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.3.0/css/mdui.min.css">
 		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
 		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
+		<link rel="stylesheet" href="../plugins/editor/css/editormd.css" />
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
 		
 	</head>
 	<body>
-		<div class="mdui-card small_card">
-	  		<div class="q_a_title">编写博客</div>
-	  		<div style="height: 500px;"></div>
-	  	</div>		
+			<div class="mdui-card small_card">
+	  			<div class="q_a_title">
+	  				『编写blog』
+	  				<button id="addLabelNodeBtn" mdui-tooltip="{content: '选择所属标签节点'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple"><i class="mdui-icon material-icons">&#xe145;</i></button>
+	  				<div class="mdui-chip label_content">
+					  <span class="mdui-chip-title" id="labelName">选择所属标签节点...</span>
+					</div>
+	  				
+	  				<button id="saveDraftBtn" mdui-tooltip="{content: '存为草稿'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe161;</i></button>
+	  				<button id="saveQaBtn" mdui-tooltip="{content: '发布'}" class="mdui-btn mdui-btn-icon mdui-color-green mdui-ripple mdui-float-right mdui-m-r-1"><i class="mdui-icon material-icons">&#xe437;</i></button>
+	  			</div>
+	  			<div style="padding: 10px;">
+	  				<div class="mdui-textfield mdui-textfield-floating-label">
+					  	<label class="mdui-textfield-label"> 标题</label>
+					  	<input class="mdui-textfield-input" id="title" type="text" maxlength="50"/>
+					</div>
+		  			<div id="editormd">                
+				        <textarea style="display:none;"></textarea>
+			        </div>
+	  			</div>
+	  		</div>		
 	</body>
 	
 	<script type="text/javascript" src="../js/jquery.min.js" ></script>
-	<script src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+	<script type="text/javascript" src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+	<script type="text/javascript" src="../plugins/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+	<script type="text/javascript" src="../plugins/editor/editormd.js" ></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
+	<script type="text/javascript" src="../js/addBlogConfig.js" ></script>
 	
 	<script type="application/javascript">
 		
 		$(function(){
+			new addBlogConfig();
 		});
 		
 	</script>
