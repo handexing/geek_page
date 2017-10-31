@@ -7,21 +7,14 @@ function addOpenSourceConfig(){
 	var m_Editor;
 	var user;
 	
+	var inst = new mdui.Menu('#addTypeBtn', '#menu');
+	
 	this.init=function(){
 		
 		self.initMarkdown();
 		
-		$('#addLabelNodeBtn').bind('click',function(){
-        	layer.open({
-	            type: 2,
-	            title: '选择标签节点',
-	            offset: ['100px', '30%'],
-	            shadeClose: true,
-	            shade: false,
-	            maxmin: true, //开启最大化最小化按钮
-	            area: ['400px', '600px'],
-	            content: 'labelDialogPage.html'
-        	});
+		$('#addTypeBtn').bind('click',function(){
+        	 inst.open();
         });
         
         /**
@@ -38,67 +31,26 @@ function addOpenSourceConfig(){
         	self.saveQuestionAnswers(3);
         });
         
+        self.initSelect();
         
 	}
 	
-	/**
-	 * 保存问与答信息
-	 */
-	this.saveQuestionAnswers=function(status){
-		var labelId = $("#labelName").attr("data-id");
-		var title = $.trim($("#title").val());
-		var content = m_Editor.getMarkdown();
-		
-		user = $.cookie('geek_home_user'); 
-		   
-		if(labelId==null || labelId==""){
-			layer.msg('请选择所属标签节点！');
-			return;
-		}
-		
-		if(title==null || title==""){
-			layer.msg('标题不能为空！');
-			return;
-		}
-		
-		if(content==null || content==""){
-			layer.msg('问与答内容不能为空！');
-			return;
-		}
-		
-		if(user == null || user == "null"){
-			layer.msg('请登录！');
-        	return;
-        }
-		user = $.parseJSON(user);
-		
-		var questionAnswers={};
-		questionAnswers.userId = user.id;
-		questionAnswers.labelId = labelId;
-		questionAnswers.title = title;
-		questionAnswers.content = content;
-		questionAnswers.status = status;
-		
-		$.ajax({
-			url:HOST_URL+'/questionAnswers/saveQuestionAnswers',  
-            type: "POST",
-            dataType: "json",//跨域ajax请求,返回数据格式为json
-            cache: false,
-            timeout: 10000,//请求超时时间,单位为毫秒
-            async: true,
-            global: false,//禁用Jquery全局事件
-            scriptCharset: 'UTF-8',
-            //processData : false,         // 告诉jQuery不要去处理发送的数据
-            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
-			data:JSON.stringify(questionAnswers),
-			success:function(responseData, status){
-				if(responseData.success){
-					$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","questionsAnswersPage");
-				}else{
-					layer.msg('操作失败！', {icon: 5});
-				}
-			}
+	this.initSelect=function(){
+		$.post(HOST_URL+"/openSource/getOpenSourcelabelList",{"size":100000},function(data){
+			var result = data.data;
+			var html="";
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var name=result[index].name;
+				html = "<li onclick=\"add_open_source_config.selectOpenSourceType("+id+",'"+name+"')\" data-id=\""+id+"\" class=\"mdui-menu-item\"><a href=\"javascript:;\" class=\"mdui-ripple\">"+name+"</a></li>";
+				$("#menu").append(html);
+			});
 		});
+	}
+	
+	this.selectOpenSourceType=function(id,name){
+		$("#typeName").text(name);
+		$("#typeName").attr("data-id",id);
 		
 	}
 	

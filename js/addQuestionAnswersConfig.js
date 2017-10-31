@@ -122,7 +122,7 @@ function addQuestionAnswersConfig(){
             			"code",/*"preformatted-text",*/"code-block","table","datetime", "emoji"/*,"html-entities"*/,"|",/*"goto-line",*/"search","preview", "watch",/* "|", "fullscreen",*/ "file", "faicon"]
        		},
 			width  : "100%",
-            height : 500,
+            height : 700,
             toc : true,
             emoji : true,       
             taskList : true,
