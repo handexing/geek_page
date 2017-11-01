@@ -58,6 +58,7 @@ function questionAnswersDetailConfig(){
 			comment.userId = user.id;
 			comment.content = content;
 			comment.themeId = themeId;
+			comment.type = 3;
 			
 			$.ajax({
 				url:HOST_URL+'/questionAnswers/saveComment',  

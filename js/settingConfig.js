@@ -5,11 +5,47 @@ function settingConfig(){
 	
 	var self=this;
 	var user = null;
+	var colors = new Array("pink","red","orange","blue","brown","purple","teal","green","cyan","amber","deep-orange","lime")
 	
 	this.init=function(){
 		
 		self.settingUserInfo();
        	self.pageable(123);
+       	
+       	$('#my_blog').bind('click',function(){
+			self.initBlog();
+		});
+	}
+	
+	/**
+	 * 初始化blog信息
+	 */
+	this.initBlog=function(){
+		$.post(HOST_URL+'/blog/getBloglabelList',{"type":4,"userId":user.id},function(data){
+			var result = data.data;
+			var html="";
+			
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var name=result[index].lableName;
+				var color = random(0,10);
+				html += "<li data-id="+id+" onclick=\"setting_config.getBlogByType("+id+")\" class=\"mdui-list-item mdui-ripple\"><span class=\"mdui-chip-icon mdui-color-"+colors[color]+" mdui-m-r-1\">"+(index+1)+"</span><div class=\"mdui-list-item-content\">"+name+"</div></li>";
+			});
+			$("#blog_type_list").html(html);
+			
+			//初始化第一个选项得blog信息
+			var labelId = $("#blog_type_list li").first().attr("data-id");
+			self.getBlogByType(labelId);
+			
+		});
+		
+	}
+	
+	/**
+	 * 单机切换blog信息
+	 */
+	this.getBlogByType=function(id){
+		alert("初始化分页信息");		
 	}
 	
 	/**
@@ -85,4 +121,9 @@ function settingConfig(){
 	
 	self.init();
 	
+}
+
+//获取范围内的随机数
+ function random(min,max){
+    return Math.floor(min+Math.random()*(max-min));
 }
