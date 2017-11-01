@@ -123,7 +123,10 @@ function questionAnswersConfig(){
 	
 	this.initTab=function(){
 		
-		$.post(HOST_URL+"/label/labelList",{"type":3},function(data){
+		var types = new Array();
+		types.push(3);
+		
+		$.post(HOST_URL+"/label/labelList",{"types":types},function(data){
 			if(data.success){
 				
 				var result = data.data;

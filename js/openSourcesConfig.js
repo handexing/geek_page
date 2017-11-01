@@ -13,7 +13,11 @@ function openSourcesConfig(){
 
 	//初始化tab
 	this.initTab=function(){
-		$.post(HOST_URL+"/openSource/getOpenSourcelabelList",{"size":10},function(data){
+		
+		var types = new Array();
+		types.push(2);
+		
+		$.post(HOST_URL+"/openSource/getOpenSourcelabelList",{"types":types},function(data){
 			
 			var result = data.data;
 			var tab="";
@@ -21,12 +25,16 @@ function openSourcesConfig(){
 			
 			$.each(result, function(index, itemobj) {
 				var id=result[index].id;  
-				var name=result[index].name;
+				var name=result[index].lableName;
 				tab = "<a href='#tab_"+id+"' class=\"mdui-ripple\" data-id="+id+">"+name+"</a>";
 				$(".mdui-tab").append(tab);
 				
 				tabContent = "<div id='tab_"+id+"'></div>";
 				$("#tab_content").append(tabContent);
+				
+				if(index == 10){//显示10条
+					return false;
+				}
 				
 			});
 			

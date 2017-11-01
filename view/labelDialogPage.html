@@ -21,7 +21,9 @@
 	<script type="text/javascript">
 	
 	    $(function () {
-	    	$.post(HOST_URL+'/label/labelTree', {"type":3}, function (data) {
+	    	var types = new Array();
+			types.push(3);
+	    	$.post(HOST_URL+'/label/labelTree', {"types":types}, function (data) {
 		        if(data.success){
 		            $('#labelTree').treeview({
 		                data : data.data,

@@ -36,12 +36,14 @@ function addOpenSourceConfig(){
 	}
 	
 	this.initSelect=function(){
-		$.post(HOST_URL+"/openSource/getOpenSourcelabelList",{"size":100000},function(data){
+		var types = new Array();
+		types.push(2);
+		$.post(HOST_URL+"/openSource/getOpenSourcelabelList",{"types":types},function(data){
 			var result = data.data;
 			var html="";
 			$.each(result, function(index, itemobj) {
 				var id=result[index].id;  
-				var name=result[index].name;
+				var name=result[index].lableName;
 				html = "<li onclick=\"add_open_source_config.selectOpenSourceType("+id+",'"+name+"')\" data-id=\""+id+"\" class=\"mdui-menu-item\"><a href=\"javascript:;\" class=\"mdui-ripple\">"+name+"</a></li>";
 				$("#menu").append(html);
 			});
