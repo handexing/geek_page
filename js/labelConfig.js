@@ -13,7 +13,11 @@ function labelConfig(){
 	
 	this.initLabelList=function(){
 		
-		$.post(HOST_URL+"/label/getAllLabel",{},function(data){
+		var types = new Array();
+		types.push(1);
+		types.push(3);
+	
+		$.post(HOST_URL+"/label/getAllLabel",{"types":types},function(data){
 			if(data.success){
 				
 				var result = data.data;

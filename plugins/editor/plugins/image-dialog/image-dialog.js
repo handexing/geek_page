@@ -117,7 +117,7 @@
 //					console.log(responseData);
 					if(responseData.success==1){
 		               	loading(false)
-		                $('[data-url]').val(responseData.url)
+		                $('[data-url]').val("http://39.106.56.107/images/"+responseData.url)
 					}else{
 						layer.msg('上传失败！', {icon: 5});
 					}

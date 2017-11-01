@@ -1,7 +1,7 @@
 /**
- * 添加问与答管理
+ * 添加bloh
  */
-function addQuestionAnswersConfig(){
+function addBlogConfig(){
 	
 	var self=this;
 	var m_Editor;
@@ -122,7 +122,7 @@ function addQuestionAnswersConfig(){
             			"code",/*"preformatted-text",*/"code-block","table","datetime", "emoji"/*,"html-entities"*/,"|",/*"goto-line",*/"search","preview", "watch",/* "|", "fullscreen",*/ "file", "faicon"]
        		},
 			width  : "100%",
-            height : 700,
+            height : 650,
             toc : true,
             emoji : true,       
             taskList : true,
