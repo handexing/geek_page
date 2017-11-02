@@ -10,6 +10,10 @@ function settingConfig(){
 	this.init=function(){
 		
 		self.settingUserInfo();
+       	
+       	$('.modifyPersonInfo').bind('click',function(){
+        	self.modifyPersonInfo();
+        });
        	self.pageable(123);
        	
        	$('#my_blog').bind('click',function(){
@@ -51,14 +55,29 @@ function settingConfig(){
 	/**
 	 * 显示用户信息
 	 */
-	this.settingUserInfo=function(){
+	this.settingUserInfo=function(user){
+		//因为修改信息和点击个人信息同时调用，所以给个判空，null就是点击，非空就是修改信息
+		if(user == null)
+		{
+			user = $.cookie('geek_home_user'); 
+			user = $.parseJSON(user);
+			$("#userName").text(user.userName);
+			$("#userNum").text(user.id);
+			$("#createTime").text(user.createTime);
+		}
+		//需要修改cookie中的信息
+		userNew = $.cookie('geek_home_user'); 
+		userNew = $.parseJSON(userNew);
+		userNew.brief = user.brief;
+		userNew.email = user.email;
+		userNew.phone = user.phone;
+		userNew.my_brief = user.brief;
+		userNew.company = user.company;
+		userNew.address = user.address;
+		userNew.webSiteUrl = user.webSiteUrl;
+		userNew.gitHubUrl = user.gitHubUrl;
+		$.cookie('geek_home_user', JSON.stringify(userNew))
 		
-		user = $.cookie('geek_home_user'); 
-		user = $.parseJSON(user);
-		
-		$("#userName").text(user.userName);
-		$("#userNum").text(user.id);
-		$("#createTime").text(user.createTime);
 		$("#brief").text(user.brief);
 		$("#email").val(user.email);
 		$("#phone").val(user.phone);
@@ -67,7 +86,6 @@ function settingConfig(){
 		$("#address").val(user.address);
 		$("#webSiteUrl").val(user.webSiteUrl);
 		$("#gitHubUrl").val(user.gitHubUrl);
-		$("#head_img_url").attr("src","../"+user.headImgUrl);
 		
 		var user_info_html = "";
 		
@@ -103,6 +121,40 @@ function settingConfig(){
 		
 	}
 	
+	/**
+	 * 修改个人信息
+	 */
+	this.modifyPersonInfo=function()
+	{
+		userT = $.cookie('geek_home_user'); 
+		userT = $.parseJSON(userT);
+		var email = $("#email").val();
+		var phone = $("#phone").val();
+		var company = $("#company").val();
+		var webSiteUrl = $("#webSiteUrl").val();
+		var address = $("#address").val();
+		var gitHubUrl = $("#gitHubUrl").val();
+		var my_brief = $("#my_brief").val();
+		var user = {};
+		user.email = email;
+		user.phone = phone;
+		user.company = company;
+		user.webSiteUrl = webSiteUrl;
+		user.address = address;
+		user.gitHubUrl = gitHubUrl;
+		user.brief = my_brief;
+		user.id = userT.id;
+		$.post(HOST_URL+'/user/modifyPersonInfo',user,function(data)
+		{
+			if(data.success)
+			{
+				alert("修改成功！");
+				self.settingUserInfo(data.data);
+			} 
+			else
+			{
+				layer.msg('程序异常！', {icon: 5});
+			}				
 	//分页
 	this.pageable=function(totalPageNumber){
 		layui.use(['laypage', 'layer'], function(){
@@ -115,7 +167,7 @@ function settingConfig(){
 					//self.initCommentContent(questionId,obj.curr-1,false);
 		    	}
 		  	});
-  
+ 
 		});
 	}
 	
