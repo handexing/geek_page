@@ -199,13 +199,13 @@ function indexConfig(){
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
 			data:JSON.stringify(user),
 			success:function(responseData, status){
-				if(responseData.data==1){
+				if(responseData.data.id==null){
+					layer.msg('用户名已存在,请修改！', {icon: 7});
+				} else if(responseData.data.id!=null){
 					layer.msg('注册完成请登录！', {icon: 1});
 					$(".returnLogin").trigger("click");
 					$(".userName").val("");
 					$(".password").val("");
-				}else if(responseData.data==-1){
-					layer.msg('用户名已存在,请修改！', {icon: 7});
 				}else{
 					layer.msg('操作失败！', {icon: 5});
 				}

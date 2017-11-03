@@ -28,31 +28,52 @@ function addBlogConfig(){
          * 存为草稿
          */
         $('#saveDraftBtn').bind('click',function(){
-        	self.saveQuestionAnswers(2);
+        	self.saveBlog(2);
         });
         
         /**
          * 发布
          */
         $('#saveQaBtn').bind('click',function(){
-        	self.saveQuestionAnswers(3);
+        	self.saveBlog(3);
         });
+        
+        user = $.cookie('geek_home_user'); 
+        user = $.parseJSON(user);
+        
+        $.post(HOST_URL+'/blog/getBloglabelList',{"type":4,"userId":user.id},function(data){
+			var result = data.data;
+			var html="";
+			
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var name=result[index].lableName;
+				html = "<li onclick=\"add_blog_config.selectType("+id+",'"+name+"')\" data-id=\""+id+"\" class=\"mdui-menu-item\"><a href=\"javascript:;\" class=\"mdui-ripple\">"+name+"</a></li>";
+				$("#menu").append(html);
+			});
+			
+		});
         
         
 	}
 	
+	this.selectType=function(id,name){
+		$("#typeName").text(name);
+		$("#typeName").attr("data-id",id);
+	}
+	
 	/**
-	 * 保存问与答信息
+	 * 保存blog信息
 	 */
-	this.saveQuestionAnswers=function(status){
-		var labelId = $("#labelName").attr("data-id");
+	this.saveBlog=function(status){
+		
+		var labelId = $("#typeName").attr("data-id");
 		var title = $.trim($("#title").val());
+		var subTitle = $.trim($("#subTitle").val());
 		var content = m_Editor.getMarkdown();
 		
-		user = $.cookie('geek_home_user'); 
-		   
 		if(labelId==null || labelId==""){
-			layer.msg('请选择所属标签节点！');
+			layer.msg('请选择所属类型！');
 			return;
 		}
 		
@@ -61,26 +82,26 @@ function addBlogConfig(){
 			return;
 		}
 		
-		if(content==null || content==""){
-			layer.msg('问与答内容不能为空！');
+		if(subTitle==null || subTitle==""){
+			layer.msg('副标题不能为空！');
 			return;
 		}
 		
-		if(user == null || user == "null"){
-			layer.msg('请登录！');
-        	return;
-        }
-		user = $.parseJSON(user);
+		if(content==null || content==""){
+			layer.msg('内容不能为空！');
+			return;
+		}
 		
-		var questionAnswers={};
-		questionAnswers.userId = user.id;
-		questionAnswers.labelId = labelId;
-		questionAnswers.title = title;
-		questionAnswers.content = content;
-		questionAnswers.status = status;
+		
+		var blog={};
+		blog.labelId = labelId;
+		blog.title = title;
+		blog.title = title;
+		blog.content = content;
+		blog.status = status;
 		
 		$.ajax({
-			url:HOST_URL+'/questionAnswers/saveQuestionAnswers',  
+			url:HOST_URL+'/blog/saveBlog',  
             type: "POST",
             dataType: "json",//跨域ajax请求,返回数据格式为json
             cache: false,
