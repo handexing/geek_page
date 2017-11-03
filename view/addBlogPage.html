@@ -16,10 +16,11 @@
 			<div class="mdui-card small_card">
 	  			<div class="q_a_title">
 	  				编写blog
-	  				<button id="addLabelNodeBtn" mdui-tooltip="{content: '选择所属类别'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple"><i class="mdui-icon material-icons">&#xe145;</i></button>
+	  				<button mdui-menu="{target: '#menu'}" mdui-tooltip="{content: '选择所属类型'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple"><i class="mdui-icon material-icons">&#xe145;</i></button>
 	  				<div class="mdui-chip label_content">
-					  <span class="mdui-chip-title" id="labelName">选择所属类别</span>
+					  <span class="mdui-chip-title" id="typeName">选择所属类型</span>
 					</div>
+					<ul class="mdui-menu" id="menu" style="margin-top: 50px;"></ul>
 	  				
 	  				<button id="saveDraftBtn" mdui-tooltip="{content: '存为草稿'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe161;</i></button>
 	  				<button id="saveQaBtn" mdui-tooltip="{content: '发布'}" class="mdui-btn mdui-btn-icon mdui-color-green mdui-ripple mdui-float-right mdui-m-r-1"><i class="mdui-icon material-icons">&#xe437;</i></button>
@@ -27,11 +28,11 @@
 	  			<div style="padding: 10px;">
 	  				<div class="mdui-textfield">
 					  	<i class="mdui-icon material-icons">&#xeb3e;</i>
-					  	<input class="mdui-textfield-input" type="text" placeholder="请输入标题..."/>
+					  	<input class="mdui-textfield-input" id="title" type="text" placeholder="请输入标题..."/>
 					</div>
 					<div class="mdui-textfield">
 						<i class="mdui-icon material-icons">&#xe6dd;</i>
-					  	<textarea class="mdui-textfield-input" placeholder="请输入副标题"></textarea>
+					  	<textarea class="mdui-textfield-input" id="subTitle" placeholder="请输入副标题"></textarea>
 					</div>
 		  			<div id="editormd">                
 				        <textarea style="display:none;"></textarea>
@@ -51,8 +52,10 @@
 	
 	<script type="application/javascript">
 		
+		var add_blog_config;
+		
 		$(function(){
-			new addBlogConfig();
+			add_blog_config = new addBlogConfig();
 		});
 		
 	</script>

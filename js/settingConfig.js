@@ -29,23 +29,69 @@ function settingConfig(){
 				var id=result[index].id;  
 				var name=result[index].lableName;
 				var color = random(0,10);
-				html += "<li data-id="+id+" onclick=\"setting_config.getBlogByType("+id+")\" class=\"mdui-list-item mdui-ripple\"><span class=\"mdui-chip-icon mdui-color-"+colors[color]+" mdui-m-r-1\">"+(index+1)+"</span><div class=\"mdui-list-item-content\">"+name+"</div></li>";
+				html += "<li data-id="+id+" onclick=\"setting_config.switchTab("+id+")\" class=\"mdui-list-item mdui-ripple\"><span class=\"mdui-chip-icon mdui-color-"+colors[color]+" mdui-m-r-1\">"+(index+1)+"</span><div class=\"mdui-list-item-content\">"+name+"</div></li>";
 			});
 			$("#blog_type_list").html(html);
 			
 			//初始化第一个选项得blog信息
 			var labelId = $("#blog_type_list li").first().attr("data-id");
-			self.getBlogByType(labelId);
+			self.getBlogByType(labelId,0,true);
 			
 		});
 		
 	}
 	
 	/**
-	 * 单机切换blog信息
+	 * 切换tab
 	 */
-	this.getBlogByType=function(id){
-		alert("初始化分页信息");		
+	this.switchTab=function(id){
+		self.getBlogByType(id,0,true);
+	}
+	
+	/**
+	 * 获取blog分页数据
+	 */
+	this.getBlogByType=function(id,pageNum,flag){
+		
+		$.post(HOST_URL+'/blog/getBlogList',{"labelId":id,"userId":user.id,"page":pageNum,"rows":10},function(data){
+			var result = data.data;
+			var html="";
+			console.log(result);
+			
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var title=result[index].title;  
+				var subtitle=result[index].subtitle;  
+				var bannerImg=result[index].bannerImg;  
+				var status=result[index].status;  
+				var collectCount=result[index].collectCount;  
+				var browseCount=result[index].browseCount;  
+				var createTime=result[index].createTime;  
+				var updateTime=result[index].updateTime;  
+				var commentCnt=result[index].commentCnt;  
+				
+				html += "<div class=\"line\"></div>";
+				html += "<li class=\"mdui-list-item mdui-ripple\">";
+				html += "<div class=\"mdui-list-item-content\">";
+	      		html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
+	      		html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
+		      	html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
+				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
+				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
+				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe622;</i><span style=\"font-size: 12px;color: grey;\">"+commentCnt+"</span>";
+				html += "</div>";
+	    		html += "</div>";
+				html += "</li>";
+			});
+			
+			html += "<div class=\"line\"></div>";
+			$("#blogList").html(html);
+			
+			if(flag){
+				self.pageable(id,data.totalPageNumber);
+			}
+			
+		});
 	}
 	
 	/**
@@ -104,7 +150,7 @@ function settingConfig(){
 	}
 	
 	//分页
-	this.pageable=function(totalPageNumber){
+	this.pageable=function(labelId,totalPageNumber){
 		layui.use(['laypage', 'layer'], function(){
   			var laypage = layui.laypage;
   			layer = layui.layer;
@@ -112,7 +158,7 @@ function settingConfig(){
 		    	cont: 'paging',
 		    	pages: totalPageNumber, //得到总页数
 		    	jump: function(obj){
-					//self.initCommentContent(questionId,obj.curr-1,false);
+					self.getBlogByType(labelId,obj.curr-1,false);
 		    	}
 		  	});
   
