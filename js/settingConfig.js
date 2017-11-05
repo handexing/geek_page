@@ -138,8 +138,6 @@ function settingConfig(){
 		$("#gitHubUrl").val(user.gitHubUrl);
 		$("#headImage").val(user.headImgUrl);
 		$(".head_img_url").attr("src","../"+user.headImgUrl);
-		$(".head_img_url").attr("src","../"+user.headImgUrl);
-		alert("../+user.headImgUrl");
 		
 		var user_info_html = "";
 		
