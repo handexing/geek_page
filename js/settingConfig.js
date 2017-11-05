@@ -18,6 +18,10 @@ function settingConfig(){
        	$('#my_blog').bind('click',function(){
 			self.initBlog();
 		});
+		
+		$('.modifyPersonAvatar').bind('click',function(){
+        	self.modifyPersonAvatar();
+        });
 	}
 	
 	/**
@@ -133,7 +137,7 @@ function settingConfig(){
 		$("#webSiteUrl").val(user.webSiteUrl);
 		$("#gitHubUrl").val(user.gitHubUrl);
 		$("#headImage").val(user.headImgUrl);
-		$("#head_img_url").attr("src","../"+user.headImgUrl);
+		$(".head_img_url").attr("src","../"+user.headImgUrl);
 		
 		var user_info_html = "";
 		
@@ -220,6 +224,9 @@ function settingConfig(){
 		});
 	}
 	
+	this.modifyPersonAvatar=function(){
+		
+	}
 	
 	self.init();
 	
