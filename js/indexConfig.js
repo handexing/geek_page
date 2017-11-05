@@ -7,6 +7,17 @@ function indexConfig(){
 	var fab = new mdui.Fab('#fab');
 	var loginDialog = new mdui.Dialog('#loginDialog');
 	var user = null;
+
+	/**
+	 * 登录按钮绑定enter键
+	 */
+	$(document).keypress(function(e){
+		var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+		if(eCode == 13)
+		{
+			self.userLogin();
+		}
+	});
 	
 	this.init=function(){
 		
