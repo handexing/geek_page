@@ -7,6 +7,7 @@ function questionAnswersDetailConfig(){
 	var m_Editor;
 	var c_Editor;
 	var questionId;
+	//var inst = new mdui.Menu('#comment_editormd', '#userList');
 	
 	this.init=function(){
 		
@@ -30,10 +31,17 @@ function questionAnswersDetailConfig(){
         
         $('#comment_editormd').bind('keyup',function(event){
           	if (event.shiftKey &&event.keyCode == 50){ 
-	          	alert('你按下了@'); 
-	          	
+//	          	alert('你按下了@'); 
+	          	//inst.open();
+	          	//$("#typeTree").show();
 	        } 
         });
+        
+        $('#comment_editormd').mousemove(function(e) {
+			var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
+			var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
+//			c_Editor.setValue(xx + '---' + yy);
+		}); 
         
         $('#commentBtn').bind('click',function(){
           	
@@ -119,6 +127,12 @@ function questionAnswersDetailConfig(){
 				self.initMarkdown();
 			}
 		});
+	}
+	
+	
+	this.selectUser=function(userId,name){
+		c_Editor.insertValue(name);
+        $("#typeTree").hide();
 	}
 	
 	/**

@@ -59,33 +59,36 @@ function settingConfig(){
 		$.post(HOST_URL+'/blog/getBlogList',{"labelId":id,"userId":user.id,"page":pageNum,"rows":10},function(data){
 			var result = data.data;
 			var html="";
-			console.log(result);
 			
-			$.each(result, function(index, itemobj) {
-				var id=result[index].id;  
-				var title=result[index].title;  
-				var subtitle=result[index].subtitle;  
-				var bannerImg=result[index].bannerImg;  
-				var status=result[index].status;  
-				var collectCount=result[index].collectCount;  
-				var browseCount=result[index].browseCount;  
-				var createTime=result[index].createTime;  
-				var updateTime=result[index].updateTime;  
-				var commentCnt=result[index].commentCnt;  
-				
-				html += "<div class=\"line\"></div>";
-				html += "<li class=\"mdui-list-item mdui-ripple\">";
-				html += "<div class=\"mdui-list-item-content\">";
-	      		html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
-	      		html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
-		      	html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
-				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
-				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
-				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe622;</i><span style=\"font-size: 12px;color: grey;\">"+commentCnt+"</span>";
-				html += "</div>";
-	    		html += "</div>";
-				html += "</li>";
-			});
+			if(result.length>0){
+				$.each(result, function(index, itemobj) {
+					var id=result[index].id;  
+					var title=result[index].title;  
+					var subtitle=result[index].subtitle;  
+					var bannerImg=result[index].bannerImg;  
+					var status=result[index].status;  
+					var collectCount=result[index].collectCount;  
+					var browseCount=result[index].browseCount;  
+					var createTime=result[index].createTime;  
+					var updateTime=result[index].updateTime;  
+					var commentCnt=result[index].commentCnt;  
+					
+					html += "<div class=\"line\"></div>";
+					html += "<li class=\"mdui-list-item mdui-ripple\">";
+					html += "<div class=\"mdui-list-item-content\">";
+		      		html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
+		      		html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
+			      	html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
+					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
+					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
+					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe622;</i><span style=\"font-size: 12px;color: grey;\">"+commentCnt+"</span>";
+					html += "</div>";
+		    		html += "</div>";
+					html += "</li>";
+				});
+			}else{
+				var html="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
+			}
 			
 			html += "<div class=\"line\"></div>";
 			$("#blogList").html(html);

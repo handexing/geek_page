@@ -96,7 +96,7 @@ function addBlogConfig(){
 		var blog={};
 		blog.labelId = labelId;
 		blog.title = title;
-		blog.title = title;
+		blog.subtitle = subTitle;
 		blog.content = content;
 		blog.status = status;
 		
@@ -111,10 +111,11 @@ function addBlogConfig(){
             scriptCharset: 'UTF-8',
             //processData : false,         // 告诉jQuery不要去处理发送的数据
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
-			data:JSON.stringify(questionAnswers),
+			data:JSON.stringify(blog),
 			success:function(responseData, status){
 				if(responseData.success){
-					$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","questionsAnswersPage");
+					$(window.parent.document).find("#m_Iframe").attr("src","view/addBlogPage.html").attr("name","addBlogPage");
+					layer.msg('(●ˇ∀ˇ●)再来一篇！');
 				}else{
 					layer.msg('操作失败！', {icon: 5});
 				}
