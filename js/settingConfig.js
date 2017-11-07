@@ -22,27 +22,106 @@ function settingConfig(){
 		$('.modifyPersonAvatar').bind('click',function(){
         	self.modifyPersonAvatar();
         });
+        
+        
+		$('.blog_type_btn').bind('click',function(){
+        	// 含标题
+			mdui.prompt('请输入类型名称', '添加类型',
+			  function (value) {
+			  	if(value == null || value == ""){
+	        		layer.msg("类型名称不能为空！");
+	        		return;
+        		}
+			  	self.addBlogType(value);
+			  },
+			  function (value) {},
+			  {
+			    confirmText: '确认',
+			    cancelText: '取消'
+			  }
+			);
+        });
+	}
+	
+	
+	/**
+	 * 添加blog类型
+	 */
+	this.addBlogType=function(name){
+		
+		var blogType = {};
+		blogType.userId = $("#userNum").text();
+		blogType.name = name;
+		blogType.status = 1;
+		blogType.parentId = 0;
+		blogType.sort = 0;
+		
+		$.ajax({
+			url:HOST_URL+'/blog/saveLabel',  
+	        type: "POST",
+	        dataType: "json",//跨域ajax请求,返回数据格式为json
+	        cache: false,
+	        timeout: 10000,//请求超时时间,单位为毫秒
+	        async: true,
+	        global: false,//禁用Jquery全局事件
+	        scriptCharset: 'UTF-8',
+	        //processData : false,         // 告诉jQuery不要去处理发送的数据
+	        contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
+			data:JSON.stringify(blogType),
+			success:function(responseData, status){
+				if(responseData.data==1){
+					self.initBlog();
+					layer.msg('添加成功！');
+				}else if(responseData.data==-1){
+					layer.msg('相同名称已存在,请修改！');
+					mdui.prompt('请输入类型名称', '添加类型',
+					  function (value) {
+					  	if(value == null || value == ""){
+			        		layer.msg("类型名称不能为空！");
+			        		return;
+		        		}
+					  	self.addBlogType(value);
+					  },
+					  function (value) {},
+					  {
+					    confirmText: '确认',
+					    cancelText: '取消',
+					    defaultValue:name
+					  }
+					);
+				}else{
+					layer.msg('操作失败！', {icon: 5});
+				}
+			}
+		});
 	}
 	
 	/**
 	 * 初始化blog信息
 	 */
 	this.initBlog=function(){
-		$.post(HOST_URL+'/blog/getBloglabelList',{"type":4,"userId":user.id},function(data){
+		
+		$.post(HOST_URL+'/blog/getBloglabelList',{"userId":user.id},function(data){
 			var result = data.data;
 			var html="";
+			if(result.length>0){
+				$.each(result, function(index, itemobj) {
+					var id=result[index].id;  
+					var name=result[index].name;
+					var color = random(0,10);
+					html += "<li data-id="+id+" onclick=\"setting_config.switchTab("+id+")\" class=\"mdui-list-item mdui-ripple\"><span class=\"mdui-chip-icon mdui-color-"+colors[color]+" mdui-m-r-1\">"+(index+1)+"</span><div class=\"mdui-list-item-content\">"+name+"</div></li>";
+				});
+				
+				//初始化第一个选项得blog信息
+				var labelId = $("#blog_type_list li").first().attr("data-id");
+				self.getBlogByType(labelId,0,true);
+				
+			} else {
+				var html="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
+				$("#blogList").html(html);
+			}
 			
-			$.each(result, function(index, itemobj) {
-				var id=result[index].id;  
-				var name=result[index].lableName;
-				var color = random(0,10);
-				html += "<li data-id="+id+" onclick=\"setting_config.switchTab("+id+")\" class=\"mdui-list-item mdui-ripple\"><span class=\"mdui-chip-icon mdui-color-"+colors[color]+" mdui-m-r-1\">"+(index+1)+"</span><div class=\"mdui-list-item-content\">"+name+"</div></li>";
-			});
 			$("#blog_type_list").html(html);
-			
-			//初始化第一个选项得blog信息
-			var labelId = $("#blog_type_list li").first().attr("data-id");
-			self.getBlogByType(labelId,0,true);
 			
 		});
 		
@@ -63,33 +142,36 @@ function settingConfig(){
 		$.post(HOST_URL+'/blog/getBlogList',{"labelId":id,"userId":user.id,"page":pageNum,"rows":10},function(data){
 			var result = data.data;
 			var html="";
-			console.log(result);
 			
-			$.each(result, function(index, itemobj) {
-				var id=result[index].id;  
-				var title=result[index].title;  
-				var subtitle=result[index].subtitle;  
-				var bannerImg=result[index].bannerImg;  
-				var status=result[index].status;  
-				var collectCount=result[index].collectCount;  
-				var browseCount=result[index].browseCount;  
-				var createTime=result[index].createTime;  
-				var updateTime=result[index].updateTime;  
-				var commentCnt=result[index].commentCnt;  
-				
-				html += "<div class=\"line\"></div>";
-				html += "<li class=\"mdui-list-item mdui-ripple\">";
-				html += "<div class=\"mdui-list-item-content\">";
-	      		html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
-	      		html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
-		      	html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
-				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
-				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
-				html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe622;</i><span style=\"font-size: 12px;color: grey;\">"+commentCnt+"</span>";
-				html += "</div>";
-	    		html += "</div>";
-				html += "</li>";
-			});
+			if(result.length>0){
+				$.each(result, function(index, itemobj) {
+					var id=result[index].id;  
+					var title=result[index].title;  
+					var subtitle=result[index].subtitle;  
+					var bannerImg=result[index].bannerImg;  
+					var status=result[index].status;  
+					var collectCount=result[index].collectCount;  
+					var browseCount=result[index].browseCount;  
+					var createTime=result[index].createTime;  
+					var updateTime=result[index].updateTime;  
+					var commentCnt=result[index].commentCnt;  
+					
+					html += "<div class=\"line\"></div>";
+					html += "<li class=\"mdui-list-item mdui-ripple\">";
+					html += "<div class=\"mdui-list-item-content\">";
+		      		html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
+		      		html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
+			      	html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
+					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
+					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
+					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe622;</i><span style=\"font-size: 12px;color: grey;\">"+commentCnt+"</span>";
+					html += "</div>";
+		    		html += "</div>";
+					html += "</li>";
+				});
+			}else{
+				var html="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
+			}
 			
 			html += "<div class=\"line\"></div>";
 			$("#blogList").html(html);
@@ -141,28 +223,34 @@ function settingConfig(){
 		
 		var user_info_html = "";
 		
-		if(user.company != null || user.company != ""){
+		console.log(user)
+		debugger
+		if(user.company == null || user.company == ""){
+		}else{
 			user_info_html += "<span>";
 				user_info_html += "<button mdui-tooltip=\"{content: '所在公司'}\" class=\"mdui-btn mdui-btn-icon mdui-color-green-900 mdui-ripple\"><i class=\"Hui-iconfont\">&#xe643;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.company+"</span>";
 			user_info_html += "</span>";
 		}
 		
-		if(user.address != null || user.address != ""){
+		if(user.address == null || user.address == ""){
+		}else{
 			user_info_html += "<span class=\"mdui-m-l-1\">";
 				user_info_html += "<button mdui-tooltip=\"{content: '所在地'}\" class=\"mdui-btn mdui-btn-icon mdui-color-deep-orange mdui-ripple\"><i class=\"Hui-iconfont\">&#xe671;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.address+"</span>";
 			user_info_html += "</span>";
 		}
 		
-		if(user.gitHubUrl != null || user.gitHubUrl != ""){
+		if(user.gitHubUrl == null || user.gitHubUrl == ""){
+		}else{
 			user_info_html += "<a class=\"mdui-m-l-1\">";
 				user_info_html += "<button mdui-tooltip=\"{content: 'GitHub'}\" class=\"mdui-btn mdui-btn-icon mdui-color-red mdui-ripple\"><i class=\"Hui-iconfont\">&#xe6d1;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.gitHubUrl+"</span>";
 			user_info_html += "</a>";
 		}
 		
-		if(user.webSiteUrl != null || user.webSiteUrl != ""){
+		if(user.webSiteUrl == null || user.webSiteUrl == ""){
+		}else{
 			user_info_html += "<a class=\"mdui-m-l-1\">";
 				user_info_html += "<button mdui-tooltip=\"{content: '个人网站'}\" class=\"mdui-btn mdui-btn-icon mdui-color-red-800 mdui-ripple\"><i class=\"Hui-iconfont\">&#xe67f;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.webSiteUrl+"</span>";

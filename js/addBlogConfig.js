@@ -41,13 +41,13 @@ function addBlogConfig(){
         user = $.cookie('geek_home_user'); 
         user = $.parseJSON(user);
         
-        $.post(HOST_URL+'/blog/getBloglabelList',{"type":4,"userId":user.id},function(data){
+        $.post(HOST_URL+'/blog/getBloglabelList',{"userId":user.id},function(data){
 			var result = data.data;
 			var html="";
 			
 			$.each(result, function(index, itemobj) {
 				var id=result[index].id;  
-				var name=result[index].lableName;
+				var name=result[index].name;
 				html = "<li onclick=\"add_blog_config.selectType("+id+",'"+name+"')\" data-id=\""+id+"\" class=\"mdui-menu-item\"><a href=\"javascript:;\" class=\"mdui-ripple\">"+name+"</a></li>";
 				$("#menu").append(html);
 			});
@@ -96,7 +96,7 @@ function addBlogConfig(){
 		var blog={};
 		blog.labelId = labelId;
 		blog.title = title;
-		blog.title = title;
+		blog.subtitle = subTitle;
 		blog.content = content;
 		blog.status = status;
 		
@@ -111,10 +111,11 @@ function addBlogConfig(){
             scriptCharset: 'UTF-8',
             //processData : false,         // 告诉jQuery不要去处理发送的数据
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
-			data:JSON.stringify(questionAnswers),
+			data:JSON.stringify(blog),
 			success:function(responseData, status){
 				if(responseData.success){
-					$(window.parent.document).find("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","questionsAnswersPage");
+					$(window.parent.document).find("#m_Iframe").attr("src","view/addBlogPage.html").attr("name","addBlogPage");
+					layer.msg('(●ˇ∀ˇ●)再来一篇！');
 				}else{
 					layer.msg('操作失败！', {icon: 5});
 				}
