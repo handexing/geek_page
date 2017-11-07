@@ -41,13 +41,13 @@ function addBlogConfig(){
         user = $.cookie('geek_home_user'); 
         user = $.parseJSON(user);
         
-        $.post(HOST_URL+'/blog/getBloglabelList',{"type":4,"userId":user.id},function(data){
+        $.post(HOST_URL+'/blog/getBloglabelList',{"userId":user.id},function(data){
 			var result = data.data;
 			var html="";
 			
 			$.each(result, function(index, itemobj) {
 				var id=result[index].id;  
-				var name=result[index].lableName;
+				var name=result[index].name;
 				html = "<li onclick=\"add_blog_config.selectType("+id+",'"+name+"')\" data-id=\""+id+"\" class=\"mdui-menu-item\"><a href=\"javascript:;\" class=\"mdui-ripple\">"+name+"</a></li>";
 				$("#menu").append(html);
 			});
