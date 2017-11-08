@@ -163,6 +163,7 @@ function indexConfig(){
             //processData : false,         // 告诉jQuery不要去处理发送的数据
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
 			data:JSON.stringify(verifyMessage),
+			xhrFields:{withCredentials:true},
 			success:function(responseData, status){
 				if(responseData.success){
 					layer.msg('密码修改成功', {icon: 7});
@@ -204,6 +205,7 @@ function indexConfig(){
             //processData : false,         // 告诉jQuery不要去处理发送的数据
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
 			data:JSON.stringify(user),
+			xhrFields:{withCredentials:true},
 			success:function(responseData, status){
 				if(responseData.success){
 					accountAndEmail.close();
