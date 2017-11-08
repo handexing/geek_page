@@ -6,6 +6,8 @@ function indexConfig(){
 	var self=this;
 	var fab = new mdui.Fab('#fab');
 	var loginDialog = new mdui.Dialog('#loginDialog');
+	var accountAndEmail = new mdui.Dialog('#accountAndEmail');
+	var verifyEmailCode = new mdui.Dialog("#verifyEmailCode");
 	var user = null;
 
 	/**
@@ -105,8 +107,118 @@ function indexConfig(){
         $('#settingBtn').bind('click',function(){
         	$("#m_Iframe").attr("src","view/settingPage.html").attr("name","settingPage");
         });
+        
+        $('#forgetPsw').bind('click',function(){
+        	accountAndEmail.open();
+        });
+        $('.sentCodeToEmail').bind('click',function(){
+        	self.sendEmail();
+        });
+        $('.nextReturn').bind('click',function(){
+        	accountAndEmail.close();
+        	loginDialog.open();
+        });
+        $('.upStep').bind('click',function(){
+        	verifyEmailCode.close();
+        	accountAndEmail.open();
+        });
+        $('.codeNextStep').bind('click',function(){
+        	self.modifyPersonPwd();
+        });
 	}
 	
+	/**
+	 * 修改用户密码
+	 */
+	this.modifyPersonPwd=function()
+	{
+		var emailCode = $('.emailCode').val();
+    	var emailPassword = $('.emailPassword').val();
+    	var againEmailPassword = $('.againEmailPassword').val();
+    	if(emailCode == null || emailCode == '' || emailPassword == null || emailPassword == '' || againEmailPassword == null || againEmailPassword == '')
+    	{
+    		layer.msg('验证码和信息不能为空！', {icon: 5});
+    		return;
+    	}
+    	if(emailPassword != againEmailPassword)
+    	{
+    		layer.msg('两次输入密码不一致！', {icon: 5});
+    		return;
+    	}
+		
+		verifyMessage = {};
+		verifyMessage.emailCode = emailCode;
+		verifyMessage.password = emailPassword;
+		verifyMessage.userName = $(".signName").val();
+
+    	$.ajax({
+			url:HOST_URL+'/user/modifyPersonPwd',  
+            type: "POST",
+            dataType: "json",//跨域ajax请求,返回数据格式为json
+            cache: false,
+            timeout: 10000,//请求超时时间,单位为毫秒
+            async: true,
+            global: false,//禁用Jquery全局事件
+            scriptCharset: 'UTF-8',
+            //processData : false,         // 告诉jQuery不要去处理发送的数据
+            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
+			data:JSON.stringify(verifyMessage),
+			success:function(responseData, status){
+				if(responseData.success){
+					layer.msg('验证码已发送到您邮箱，请注意查收！', {icon: 7});
+					accountAndEmail.close();
+					verifyEmailCode.open();
+				} else if(responseData.data.id ==null){
+					layer.msg('用户名或邮箱错误！', {icon: 7});
+				}else{
+					layer.msg('操作失败！', {icon: 5});
+				}
+			}
+		});
+	}
+	
+	
+	
+	/**
+	 * 发送验证码到邮箱
+	 */
+	this.sendEmail = function()
+	{
+		var signName = $(".signName").val();
+		var signEmail = $(".signEmail").val();
+		user = {};
+		user.userName = signName;
+		user.email = signEmail;
+		if(signName == null || signName==undefined || signName== '' || signEmail == null || signEmail==undefined || signEmail =='')
+		{
+			layer.msg('用户名和邮箱不能为空！', {icon: 5});
+			return;
+		}
+		$.ajax({
+			url:HOST_URL+'/user/getEmailCode',  
+            type: "POST",
+            dataType: "json",//跨域ajax请求,返回数据格式为json
+            cache: false,
+            timeout: 10000,//请求超时时间,单位为毫秒
+            async: true,
+            global: false,//禁用Jquery全局事件
+            scriptCharset: 'UTF-8',
+            //processData : false,         // 告诉jQuery不要去处理发送的数据
+            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
+			data:JSON.stringify(user),
+			success:function(responseData, status){
+				if(responseData.success){
+					accountAndEmail.close();
+					verifyEmailCode.open();
+					layer.msg('验证码已发送到您邮箱，请注意查收！', {icon: 7});
+				} else if(responseData.data.id ==null){
+					layer.msg('用户名或邮箱错误！', {icon: 7});
+				}else{
+					layer.msg('操作失败！', {icon: 5});
+				}
+			}
+		});
+	}
 	
 	/**
 	 * API1会检查极验云服务器是否能正常连接，将可用状态返回给客户端，并且缓存在session中。
