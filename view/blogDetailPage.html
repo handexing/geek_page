@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>博客详情</title>
+		
+		<link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.3.0/css/mdui.min.css">
+		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
+		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
+		<link rel="stylesheet" href="../plugins/editor/css/editormd.preview.css" />
+		<link rel="stylesheet" href="../plugins/editor/css/editormd.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
+		
+	</head>
+	<body>
+			<div class="mdui-card small_card" style="padding-bottom: 20px;">
+	  			<div class="q_a_title">
+	  				<span style="color: #636363;">blog</span> › <span style="color: #636363;" id="typeName">分享创造</span>
+	  				<button id="collectBtn" data-id="" mdui-tooltip="{content: '收藏'}" class="mdui-btn mdui-btn-icon mdui-color-red mdui-ripple mdui-float-right"><i class="mdui-icon material-icons">&#xe87e;</i></button>
+	  				<p style="font-size: 28px;" class="mdui-m-t-2" id="title"></p>
+	  				<p style="font-size: 16px;color: gray;" class="mdui-m-t-1" id="subTitle"></p>
+	  				<div class="mdui-m-t-2">
+						<img class="mdui-img-circle" id="head_img" src='../img/logo.png' width="70" height="70" style="border: 1px solid ghostwhite;"/>
+						<span class="mdui-m-l-1" style="color: #636363;font-weight: bold;" id="userName">handx</span> · 
+						<span style="color: grey;" id="createTime"></span>   · 
+						<span style="color: grey;" id="browseCount"></span>
+	  				</div>
+	  			</div>
+	  			<div style="padding: 10px;">
+		  			<div id="editormd">                
+				        <textarea style="display:none;font-size: 20px;" id="content">
+				        </textarea>
+			        </div>
+	  			</div>
+	  			<div class="line"></div>
+	  			<div id="q_a_content">
+	  				<div class="q_a_title">
+	  					<div class="mdui-chip">
+						  	<span class="mdui-chip-title">评论专区</span>
+						</div>	
+	  				</div>
+					<ul class="mdui-list mdui-list-dense" id="comment_ul_content">
+						
+					</ul>
+					
+					<div class="mdui-valign">
+				  		<div id="paging" class="mdui-center"></div>
+					</div>
+					
+	  			</div>
+	  			
+	  			<div id="q_a_comment">
+	  				<div class="q_a_title">
+	  					<div class="mdui-chip">
+						  	<span class="mdui-chip-title">添加一条新评论</span> 
+						</div>	
+						<span style="color: grey;">请尽量让自己的回复能够对别人有帮助回复</span>
+	  				</div>
+	  				<div style="clear: both;"></div>
+	  				<div id="comment_editormd" class="mdui-center mdui-m-t-1" style="border-radius: 5px;border: 1px solid gainsboro;">                
+				        <textarea style="display:none;"></textarea>
+			        </div>
+	  				<button class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-r-1 mdui-float-right" id="commentBtn">回复</button>
+	  			</div>
+	  		</div>		
+
+	</body>
+	
+	<script type="text/javascript" src="../js/jquery.min.js" ></script>
+	<script type="text/javascript" src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+	<script type="text/javascript" src="../plugins/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+	<script src="../plugins/editor/lib/marked.min.js"></script>
+    <script src="../plugins/editor/lib/prettify.min.js"></script>
+    <script src="../plugins/editor/lib/raphael.min.js"></script>
+    <script src="../plugins/editor/lib/underscore.min.js"></script>
+    <script src="../plugins/editor/lib/sequence-diagram.min.js"></script>
+    <script src="../plugins/editor/lib/flowchart.min.js"></script>
+    <script src="../plugins/editor/lib/jquery.flowchart.min.js"></script>
+	<script type="text/javascript" src="../plugins/editor/editormd.js" ></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
+	<script type="text/javascript" src="../js/commonConfig.js" ></script>
+	<script type="text/javascript" src="../js/blogDetailConfig.js" ></script>
+	
+	<script type="application/javascript">
+		
+		var blog_detail_config;
+		
+		$(function(){
+			blog_detail_config = new blogDetailConfig();
+		});
+		
+	</script>
+
+</html>

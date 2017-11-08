@@ -1,49 +1,24 @@
 /**
- * 问与答详情页
+ * blog详情页
  */
-function questionAnswersDetailConfig(){
+function blogDetailConfig(){
 	
 	var self=this;
 	var m_Editor;
 	var c_Editor;
-	var questionId;
+	var blogId;
 	//var inst = new mdui.Menu('#comment_editormd', '#userList');
 	
 	this.init=function(){
 		
-		questionId = getUrlVars()['id'];
+		blogId = getUrlVars()['id'];
 		
-		self.initContent(questionId);
+		self.initContent(blogId);
+		self.browseCnt(blogId);
 		
-		self.browseCnt(questionId);
-		self.initCommentContent(questionId,0,true);
+		self.initCommentContent(blogId,0,true);
 		
-		/**
-         * 存为草稿
-         */
-        $('#collectBtn').bind('click',function(){
-          	var id = $('#collectBtn').attr("data-id");
-          	/*<i class="mdui-icon material-icons">&#xe87e;</i>    空心
-          	<i class="mdui-icon material-icons">&#xe87d;</i>*/
-          	
-          	$('#collectBtn').html("<i class=\"mdui-icon material-icons\">&#xe87d;</i>");
-        });
-        
-        $('#comment_editormd').bind('keyup',function(event){
-          	if (event.shiftKey &&event.keyCode == 50){ 
-//	          	alert('你按下了@'); 
-	          	//inst.open();
-	          	//$("#typeTree").show();
-	        } 
-        });
-        
-        $('#comment_editormd').mousemove(function(e) {
-			var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
-			var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
-//			c_Editor.setValue(xx + '---' + yy);
-		}); 
-        
-        $('#commentBtn').bind('click',function(){
+     	$('#commentBtn').bind('click',function(){
           	
 			var themeId = $("#title").attr("data-id");
 			var content = c_Editor.getMarkdown();
@@ -66,7 +41,7 @@ function questionAnswersDetailConfig(){
 			comment.userId = user.id;
 			comment.content = content;
 			comment.themeId = themeId;
-			comment.type = 2;
+			comment.type = 3;
 			
 			$.ajax({
 				url:HOST_URL+'/comment/saveComment',  
@@ -82,7 +57,7 @@ function questionAnswersDetailConfig(){
 				data:JSON.stringify(comment),
 				success:function(responseData, status){
 					if(responseData.success){
-						self.initCommentContent(questionId,0,true);
+						self.initCommentContent(blogId,0,true);
 						c_Editor.setValue("");
 					}else{
 						layer.msg('操作失败！', {icon: 5});
@@ -112,10 +87,12 @@ function questionAnswersDetailConfig(){
 	/**
 	 * 初始化页面内容
 	 */
-	this.initContent=function(questionId){
-       $.post(HOST_URL+"/questionAnswers/getQuestionAnswersById",{"id":questionId},function(data){
+	this.initContent=function(blogId){
+       $.post(HOST_URL+"/blog/getBlogById",{"id":blogId},function(data){
+       	console.log(data);
 			if(data.success){
 				$("#title").text(data.data.title);
+				$("#subTitle").text(data.data.subtitle);
 				$("#userName").text(data.data.userName);
 				$("#createTime").text(data.data.createTime);
 				$("#head_img").attr("src","../"+data.data.headImgUrl)
@@ -123,7 +100,7 @@ function questionAnswersDetailConfig(){
 				$("#title").attr("data-id",data.data.id)
 				$("#browseCount").text(data.data.browseCount+"次点击");
 				$("#content").val(data.data.content);
-				$("#labelName").text(data.data.labelName);
+				$("#typeName").text(data.data.typeName);
 				self.initMarkdown();
 			}
 		});
@@ -153,9 +130,9 @@ function questionAnswersDetailConfig(){
 	/**
 	 * 初始化评论
 	 */
-	this.initCommentContent=function(questionId,pageNum,flag){
+	this.initCommentContent=function(blogId,pageNum,flag){
 		
-		$.post(HOST_URL+"/comment/commentList",{"id":questionId,"type":2,"page":pageNum,"rows":10},function(data){
+		$.post(HOST_URL+"/comment/commentList",{"id":blogId,"type":3,"page":pageNum,"rows":10},function(data){
 			
 			var result = data.data;
 			var htmlContent = "";
@@ -224,8 +201,8 @@ function questionAnswersDetailConfig(){
 	/**
 	 * 浏览量+1
 	 */
-	this.browseCnt=function(questionId){
-       $.post(HOST_URL+"/questionAnswers/addQuestionAnswersBrowseCnt",{"id":questionId},function(data){
+	this.browseCnt=function(blogId){
+       $.post(HOST_URL+"/blog/addBlogBrowseCnt",{"id":blogId},function(data){
 			
 		});
 	}

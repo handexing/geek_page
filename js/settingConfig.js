@@ -111,7 +111,7 @@ function settingConfig(){
 					var color = random(0,10);
 					html += "<li data-id="+id+" onclick=\"setting_config.switchTab("+id+")\" class=\"mdui-list-item mdui-ripple\"><span class=\"mdui-chip-icon mdui-color-"+colors[color]+" mdui-m-r-1\">"+(index+1)+"</span><div class=\"mdui-list-item-content\">"+name+"</div></li>";
 				});
-				
+				$("#blog_type_list").html(html);
 				//初始化第一个选项得blog信息
 				var labelId = $("#blog_type_list li").first().attr("data-id");
 				self.getBlogByType(labelId,0,true);
@@ -120,9 +120,6 @@ function settingConfig(){
 				var html="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
 				$("#blogList").html(html);
 			}
-			
-			$("#blog_type_list").html(html);
-			
 		});
 		
 	}
@@ -157,7 +154,7 @@ function settingConfig(){
 					var commentCnt=result[index].commentCnt;  
 					
 					html += "<div class=\"line\"></div>";
-					html += "<li class=\"mdui-list-item mdui-ripple\">";
+					html += "<li class=\"mdui-list-item mdui-ripple\" onclick=\"setting_config.blogDetailed("+id+")\">";
 					html += "<div class=\"mdui-list-item-content\">";
 		      		html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
 		      		html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
@@ -199,6 +196,12 @@ function settingConfig(){
 		});
 	}
 	
+	/**
+	 * 跳转到blog详情页
+	 */
+	this.blogDetailed=function(id){
+		$(window.parent.document).find("#m_Iframe").attr("src","view/blogDetailPage.html?id="+id).attr("name","blogDetailPage");
+	}
 	
 	/**
 	 * 显示用户信息
@@ -223,8 +226,6 @@ function settingConfig(){
 		
 		var user_info_html = "";
 		
-		console.log(user)
-		debugger
 		if(user.company == null || user.company == ""){
 		}else{
 			user_info_html += "<span>";

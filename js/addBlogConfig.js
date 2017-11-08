@@ -67,12 +67,12 @@ function addBlogConfig(){
 	 */
 	this.saveBlog=function(status){
 		
-		var labelId = $("#typeName").attr("data-id");
+		var typeId = $("#typeName").attr("data-id");
 		var title = $.trim($("#title").val());
 		var subTitle = $.trim($("#subTitle").val());
 		var content = m_Editor.getMarkdown();
 		
-		if(labelId==null || labelId==""){
+		if(typeId==null || typeId==""){
 			layer.msg('请选择所属类型！');
 			return;
 		}
@@ -94,7 +94,7 @@ function addBlogConfig(){
 		
 		
 		var blog={};
-		blog.labelId = labelId;
+		blog.typeId = typeId;
 		blog.title = title;
 		blog.subtitle = subTitle;
 		blog.content = content;
