@@ -53,8 +53,25 @@ function addBlogConfig(){
 			});
 			
 		});
+		
+		
+		$.post(HOST_URL+'/blog/getBloglabelList',{"userId":0},function(data){
+			var result = data.data;
+			var html="";
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var name=result[index].name;
+				html = "<li onclick=\"add_blog_config.selectSystemType("+id+",'"+name+"')\" data-id=\""+id+"\" class=\"mdui-menu-item\"><a href=\"javascript:;\" class=\"mdui-ripple\">"+name+"</a></li>";
+				$("#system_type").append(html);
+			});
+		});
         
         
+	}
+	
+	this.selectSystemType=function(id,name){
+		$("#systemTypeName").text(name);
+		$("#systemTypeName").attr("data-id",id);
 	}
 	
 	this.selectType=function(id,name){
@@ -67,10 +84,16 @@ function addBlogConfig(){
 	 */
 	this.saveBlog=function(status){
 		
+		var systemTypeId = $("#systemTypeName").attr("data-id");
 		var typeId = $("#typeName").attr("data-id");
 		var title = $.trim($("#title").val());
 		var subTitle = $.trim($("#subTitle").val());
 		var content = m_Editor.getMarkdown();
+		
+		if(systemTypeId==null || systemTypeId==""){
+			layer.msg('请选择所属大类型！');
+			return;
+		}
 		
 		if(typeId==null || typeId==""){
 			layer.msg('请选择所属类型！');
@@ -99,6 +122,7 @@ function addBlogConfig(){
 		blog.subtitle = subTitle;
 		blog.content = content;
 		blog.status = status;
+		blog.systemTypeId = systemTypeId;
 		
 		$.ajax({
 			url:HOST_URL+'/blog/saveBlog',  
@@ -114,8 +138,8 @@ function addBlogConfig(){
 			data:JSON.stringify(blog),
 			success:function(responseData, status){
 				if(responseData.success){
-					$(window.parent.document).find("#m_Iframe").attr("src","view/addBlogPage.html").attr("name","addBlogPage");
 					layer.msg('(●ˇ∀ˇ●)再来一篇！');
+					$(window.parent.document).find("#m_Iframe").attr("src","view/addBlogPage.html").attr("name","addBlogPage");
 				}else{
 					layer.msg('操作失败！', {icon: 5});
 				}
