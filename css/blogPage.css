@@ -1,0 +1,14 @@
+.questions_title{font-size: 19px;color:gray;font-weight: 500;}
+
+.subtitle{margin-top: 15px;}
+.lable{border: 1px solid gainsboro; border-radius: 10px;padding: 3px 5px;}
+
+.crad_title{padding:10px 20px 40px 20px;font-size: 16px;border-bottom: 1px solid ghostwhite;}
+.q_a_title{padding:10px 20px;font-size: 16px;border-bottom: 1px solid ghostwhite;}
+
+.crad_title ul li{list-style: none;float: left;margin: 5px 5px;border: 1px solid gainsboro;border-radius: 5px;padding: 3px 5px;color:gray;cursor: pointer;}
+.crad_title ul li:hover{background: green;color: white;}
+
+/*.comment_editormd:hover{background: #e9e9e9;}*/
+
+.system_type{border-bottom: 1px dashed ghostwhite;height: 45px;line-height: 45px;padding-left: 60px;}
