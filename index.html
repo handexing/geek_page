@@ -186,6 +186,50 @@
 			
 		</div>
 		
+		<div class="mdui-dialog flip-container" id="accountAndEmail" style="width: 500px;">
+			<div class="flipper">
+				 <div class="mdui-dialog-content" id= "modifyP" style="width: 500px;">
+			  		<div class="mdui-valign">
+				  		<span class="mdui-center"><b style="font-size: 25px;">极客屋</b><img src="img/logo.png" width="50" height="60" /></span>
+			  		</div>
+				  	<div class="mdui-textfield" >
+						<i class="mdui-icon material-icons">account_circle</i>
+						<input class="mdui-textfield-input signName" type="text" placeholder="请输入用户名..."/>
+					</div>
+					<div class="mdui-textfield">
+						<i class="mdui-icon material-icons">email</i>
+						<input  class="mdui-textfield-input signEmail" type="email" placeholder="请输入注册邮箱...">
+					</div>
+					<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-red sentCodeToEmail">下一步</button>
+					<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-blue nextReturn">返回登录</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mdui-dialog flip-container" id="verifyEmailCode" style="width: 500px;">
+			<div class="flipper">
+				 <div class="mdui-dialog-content" id= "modifyP" style="width: 500px;">
+			  		<div class="mdui-valign">
+				  		<span class="mdui-center"><b style="font-size: 25px;">极客屋</b><img src="img/logo.png" width="50" height="60" /></span>
+			  		</div>
+				  	<div class="mdui-textfield" >
+						<i class="mdui-icon material-icons">vpn_key</i>
+						<input class="mdui-textfield-input emailCode" type="text" placeholder="请输入6位数验证码..."/>
+					</div>
+					<div class="mdui-textfield">
+						<i class="mdui-icon material-icons">lock</i>
+						<input  class="mdui-textfield-input emailPassword" type="password" placeholder="请输入新密码...">
+					</div>
+					<div class="mdui-textfield">
+						<i class="mdui-icon material-icons">lock</i>
+						<input  class="mdui-textfield-input againEmailPassword" type="password" placeholder="请再次输入新密码...">
+					</div>
+					<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-red upStep">上一步</button>
+					<button class="mdui-m-t-1 mdui-btn mdui-btn-raised mdui-ripple mdui-btn-block mdui-color-blue codeNextStep">下一步</button>
+				</div>
+			</div>
+		</div>
+		
 		<div class="mdui-container" style="margin-top: 10px;padding: 0px;">
 			<iframe id="m_Iframe" onload="javascript:dyniframesize('m_Iframe');" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 100%;"></iframe>
   		</div>
