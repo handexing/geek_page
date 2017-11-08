@@ -163,15 +163,14 @@ function indexConfig(){
             //processData : false,         // 告诉jQuery不要去处理发送的数据
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
 			data:JSON.stringify(verifyMessage),
+			xhrFields:{withCredentials:true},
 			success:function(responseData, status){
 				if(responseData.success){
-					layer.msg('验证码已发送到您邮箱，请注意查收！', {icon: 7});
-					accountAndEmail.close();
-					verifyEmailCode.open();
-				} else if(responseData.data.id ==null){
-					layer.msg('用户名或邮箱错误！', {icon: 7});
+					layer.msg('密码修改成功', {icon: 7});
+					verifyEmailCode.close();
+					loginDialog.open();
 				}else{
-					layer.msg('操作失败！', {icon: 5});
+					layer.msg(responseData.errorMsg, {icon: 5});
 				}
 			}
 		});
@@ -206,6 +205,7 @@ function indexConfig(){
             //processData : false,         // 告诉jQuery不要去处理发送的数据
             contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
 			data:JSON.stringify(user),
+			xhrFields:{withCredentials:true},
 			success:function(responseData, status){
 				if(responseData.success){
 					accountAndEmail.close();
