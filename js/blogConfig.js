@@ -7,16 +7,16 @@ function blogConfig(){
 	
 	this.init=function(){
 		
-		/*$.post(HOST_URL+'/blog/getBloglabelList',{"userId":0},function(data){
+		$.post(HOST_URL+'/blog/getBloglabelList',{"userId":0},function(data){
 			var result = data.data;
 			var html="";
 			$.each(result, function(index, itemobj) {
 				var id=result[index].id;  
 				var name=result[index].name;
-				html = "<li onclick=\"add_blog_config.selectSystemType("+id+",'"+name+"')\" data-id=\""+id+"\" class=\"mdui-menu-item\"><a href=\"javascript:;\" class=\"mdui-ripple\">"+name+"</a></li>";
-				$("#system_type").append(html);
+				html = "<div class=\"mdui-col-xs-12 mdui-col-sm-6 system_type\"><i class=\"Hui-iconfont\">&#xe6c1;</i><a href=\"javascript:void()\">"+name+"</a></div>";
+				$("#blogType").append(html);
 			});
-		});*/
+		});
         
         self.pageable(123);
 	}

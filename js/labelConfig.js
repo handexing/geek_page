@@ -33,15 +33,13 @@ function labelConfig(){
 					var sort=result[index].sort;
 					
 					if(parentId == 0){
-						htmlContent = "<div style=\"font-weight: bold;\" class=\"crad_title mdui-m-t-2\" data-id="+id+">"+name+"</div>";
+						console.log("12121");
+						htmlContent="<div id='typeList-"+id+"' style=\"height: 45px;\" class=\"mdui-m-t-2 mdui-m-l-1\" data-id="+id+"><span style=\"color: #636363;font-size:18px;float: left;line-height: 45px;\">"+name+"：</span></div>";
 						$("#lable").append(htmlContent);
-						ulHtml += "<div>";
-							ulHtml += "<ul class=\"mdui-m-t-2\" id='ul-"+id+"'>";
-							ulHtml += "</ul>";
-						ulHtml += "</div>";
-						ulHtml += "<div class=\"mdui-clearfix\"></div>";
-						$("#lable").append(ulHtml);
-						ulHtml = "";
+						
+						ulHtml="<ul class=\"mdui-float-left\" style=\"margin-top: 4px;\" id='ul-"+id+"'></ul>";
+						$("#typeList-"+id).append(ulHtml);
+						
 						var childs=result[index].childs;
 						$.each(childs, function(index, itemobj) {
 							var c_id=childs[index].id;  
@@ -49,6 +47,7 @@ function labelConfig(){
 							var liHtml = "<li data-id="+c_id+">"+name+"</li>";
 							$("#ul-"+id).append(liHtml);
 						});
+						$("#lable").append("<div class='line' style='padding-bottom: 15px;'></div>");
 					}
 					
 				});

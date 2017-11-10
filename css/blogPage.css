@@ -11,4 +11,4 @@
 
 /*.comment_editormd:hover{background: #e9e9e9;}*/
 
-.system_type{border-bottom: 1px dashed ghostwhite;height: 45px;line-height: 45px;padding-left: 60px;}
+.system_type{border-bottom: 1px dashed ghostwhite;height: 45px;line-height: 45px;padding-left: 40px;font-weight: bold;color: #636363;}
