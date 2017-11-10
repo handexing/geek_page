@@ -125,6 +125,43 @@ function indexConfig(){
         $('.codeNextStep').bind('click',function(){
         	self.modifyPersonPwd();
         });
+        
+        $('.userName').bind('blur',function(){
+        	var userName = $.trim($(".userName").val());
+        	if(userName==null || userName==""){
+				layer.msg('用户名不能为空！');
+				return;
+			}
+        	$.post(HOST_URL+'/user/checkUserName',{"userName":userName},function(data){
+				if(data.success){
+					if(data.data.id != null){
+						layer.msg('用户名已存在，请修改！', {icon: 7});
+					}
+				} else{
+					layer.msg('程序异常！', {icon: 5});
+				}
+			});
+        });
+        
+        $('.email').bind('blur',function(){
+        	var email = $.trim($(".email").val());
+        	if(email==null || email==""){
+				layer.msg('邮箱不能为空！');
+				return;
+			}
+        	$.post(HOST_URL+'/user/checkEmail',{"email":email},function(data){
+				if(data.success){
+					if(data.data.id != null){
+						layer.msg('邮箱已存在，请修改！', {icon: 7});
+					}
+				} else{
+					layer.msg('程序异常！', {icon: 5});
+				}
+			});
+        });
+        
+        
+        
 	}
 	
 	/**
