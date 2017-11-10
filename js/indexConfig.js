@@ -331,9 +331,15 @@ function indexConfig(){
 
 		var userName = $.trim($(".userName").val());
 		var password = $.trim($(".password").val());
+		var email = $.trim($(".email").val());
 		
 		if(userName==null || userName==""){
 			layer.msg('用户名不能为空！');
+			return;
+		}
+		
+		if(email==null || email==""){
+			layer.msg('邮箱不能为空！');
 			return;
 		}
 		
@@ -345,6 +351,7 @@ function indexConfig(){
 		var user={};
 		user.userName = userName;
 		user.password = password;
+		user.email = email;
 		
 		$.ajax({
 			url:HOST_URL+'/user/userRegister',  
