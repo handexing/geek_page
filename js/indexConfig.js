@@ -15,8 +15,7 @@ function indexConfig(){
 	 */
 	$(document).keypress(function(e){
 		var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
-		if(eCode == 13)
-		{
+		if(eCode == 13){
 			self.userLogin();
 		}
 	});
@@ -27,9 +26,14 @@ function indexConfig(){
 		
 		$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
 		
+		$('.logoBtn').bind('click',function(){
+			$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
+		});
+		
 		$('#indexPage').bind('click',function(){
 			$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
 		});
+		
 		
 		$('#lableNodePage').bind('click',function(){
 			$("#m_Iframe").attr("src","view/lableNodePage.html").attr("name","lableNodePage");
@@ -158,6 +162,14 @@ function indexConfig(){
 					layer.msg('程序异常！', {icon: 5});
 				}
 			});
+        });
+        
+        $('#aboutMeBtn').bind('click',function(){
+        	$(window.parent.document).find("#m_Iframe").attr("src","view/aboutMe.html").attr("name","aboutMe");
+        });
+        
+        $('#missionBtn').bind('click',function(){
+        	$(window.parent.document).find("#m_Iframe").attr("src","view/ourMission.html").attr("name","ourMission");
         });
         
         
