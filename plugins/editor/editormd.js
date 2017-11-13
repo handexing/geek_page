@@ -3348,7 +3348,7 @@
     editormd.firstUpperCase = editormd.ucfirst = firstUpperCase;
     
     editormd.urls = {
-        atLinkBase : "https://github.com/"
+        atLinkBase : "http://www.geekuser.cn/"
     };
     
     editormd.regexs = {
