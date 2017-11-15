@@ -7,7 +7,6 @@ function questionAnswersDetailConfig(){
 	var m_Editor;
 	var c_Editor;
 	var questionId;
-	//var inst = new mdui.Menu('#comment_editormd', '#userList');
 	
 	this.init=function(){
 		
@@ -30,18 +29,17 @@ function questionAnswersDetailConfig(){
         });
         
         $('#comment_editormd').bind('keyup',function(event){
-          	if (event.shiftKey &&event.keyCode == 50){ 
-//	          	alert('你按下了@'); 
-	          	//inst.open();
-	          	//$("#typeTree").show();
+          	if (event.shiftKey &&event.keyCode == 50){
+          		var index = c_Editor.getCursor();
+          		var leftValue = index.ch * 8;
+          		document.getElementById('typeTree').style.top = '-175px';
+				document.getElementById('typeTree').style.left = leftValue+'px';
+				var liLength = $("#userList li").length;
+				if(liLength != 0){
+					$("#typeTree").show();
+				}
 	        } 
         });
-        
-        $('#comment_editormd').mousemove(function(e) {
-			var xx = e.originalEvent.x || e.originalEvent.layerX || 0; 
-			var yy = e.originalEvent.y || e.originalEvent.layerY || 0; 
-//			c_Editor.setValue(xx + '---' + yy);
-		}); 
         
         $('#commentBtn').bind('click',function(){
           	
@@ -107,6 +105,8 @@ function questionAnswersDetailConfig(){
             path   : '../plugins/editor/lib/'
         });
         
+        self.initCommentUserList(questionId)
+        
 	}
 
 	/**
@@ -131,8 +131,32 @@ function questionAnswersDetailConfig(){
 	
 	
 	this.selectUser=function(userId,name){
-		c_Editor.insertValue(name);
+		c_Editor.insertValue(name+" ");
+		$("#replyUserIds").val($("#replyUserIds").val()+userId+",");
         $("#typeTree").hide();
+	}
+	
+	/**
+	 * 初始化评论用户列表
+	 */
+	this.initCommentUserList=function(questionId){
+		
+		$.post(HOST_URL+"/comment/getCommentUserList",{"themeId":questionId,"type":2},function(data){
+			
+			var result = data.data;
+			var htmlContent = "";
+			
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var userName=result[index].userName;
+				htmlContent += "<li onclick=\"question_answers_detail_config.selectUser("+id+",'"+userName+"')\" class=\"mdui-list-item mdui-ripple\">"+userName+"</li>";
+			});
+			
+			$("#userList").html(htmlContent);
+			
+		});
+		
+        
 	}
 	
 	/**
