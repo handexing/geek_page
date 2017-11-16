@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>问与答</title>
 		
-		<link rel="stylesheet" href="//cdn.bootcss.com/mdui/0.3.0/css/mdui.min.css">
+		<link rel="stylesheet" href="../plugins/mdui/css/mdui.min.css">
 		<link rel="stylesheet" href="../plugins/layui/css/layui.css">
 		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
 		<link rel="stylesheet" href="../plugins/editor/css/editormd.preview.css" />
@@ -14,19 +14,15 @@
 		<style>
 			#typeTree{
 				width:150px;
-				height:auto;
+				height:210px;
 				border:gainsboro 1px solid;
 				background:#fff;
 				color:#333;
 				display:none;
 				position: relative;
+				/*top: -175px;
+				left: 10px;*/
 				z-index:10000;
-				background-color: white;
-				-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')"; /* For IE 8 */
-				filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000'); /* For IE 5.5 - 7 */
-				-moz-box-shadow: 2px 2px 10px #909090;/* for firefox */
-				-webkit-box-shadow: 2px 2px 10px #909090;/* for safari or chrome */
-				box-shadow:2px 2px 10px #909090;/* for opera or ie9 */
 			}
 		</style>
 	</head>
@@ -77,27 +73,26 @@
 						</div>	
 						<span style="color: grey;">请尽量让自己的回复能够对别人有帮助回复</span>
 	  				</div>
+	  				<input type="hidden" id="replyUserIds" />
 	  				<div style="clear: both;"></div>
 	  				<div id="comment_editormd" class="mdui-center mdui-m-t-1" style="border-radius: 5px;border: 1px solid gainsboro;">                
 				        <textarea style="display:none;"></textarea>
 			        </div>
-	  				<div id="typeTree">
-						<ul class="mdui-list" id="userList">
-							<li onclick="question_answers_detail_config.selectUser(1,'handx')" class="mdui-list-item mdui-ripple">handx</li>
-							<li onclick="question_answers_detail_config.selectUser(2,'jack')" class="mdui-list-item mdui-ripple">jack</li>
-							<li onclick="question_answers_detail_config.selectUser(3,'sdfs')" class="mdui-list-item mdui-ripple">sdfs</li>
-						</ul>
+			        <button class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-r-1 mdui-float-right" id="commentBtn">回复</button>
+			        
+	  				<div id="typeTree" style="overflow:scroll;width:150px; height:210px;">
+						<ul class="mdui-list" id="userList" ></ul>
 	  				</div>
-	  				<button class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-r-1 mdui-float-right" id="commentBtn">回复</button>
+	  				
 	  			</div>
-
 				
 	  		</div>		
 
 	</body>
 	
 	<script type="text/javascript" src="../js/jquery.min.js" ></script>
-	<script type="text/javascript" src="//cdn.bootcss.com/mdui/0.3.0/js/mdui.min.js"></script>
+	<script type="text/javascript" src="../js/commonConfig.js" ></script>
+	<script type="text/javascript" src="../plugins/mdui/js/mdui.min.js"></script>
 	<script type="text/javascript" src="../plugins/layer/2.4/layer.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
@@ -110,7 +105,6 @@
     <script src="../plugins/editor/lib/jquery.flowchart.min.js"></script>
 	<script type="text/javascript" src="../plugins/editor/editormd.js" ></script>
 	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
-	<script type="text/javascript" src="../js/commonConfig.js" ></script>
 	<script type="text/javascript" src="../js/questionAnswersDetailConfig.js" ></script>
 	
 	<script type="application/javascript">

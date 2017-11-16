@@ -3491,7 +3491,7 @@
                     });
 
                     text = text.replace(atLinkReg, function($1, $2) {
-                        return "<a href=\"" + editormd.urls.atLinkBase + "" + $2 + "\" title=\"&#64;" + $2 + "\" class=\"at-link\">" + $1 + "</a>";
+                        return "<a  title=\"&#64;" + $2 + "\" class=\"at-link\" onclick=\"accessUser('"+$1+"'\)\">" + $1 + "</a>";
                     }).replace(/_#_&#64;_#_/g, "@");
                 }
                 
