@@ -33,7 +33,6 @@ function labelConfig(){
 					var sort=result[index].sort;
 					
 					if(parentId == 0){
-						console.log("12121");
 						htmlContent="<div id='typeList-"+id+"' style=\"height: 45px;\" class=\"mdui-m-t-2 mdui-m-l-1\" data-id="+id+"><span style=\"color: #636363;font-size:18px;float: left;line-height: 45px;\">"+name+"：</span></div>";
 						$("#lable").append(htmlContent);
 						
