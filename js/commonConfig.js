@@ -21,3 +21,11 @@ function getUrlVars() {
     }
     return vars;
 }
+
+
+/**
+ * 访问用户首页
+ */
+function accessUser(userName){
+	$(window.parent.document).find("#m_Iframe").attr("src","view/userPage.html").attr("name","userPage");
+}

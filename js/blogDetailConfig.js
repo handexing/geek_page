@@ -190,7 +190,7 @@ function blogDetailConfig(){
 			
 			
 			if(flag){
-				self.pageable(questionId,data.totalPageNumber);
+				self.pageable(blogId,data.totalPageNumber);
 			}
 			
 		});
@@ -208,7 +208,7 @@ function blogDetailConfig(){
 	}
 	
 	//分页
-	this.pageable=function(questionId,totalPageNumber){
+	this.pageable=function(blogId,totalPageNumber){
 		layui.use(['laypage', 'layer'], function(){
   			var laypage = layui.laypage;
   			layer = layui.layer;
@@ -216,7 +216,7 @@ function blogDetailConfig(){
 		    	cont: 'paging',
 		    	pages: totalPageNumber, //得到总页数
 		    	jump: function(obj){
-					self.initCommentContent(questionId,obj.curr-1,false);
+					self.initCommentContent(blogId,obj.curr-1,false);
 		    	}
 		  	});
   
