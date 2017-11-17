@@ -5,7 +5,8 @@ function settingConfig(){
 	
 	var self=this;
 	var user;
-	var colors = new Array("pink","red","orange","blue","brown","purple","teal","green","cyan","amber","deep-orange","lime")
+	var colors = new Array("pink","red","orange","blue","brown","purple","teal","green","cyan","amber","deep-orange","lime");
+	var modifyPersonAvatar = new mdui.Dialog("#uploadPhotoDialog");
 	
 	this.init=function(){
 		
@@ -23,6 +24,9 @@ function settingConfig(){
         	self.modifyPersonAvatar();
         });
         
+        $('.directModifyPwd').bind('click',function(){
+        	self.directModifyPwd();
+        })
         
 		$('.blog_type_btn').bind('click',function(){
         	// 含标题
@@ -41,9 +45,100 @@ function settingConfig(){
 			  }
 			);
         });
+        
+        $('.cancelUpload').bind('click',function(){
+        	modifyPersonAvatar.close();
+        });
+        $('#avatarInput').bind('change',function(){
+        	self.synchronizePhoto(this);
+        });
+        $(".uploadSave").bind('click',function(){
+        	self.uploadSavePhoto(this);
+        });
 	}
 	
+	/**
+	 * 同步图片
+	 */
+	this.synchronizePhoto = function(node){
+		var imgURL = ""; 
+		try{  
+            var file = null;  
+            if(node.files && node.files[0] ){  
+                file = node.files[0];  
+            }else if(node.files && node.files.item(0)) {  
+                file = node.files.item(0);  
+            }  
+            try{  
+                imgURL =  file.getAsDataURL();  
+            }catch(e){  
+                imgRUL = window.URL.createObjectURL(file);  
+            }  
+        }catch(e){  
+            if (node.files && node.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    imgURL = e.target.result;  
+                };  
+                reader.readAsDataURL(node.files[0]);  
+            }  
+        } 
+        creatImg(imgRUL);  
+        return imgURL; 
+	}
 	
+	/**
+	 * 拼接img
+	 */
+	function creatImg(imgRUL){
+		var preview_lg = $('.preview-lg');
+		var avatar_wrapper = $(".avatar-wrapper");
+        var textHtml = "<img src='"+imgRUL+"'width='414px' height='600px' class='mainImg'/>";
+        avatar_wrapper.empty();
+        avatar_wrapper.append(textHtml); 
+        $('.mainImg').cropper({
+        	aspectRatio: 16 / 16 ,
+        	preview:preview_lg ,
+        	/*crop: function(e) {
+        		self.uploadSavePhoto(e);
+		  	}*/
+        });
+    }
+	
+	this.uploadSavePhoto = function()
+	{
+		$('.mainImg').cropper('getCroppedCanvas').toBlob(function(blob){
+			var formData = new FormData();
+			var ImageURL = $('#avatarInput').val();
+			var imageNames = ImageURL.split("\\");
+			var imageName = imageNames[imageNames.length - 1];
+			formData.append('croppedImage', blob);
+			formData.append('imageName',imageName);
+			formData.append('userName',$.parseJSON($.cookie('geek_home_user')).userName);
+			$.ajax(HOST_URL+'/user/modifyAvatar', {
+			    method: "POST",
+			    data: formData,
+			    processData: false,
+			    contentType: false,
+			    global: false,//禁用Jquery全局事件
+			    success: function (responseData,status) {
+			    	if(responseData.success == 1){
+			    		var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
+			    		geekHomeUser.headImgUrl = responseData.url;
+			    		$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});
+			    		$(".head_img_url").attr("src","../"+responseData.url);
+			    		parent.$("#headImage").attr("src",responseData.url);
+			    	}
+			    	layer.msg('修改成功！');
+			    	modifyPersonAvatar.close();
+			    },
+			    error: function () {
+			      	layer.msg('修改失败！', {icon: 5});
+			    } 
+			});
+		});
+	}
+		
 	/**
 	 * 添加blog类型
 	 */
@@ -263,6 +358,54 @@ function settingConfig(){
 	}
 	
 	/**
+	 * 直接修改密码
+	 */
+	
+	this.directModifyPwd = function(){
+		var userName = $("#userName").text();
+		var oldPassword = $("#oldPassword").val();
+		var newPassword = $("#newPassword").val();
+		var newPasswordAgain = $("#newPasswordAgain").val();
+		if(oldPassword == null || oldPassword == '' || newPassword == null || newPassword == '' || newPasswordAgain == null || newPasswordAgain == '')
+    	{
+    		layer.msg('验证码和信息不能为空！', {icon: 5});
+    		return;
+    	}
+    	if(newPassword != newPasswordAgain)
+    	{
+    		layer.msg('两次输入密码不一致！', {icon: 5});
+    		return;
+    	}
+    	verifyMessage = {};
+		verifyMessage.userName = userName;
+		verifyMessage.password = oldPassword;
+		verifyMessage.newPassword = newPassword;
+		verifyMessage.flag = 2;
+		$.ajax({
+			url:HOST_URL+'/user/modifyPersonPwd',  
+            type: "POST",
+            dataType: "json",//跨域ajax请求,返回数据格式为json
+            cache: false,
+            timeout: 10000,//请求超时时间,单位为毫秒
+            async: true,
+            global: false,//禁用Jquery全局事件
+            scriptCharset: 'UTF-8',
+            //processData : false,         // 告诉jQuery不要去处理发送的数据
+            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
+			data:JSON.stringify(verifyMessage),
+			xhrFields:{withCredentials:true},
+			success:function(responseData, status){
+				if(responseData.success){
+					layer.msg('密码修改成功', {icon: 7});
+				}else{
+					layer.msg(responseData.errorMsg, {icon: 5});
+				}
+			}
+		});
+	}
+	
+	
+	/**
 	 * 修改个人信息
 	 */
 	this.modifyPersonInfo=function(){
@@ -313,8 +456,11 @@ function settingConfig(){
 		});
 	}
 	
+	/**
+	 * 上传头像
+	 */
 	this.modifyPersonAvatar=function(){
-		
+		modifyPersonAvatar.open();
 	}
 	
 	self.init();
