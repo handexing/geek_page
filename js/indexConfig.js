@@ -13,12 +13,12 @@ function indexConfig(){
 	/**
 	 * 登录按钮绑定enter键
 	 */
-	$(document).keypress(function(e){
+	/*$(document).keypress(function(e){
 		var eCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
 		if(eCode == 13){
 			self.userLogin();
 		}
-	});
+	});*/
 	
 	this.init=function(){
 		
@@ -177,7 +177,7 @@ function indexConfig(){
 	}
 	
 	/**
-	 * 修改用户密码
+	 * 邮箱修改用户密码
 	 */
 	this.modifyPersonPwd=function()
 	{
@@ -199,6 +199,7 @@ function indexConfig(){
 		verifyMessage.emailCode = emailCode;
 		verifyMessage.password = emailPassword;
 		verifyMessage.userName = $(".signName").val();
+		verifyMessage.flag = 1;
 
     	$.ajax({
 			url:HOST_URL+'/user/modifyPersonPwd',  
@@ -414,13 +415,10 @@ function indexConfig(){
 		$.post(HOST_URL+'/user/userLogin',{"userName":userName,"password":password},function(data){
 			
 			if(data.success){
-				
 				var result = data.data;
-					
-				var html = "<img class=\"mdui-img-circle\" src='"+result.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
+				var html = "<img id=\"headImage\" class=\"mdui-img-circle\" src='"+result.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
 				$(".headImg").html(html);
 				$(".user_more").show();
-				
 				$("#userId").val(result.id);
 				$("#userName").val(result.userName);
 				$("#headImgUrl").val(result.headImgUrl);
@@ -430,13 +428,14 @@ function indexConfig(){
 				$("#birthday").val(result.birthday);
 				$("#phone").val(result.phone);
 				$("#createTime").val(result.createTime);
+				$(".head_img_url").attr("src","../"+result.headImgUrl);
 				
 				$.cookie('geek_home_user',JSON.stringify(result), {expires: 7});
 				
 				loginDialog.close();
 				$(".headImg").unbind("click");
 			} else{
-				layer.msg('程序异常！', {icon: 5});
+				layer.msg(data.errorMsg, {icon: 5});
 			}
 		});
 		
