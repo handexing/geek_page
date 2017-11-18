@@ -20,6 +20,7 @@ function blogConfig(){
         
         
         self.initBlogData(0,true);
+        self.initHotBlogList();
         
 	}
 	
@@ -85,6 +86,50 @@ function blogConfig(){
 			}
 			
 			$(".timeago").timeago();
+		});
+	}
+	
+	this.initHotBlogList=function(){
+		
+		$.post(HOST_URL+"/blog/getHotBlogList",{"page":0,"rows":10},function(data){
+			
+			var result = data.data;
+			var html="";
+			
+			if(result.length>0){
+				console.log(result);
+				$.each(result, function(index, itemobj) {
+					var id=result[index].id;  
+					var browseCount=result[index].browseCount;
+					var collectCount=result[index].collectCount;
+					var headImgUrl=result[index].headImgUrl;
+					var content=result[index].content;
+					var subtitle=result[index].subtitle;
+					var title=result[index].title;
+					var userId=result[index].userId;
+					var typeId=result[index].typeId;
+					var typeName=result[index].typeName;
+					var systemTypeName=result[index].systemTypeName;
+					var systemTypeId=result[index].systemTypeId;
+					var userName=result[index].userName;
+					var labelName=result[index].labelName;
+					var createTime=result[index].createTime;
+					var commentCnt=result[index].commentCnt;
+					createTime = createTime.replace(/ /,"T");
+					
+					html += "<li class=\"mdui-list-item mdui-ripple\">";
+					html += "<div class=\"mdui-img-circle\"><img src='../"+headImgUrl+"' width=\"40\" height=\"40\"></div>";
+					html += "<div class=\"mdui-list-item-content mdui-m-l-1\" style=\"font-size:15px;color:dimgray;\">"+title+"</div>";
+					html += "</li>";
+					html += "<div class=\"line\"></div>";
+				
+				});
+			}else{
+				var html="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
+			}
+			
+			$("#hotBlog").html(html);
+			
 		});
 	}
 	
