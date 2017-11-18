@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="../plugins/Hui-iconfont/1.0.8/iconfont.css"  />
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../css/settingPage.css" />
+		<link rel="stylesheet" href="../css/cropper.css" />
 		
 	</head>
 	<body>
@@ -110,24 +111,53 @@
 						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
 						  		<div class="mdui-textfield">
 								  	<i class="mdui-icon material-icons">&#xe898;</i>
-								  	<input class="mdui-textfield-input" type="email" placeholder="请输入当前密码..."/>
+								  	<input class="mdui-textfield-input" type="email" id="oldPassword" placeholder="请输入当前密码..."/>
 								</div>
 						  	</div>
 						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
 								<div class="mdui-textfield">
 								  	<i class="mdui-icon material-icons">&#xe897;</i>
-								  	<input class="mdui-textfield-input" type="email" placeholder="请输入新密码..."/>
+								  	<input class="mdui-textfield-input" type="email" id="newPassword" placeholder="请输入新密码..."/>
 								</div>
 						  	</div>
 						  	<div class="mdui-col-xs-6 mdui-col-sm-4">
 								<div class="mdui-textfield">
 								  	<i class="mdui-icon material-icons">&#xe897;</i>
-								  	<input class="mdui-textfield-input" type="email" placeholder="请输再次入新密码..."/>
+								  	<input class="mdui-textfield-input" type="email"  id="newPasswordAgain" placeholder="请输再次入新密码..."/>
 								</div>
 						  	</div>
 						</div>
-						<button style="margin-left: 60px;" class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-t-2"><i class="mdui-icon material-icons">&#xe6df;</i>更改密码</button>
+						<button style="margin-left: 60px;" class="mdui-btn mdui-btn-dense mdui-color-red mdui-ripple mdui-m-t-2 directModifyPwd"><i class="mdui-icon material-icons">&#xe6df;</i>更改密码</button>
 					</div>
+			</div>
+			
+			<div class="mdui-dialog" id="uploadPhotoDialog" style="width: 600px;">
+				<div class="flipper">
+					 <div class="mdui-dialog-content" id= "" style="width: 600px;height: 500px;">
+					 	<div>
+					 		<h4 class="modal-title" id="avatar-modal-label">Change Avatar</h4>
+					 	</div>
+					 	<div class="mdui-divider-inset"></div>
+					 	<div class="avatar-upload">
+		                    <input type="hidden" class="avatar-src" name="avatar_src">
+		                    <input type="hidden" class="avatar-data" name="avatar_data">
+		                    <label for="avatarInput">Local upload</label>
+		                    <input type="file" class="avatar-input" id="avatarInput" name="avatar_file">
+		                </div>
+					 	<div class="" >
+					 		<div class="mdui-col-xs-8">
+					 			<div class="avatar-wrapper"></div>
+					 		</div>
+					 		<div class="mdui-col-xs-3 linePhoto">
+					 			<div class="avatar-preview preview-lg"></div>
+					 		</div>
+					 	</div>
+					 	<div class="bottonPhoto">
+					 		<button class="mdui-btn mdui-color-red uploadSave">保存</button>
+					 		<button class="mdui-btn mdui-color-grey cancelUpload">取消</button>
+					 	</div>
+					</div>
+				</div>
 			</div>
 			
 			<div id="blog" class="mdui-m-t-1">
@@ -159,6 +189,7 @@
 	<script type="text/javascript" src="../js/jquery.cookie.js" ></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
 	<script type="text/javascript" src="../js/settingConfig.js" ></script>
+	<script type="text/javascript" src="../js/cropper.js" ></script>
 	
 	<script type="application/javascript">
 		
