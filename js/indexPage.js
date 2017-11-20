@@ -30,7 +30,7 @@ function indexPage(){
 	 */
 	this.initBlogData=function(){
 		
-		$.post(HOST_URL+"/blog/getAllBlogList",{"page":0,"rows":12},function(data){
+		$.post(HOST_URL+"/blog/getAllBlogList",{"page":0,"rows":12,"systemTypeId":0},function(data){
 			
 			var result = data.data;
 			var html="";
@@ -165,7 +165,7 @@ function indexPage(){
 						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">"+commentCnt+"</span></div>";
 						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">"+title+"</div>";
 						      		tabContent += "<div class=\"mdui-list-item-text\">";
-						      			tabContent += "<div class=\"subtitle\">";
+						      			tabContent += "<div class=\"subtitle mdui-m-t-1\">";
 						      				tabContent += "<span class=\"lable\">"+labelName+"</span>";
 						      				tabContent += "•  <b>"+userName+"</b>  •  <time class=timeago datetime=\""+createTime+"Z+08:00\"></time>";
 						      			tabContent += "</div>";

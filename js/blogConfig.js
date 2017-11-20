@@ -13,20 +13,21 @@ function blogConfig(){
 			$.each(result, function(index, itemobj) {
 				var id=result[index].id;  
 				var name=result[index].name;
-				html = "<div class=\"mdui-col-xs-12 mdui-col-sm-6 system_type\"><i class=\"Hui-iconfont\">&#xe6c1;</i><a href=\"javascript:void()\">"+name+"</a></div>";
+				html = "<div class=\"mdui-col-xs-12 mdui-col-sm-6 system_type\"><i class=\"Hui-iconfont\">&#xe6c1;</i><a onclick=\"blog_config.selectBlog('"+id+"')\" href=\"javascript:void()\">"+name+"</a></div>";
 				$("#blogType").append(html);
 			});
 		});
         
         
-        self.initBlogData(0,true);
+        self.initBlogData(0,true,0);
         self.initHotBlogList();
+        self.initHotBlogUserList();
         
 	}
 	
-	this.initBlogData=function(pageNum,flag){
+	this.initBlogData=function(pageNum,flag,systemTypeId){
 		
-		$.post(HOST_URL+"/blog/getAllBlogList",{"page":pageNum,"rows":15},function(data){
+		$.post(HOST_URL+"/blog/getAllBlogList",{"page":pageNum,"rows":15,"systemTypeId":systemTypeId},function(data){
 			
 			var result = data.data;
 			var html="";
@@ -82,7 +83,7 @@ function blogConfig(){
 			$("#blogList").html(html);
 	  
 			if(flag){
-				self.pageable(data.totalPageNumber);
+				self.pageable(data.totalPageNumber,systemTypeId);
 			}
 			
 			$(".timeago").timeago();
@@ -97,7 +98,6 @@ function blogConfig(){
 			var html="";
 			
 			if(result.length>0){
-				console.log(result);
 				$.each(result, function(index, itemobj) {
 					var id=result[index].id;  
 					var browseCount=result[index].browseCount;
@@ -117,7 +117,7 @@ function blogConfig(){
 					var commentCnt=result[index].commentCnt;
 					createTime = createTime.replace(/ /,"T");
 					
-					html += "<li class=\"mdui-list-item mdui-ripple\">";
+					html += "<li class=\"mdui-list-item mdui-ripple\" onclick=\"blog_config.blogDetailed("+id+")\">";
 					html += "<div class=\"mdui-img-circle\"><img src='../"+headImgUrl+"' width=\"40\" height=\"40\"></div>";
 					html += "<div class=\"mdui-list-item-content mdui-m-l-1\" style=\"font-size:15px;color:dimgray;\">"+title+"</div>";
 					html += "</li>";
@@ -133,8 +133,39 @@ function blogConfig(){
 		});
 	}
 	
+	this.initHotBlogUserList=function(){
+		
+		$.post(HOST_URL+"/blog/getHotBlogUserList",{"page":0,"rows":8},function(data){
+			
+			var result = data.data;
+			var html="";
+			
+			if(result.length>0){
+				$.each(result, function(index, itemobj) {
+					var headImgUrl=result[index].headImgUrl;
+					var userId=result[index].userId;
+					var userName=result[index].userName;
+					var commentCnt=result[index].commentCnt;
+					
+					html += "<div class=\"mdui-col-xs-6 mdui-list-item mdui-center mdui-p-t-1 mdui-p-b-1\" style=\"border-right: 1px solid ghostwhite; border-bottom: 1px solid ghostwhite;cursor: pointer;\" onclick=\"blog_config.goToUser('"+userName+"')\">";
+					html += "<div class=\"mdui-img-circle\">";
+					html += "<img src='../"+headImgUrl+"' width=\"70\" height=\"70\" class=\"mdui-center\">";
+					html += "<div class=\"mdui-text-center\">";
+					html += "<span style=\"font-weight: bold;color: #636363;\">"+userName+"</span>";
+					html += "</div></div></div>";
+				
+				});
+			}else{
+				var html="<button class=\"mdui-btn mdui-btn-block mdui-color-grey-100 mdui-ripple\">暂无数据！</button>";
+			}
+			
+			$("#hotBlogUser").html(html);
+			
+		});
+	}
+	
 	//分页
-	this.pageable=function(totalPageNumber){
+	this.pageable=function(totalPageNumber,systemTypeId){
 		layui.use(['laypage', 'layer'], function(){
   			var laypage = layui.laypage;
   			layer = layui.layer;
@@ -142,11 +173,15 @@ function blogConfig(){
 		    	cont: 'paging',
 		    	pages: totalPageNumber, //得到总页数
 		    	jump: function(obj){
-					self.initBlogData(obj.curr-1,false);
+					self.initBlogData(obj.curr-1,false,systemTypeId);
 		    	}
 		  	});
   
 		});
+	}
+	
+	this.selectBlog=function(id){
+		self.initBlogData(0,true,id);
 	}
 	
 	/**
@@ -154,6 +189,13 @@ function blogConfig(){
 	 */
 	this.blogDetailed=function(id){
 		$(window.parent.document).find("#m_Iframe").attr("src","view/blogDetailPage.html?id="+id).attr("name","blogDetailPage");
+	}
+	
+	/**
+	 * 跳转到用户详情页
+	 */
+	this.goToUser=function(id){
+		$(window.parent.document).find("#m_Iframe").attr("src","view/userPage.html?id="+id).attr("name","userPage");
 	}
 	
 	self.init();

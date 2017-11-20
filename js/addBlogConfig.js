@@ -123,6 +123,7 @@ function addBlogConfig(){
 		blog.content = content;
 		blog.status = status;
 		blog.systemTypeId = systemTypeId;
+		blog.userId = user.id;
 		
 		$.ajax({
 			url:HOST_URL+'/blog/saveBlog',  
