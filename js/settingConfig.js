@@ -124,10 +124,11 @@ function settingConfig(){
 			    success: function (responseData,status) {
 			    	if(responseData.success == 1){
 			    		var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
-			    		geekHomeUser.headImgUrl = responseData.url;
-			    		$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});
+			    		/*geekHomeUser.headImgUrl = responseData.url;*/
 			    		$(".head_img_url").attr("src","../"+responseData.url);
-			    		parent.$("#headImage").attr("src",responseData.url);
+			    		/*parent.$("#headImage").attr("src",responseData.url);*/
+			    		parent.$('.headImg').children().attr('src',responseData.url);
+			    		/*$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});*/
 			    	}
 			    	layer.msg('修改成功！');
 			    	modifyPersonAvatar.close();
