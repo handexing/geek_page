@@ -32,14 +32,14 @@ function openSourcesConfig(){
 				tabContent = "<div id='tab_"+id+"'></div>";
 				$("#tab_content").append(tabContent);
 				
-				if(index == 10){//显示10条
-					return false;
-				}
+//				if(index == 10){//显示10条
+//					return false;
+//				}
 				
 			});
 			
-			tab = "<a href='#tab_0' class=\"mdui-ripple\" data-id=0>全部</a>";
-			$(".mdui-tab").append(tab);
+//			tab = "<a href='#tab_0' class=\"mdui-ripple\" data-id=0>全部</a>";
+//			$(".mdui-tab").append(tab);
 			
 	  		var inst = new mdui.Tab('.mdui-tab');
 			inst.show(0);
