@@ -23,6 +23,7 @@ function indexPage(){
 		self.initQuestionAnswersList();
 		self.initLabelList();
 		self.initBlogData();
+		self.initSpeicalList();
 	}
 	
 	/**
@@ -30,7 +31,7 @@ function indexPage(){
 	 */
 	this.initBlogData=function(){
 		
-		$.post(HOST_URL+"/blog/getAllBlogList",{"page":0,"rows":12},function(data){
+		$.post(HOST_URL+"/blog/getAllBlogList",{"page":0,"rows":12,"systemTypeId":0},function(data){
 			
 			var result = data.data;
 			var html="";
@@ -134,6 +135,41 @@ function indexPage(){
 	}
 	
 	/**
+	 * 初始化专题
+	 */
+	this.initSpeicalList=function(){
+		
+		var types = new Array();
+		types.push(1);
+		types.push(3);
+	
+		$.post(HOST_URL+"/special/getSpecialList",{"page":0,"rows":12},function(data){
+			
+			var result = data.data;
+			var htmlContent="";
+			
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var name=result[index].name;
+				var subtitle=result[index].subtitle;
+				var imgPath=result[index].imgPath;
+				
+				htmlContent += "<div class=\"mdui-col mdui-m-t-1 mdui-hoverable\">";
+				htmlContent += "<div class=\"mdui-grid-tile\">";
+				htmlContent += "<img src=\"http://fakeimg.pl/350x255/?text=geekHome&font=lobster\" />";
+				htmlContent += "<div class=\"mdui-grid-tile-actions\">";
+				htmlContent += "<div class=\"mdui-grid-tile-text\">";
+				htmlContent += "<div class=\"mdui-grid-tile-title\">"+name+"</div>";
+				htmlContent += "<div class=\"mdui-grid-tile-subtitle\">"+subtitle+"</div>";
+				htmlContent += "</div></div></div></div>";
+			});
+			
+			$("#specialList").html(htmlContent);
+				
+		});
+	}
+	
+	/**
 	 * 初始化问与答列表
 	 */
 	this.initQuestionAnswersList=function(){
@@ -165,7 +201,7 @@ function indexPage(){
 						    		tabContent += "<div class=\"mdui-float-right\"><a href=\"javascript:;\" class=\"mdui-btn mdui-btn-icon\"><i class=\"Hui-iconfont\">&#xe622;</i></a><span style=\"font-size: 12px;\">"+commentCnt+"</span></div>";
 						      		tabContent += "<div class=\"mdui-list-item-title questions_title\">"+title+"</div>";
 						      		tabContent += "<div class=\"mdui-list-item-text\">";
-						      			tabContent += "<div class=\"subtitle\">";
+						      			tabContent += "<div class=\"subtitle mdui-m-t-1\">";
 						      				tabContent += "<span class=\"lable\">"+labelName+"</span>";
 						      				tabContent += "•  <b>"+userName+"</b>  •  <time class=timeago datetime=\""+createTime+"Z+08:00\"></time>";
 						      			tabContent += "</div>";
