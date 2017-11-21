@@ -7,8 +7,7 @@
 #hot_problem{height: 760px;}
 
 
-#hot_special{height: 610px;}
-#open_source_ranking{height: 610px;}
+#open_source_ranking{padding-bottom:10px;}
 
 
 #tagsList {position: relative;height:70%;margin-top: 20px;}

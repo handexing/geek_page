@@ -21,18 +21,79 @@ function addOpenSourceConfig(){
          * 存为草稿
          */
         $('#saveDraftBtn').bind('click',function(){
-        	self.saveQuestionAnswers(2);
+        	self.saveOpenSource(2);
         });
         
         /**
          * 发布
          */
         $('#saveQaBtn').bind('click',function(){
-        	self.saveQuestionAnswers(3);
+        	self.saveOpenSource(3);
         });
         
         self.initSelect();
         
+	}
+	
+	/**
+	 * 保存saveOpenSource信息
+	 */
+	this.saveOpenSource=function(status){
+		
+		var labelId = $("#typeName").attr("data-id");
+		var title = $.trim($("#title").val());
+		var subTitle = $.trim($("#subTitle").val());
+		var content = m_Editor.getMarkdown();
+		
+		if(labelId==null || labelId==""){
+			layer.msg('请选择所属类型！');
+			return;
+		}
+		
+		if(title==null || title==""){
+			layer.msg('标题不能为空！');
+			return;
+		}
+		
+		if(subTitle==null || subTitle==""){
+			layer.msg('副标题不能为空！');
+			return;
+		}
+		
+		if(content==null || content==""){
+			layer.msg('内容不能为空！');
+			return;
+		}
+		
+		var openSource={};
+		openSource.labelId = labelId;
+		openSource.title = title;
+		openSource.subtitle = subTitle;
+		openSource.content = content;
+		openSource.status = status;
+		
+		$.ajax({
+			url:HOST_URL+'/openSource/saveOpenSource',  
+            type: "POST",
+            dataType: "json",//跨域ajax请求,返回数据格式为json
+            cache: false,
+            timeout: 10000,//请求超时时间,单位为毫秒
+            async: true,
+            global: false,//禁用Jquery全局事件
+            scriptCharset: 'UTF-8',
+            //processData : false,         // 告诉jQuery不要去处理发送的数据
+            contentType: 'application/json;charset=UTF-8',//请求内容的MIMEType
+			data:JSON.stringify(openSource),
+			success:function(responseData, status){
+				if(responseData.success){
+					layer.msg('(●ˇ∀ˇ●)再来一篇！');
+					$(window.parent.document).find("#m_Iframe").attr("src","view/addOpenSource.html").attr("name","addOpenSource");
+				}else{
+					layer.msg('操作失败！', {icon: 5});
+				}
+			}
+		});
+		
 	}
 	
 	this.initSelect=function(){
