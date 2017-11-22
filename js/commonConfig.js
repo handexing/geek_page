@@ -9,6 +9,7 @@
 //var HOST_URL = "http://39.106.56.107:8888";
 
 var HOST_URL = "http://127.0.0.1:8888";
+var IMAGE_URL = "http://39.106.56.107/images/";
 
 
 function getUrlVars() {
