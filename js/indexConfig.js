@@ -43,6 +43,10 @@ function indexConfig(){
 			$("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","questionsAnswersPage");
 		});
 		
+		$('#pointsMall').bind('click',function(){
+			$("#m_Iframe").attr("src","view/pointsMall.html").attr("name","pointsMall");
+		});
+		
 		$('#openSourcePage').bind('click',function(){
 			$("#m_Iframe").attr("src","view/openSourcePage.html").attr("name","openSourcePage");
 		});
