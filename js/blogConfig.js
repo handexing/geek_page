@@ -54,7 +54,7 @@ function blogConfig(){
 					
 					html += "<li class=\"mdui-list-item mdui-ripple mdui-p-t-3 mdui-p-b-3\" onclick=\"blog_config.blogDetailed("+id+")\">";
 								html += "<div class=\"mdui-img-circle\">";
-									html += "<img src='../"+headImgUrl+"' width=\"70\" height=\"70\">";
+									html += "<img src='"+IMAGE_URL+headImgUrl+"' width=\"70\" height=\"70\">";
 									html += "<div class=\"mdui-text-center mdui-m-t-2\">";
 										html += "<span style=\"font-weight: bold;color: #636363;\">"+userName+"</span>";
 									html += "</div>";
@@ -118,7 +118,7 @@ function blogConfig(){
 					createTime = createTime.replace(/ /,"T");
 					
 					html += "<li class=\"mdui-list-item mdui-ripple\" onclick=\"blog_config.blogDetailed("+id+")\">";
-					html += "<div class=\"mdui-img-circle\"><img src='../"+headImgUrl+"' width=\"40\" height=\"40\"></div>";
+					html += "<div class=\"mdui-img-circle\"><img src='"+IMAGE_URL+headImgUrl+"' width=\"40\" height=\"40\"></div>";
 					html += "<div class=\"mdui-list-item-content mdui-m-l-1\" style=\"font-size:15px;color:dimgray;\">"+title+"</div>";
 					html += "</li>";
 					html += "<div class=\"line\"></div>";
@@ -149,7 +149,7 @@ function blogConfig(){
 					
 					html += "<div class=\"mdui-col-xs-6 mdui-list-item mdui-center mdui-p-t-1 mdui-p-b-1\" style=\"border-right: 1px solid ghostwhite; border-bottom: 1px solid ghostwhite;cursor: pointer;\" onclick=\"blog_config.goToUser('"+userName+"')\">";
 					html += "<div class=\"mdui-img-circle\">";
-					html += "<img src='../"+headImgUrl+"' width=\"70\" height=\"70\" class=\"mdui-center\">";
+					html += "<img src='"+IMAGE_URL+headImgUrl+"' width=\"70\" height=\"70\" class=\"mdui-center\">";
 					html += "<div class=\"mdui-text-center\">";
 					html += "<span style=\"font-weight: bold;color: #636363;\">"+userName+"</span>";
 					html += "</div></div></div>";
