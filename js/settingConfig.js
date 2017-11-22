@@ -125,9 +125,9 @@ function settingConfig(){
 			    	if(responseData.success == 1){
 			    		var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
 			    		/*geekHomeUser.headImgUrl = responseData.url;*/
-			    		$(".head_img_url").attr("src","../"+responseData.url);
+			    		$(".head_img_url").attr("src",IMAGE_URL+responseData.url);
 			    		/*parent.$("#headImage").attr("src",responseData.url);*/
-			    		parent.$('.headImg').children().attr('src',responseData.url);
+			    		parent.$('.headImg').children().attr('src',IMAGE_URL+responseData.url);
 			    		/*$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});*/
 			    	}
 			    	layer.msg('修改成功！');
@@ -322,32 +322,28 @@ function settingConfig(){
 		
 		var user_info_html = "";
 		
-		if(user.company == null || user.company == ""){
-		}else{
+		if(user.company.length != 0){
 			user_info_html += "<span>";
 				user_info_html += "<button mdui-tooltip=\"{content: '所在公司'}\" class=\"mdui-btn mdui-btn-icon mdui-color-green-900 mdui-ripple\"><i class=\"Hui-iconfont\">&#xe643;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.company+"</span>";
 			user_info_html += "</span>";
 		}
 		
-		if(user.address == null || user.address == ""){
-		}else{
+		if(user.address.length != 0){
 			user_info_html += "<span class=\"mdui-m-l-1\">";
 				user_info_html += "<button mdui-tooltip=\"{content: '所在地'}\" class=\"mdui-btn mdui-btn-icon mdui-color-deep-orange mdui-ripple\"><i class=\"Hui-iconfont\">&#xe671;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.address+"</span>";
 			user_info_html += "</span>";
 		}
 		
-		if(user.gitHubUrl == null || user.gitHubUrl == ""){
-		}else{
+		if(user.gitHubUrl.length != 0){
 			user_info_html += "<a class=\"mdui-m-l-1\">";
 				user_info_html += "<button mdui-tooltip=\"{content: 'GitHub'}\" class=\"mdui-btn mdui-btn-icon mdui-color-red mdui-ripple\"><i class=\"Hui-iconfont\">&#xe6d1;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.gitHubUrl+"</span>";
 			user_info_html += "</a>";
 		}
 		
-		if(user.webSiteUrl == null || user.webSiteUrl == ""){
-		}else{
+		if(user.webSiteUrl.length != 0){
 			user_info_html += "<a class=\"mdui-m-l-1\">";
 				user_info_html += "<button mdui-tooltip=\"{content: '个人网站'}\" class=\"mdui-btn mdui-btn-icon mdui-color-red-800 mdui-ripple\"><i class=\"Hui-iconfont\">&#xe67f;</i></button>";
 				user_info_html += "<span class=\"mdui-m-l-1\" style=\"font-weight: bold;color: gray;\">"+user.webSiteUrl+"</span>";

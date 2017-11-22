@@ -330,7 +330,7 @@ function indexConfig(){
 		$("#phone").val(user.phone);
 		$("#createTime").val(user.createTime);
 		
-		var html = "<img class=\"mdui-img-circle\" src='"+user.headImgUrl+"' width=\"45\" height=\"45\"/>";
+		var html = "<img class=\"mdui-img-circle\" src='"+IMAGE_URL+user.headImgUrl+"' width=\"45\" height=\"45\"/>";
 		$(".headImg").html(html);
 		$(".user_more").show();
 		$(".headImg").unbind("click");
@@ -416,7 +416,7 @@ function indexConfig(){
 			
 			if(data.success){
 				var result = data.data;
-				var html = "<img id=\"headImage\" class=\"mdui-img-circle\" src='"+result.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
+				var html = "<img id=\"headImage\" class=\"mdui-img-circle\" src='"+IMAGE_URL+result.headImgUrl+"' width=\"40\" height=\"40\" style=\"border: 1px solid ghostwhite;\"/>";
 				$(".headImg").html(html);
 				$(".user_more").show();
 				$("#userId").val(result.id);
@@ -428,7 +428,7 @@ function indexConfig(){
 				$("#birthday").val(result.birthday);
 				$("#phone").val(result.phone);
 				$("#createTime").val(result.createTime);
-				$(".head_img_url").attr("src","../"+result.headImgUrl);
+				$(".head_img_url").attr("src",IMAGE_URL+result.headImgUrl);
 				
 				$.cookie('geek_home_user',JSON.stringify(result), {expires: 7});
 				

@@ -95,7 +95,7 @@ function blogDetailConfig(){
 				$("#subTitle").text(data.data.subtitle);
 				$("#userName").text(data.data.userName);
 				$("#createTime").text(data.data.createTime);
-				$("#head_img").attr("src","../"+data.data.headImgUrl)
+				$("#head_img").attr("src",IMAGE_URL+data.data.headImgUrl)
 				$("#collectBtn").attr("data-id",data.data.id)
 				$("#title").attr("data-id",data.data.id)
 				$("#browseCount").text(data.data.browseCount+"次点击");
@@ -148,7 +148,7 @@ function blogDetailConfig(){
 					var themeId=result[index].themeId;
 					
 					htmlContent += "<li class=\"mdui-list-item mdui-ripple\">";
-						htmlContent += "<div class=\"mdui-img-circle\"><img src=\"../"+headImgUrl+"\" width=\"50\" height=\"50\"/></div>";
+						htmlContent += "<div class=\"mdui-img-circle\"><img src='"+IMAGE_URL+headImgUrl+"' width=\"50\" height=\"50\"/></div>";
 						    htmlContent += "<div class=\"mdui-list-item-content\">";
 						    	htmlContent += "<div class=\"mdui-float-right\">";
 						    		htmlContent += "<div class=\"mdui-chip\" style=\"background-color: ghostwhite;\">";
