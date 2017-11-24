@@ -12,9 +12,11 @@
 		
 	</head>
 	<body>
-		<div class="mdui-card small_card">
+		<div class="mdui-card small_card" style="height: 870px;">
 	  		<div class="q_a_title">『专题』</div>
-	  		<div style="height: 500px;"></div>
+	  		<div class="mdui-col-xs-12 mdui-col-sm-12 mdui-m-t-1">
+	  			<div class="mdui-row-xs-6" id="specialList"></div>
+  			</div>
 	  	</div>		
 	</body>
 	
@@ -22,10 +24,12 @@
 	<script type="text/javascript" src="../plugins/mdui/js/mdui.min.js"></script>
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
+	<script type="text/javascript" src="../js/specialConfig.js"></script>
 	
 	<script type="application/javascript">
 		
 		$(function(){
+			new specialConfig();
 		});
 		
 	</script>
