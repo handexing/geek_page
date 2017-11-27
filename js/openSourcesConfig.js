@@ -81,11 +81,11 @@ function openSourcesConfig(){
 					var commentCnt=result[index].commentCnt;
 					var bannerImg=result[index].bannerImg;
 					
-					html += "<li class=\"mdui-list-item mdui-ripple\">";
+					html += "<li class=\"mdui-list-item mdui-ripple\" onclick=\"open_sources_config.openSourceDetail("+id+")\">";
 					html += "<div class=\"mdui-list-item-content\">";
       				html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
       				html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
-        				html += "<img src=\"../img/tt.png\" width=\"50%\" height=\"50%\"/>";
+        			//html += "<img src=\"../img/tt.png\" width=\"50%\" height=\"50%\"/>";
 	      			html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
 					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
 					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
@@ -112,8 +112,8 @@ function openSourcesConfig(){
 	}
 	
 	//开源详情页
-	this.openSourceDetail=function(){
-		$(window.parent.document).find("#m_Iframe").attr("src","view/openSourceDetailPage.html").attr("name","openSourceDetailPage");
+	this.openSourceDetail=function(id){
+		$(window.parent.document).find("#m_Iframe").attr("src","view/openSourceDetailPage.html?id="+id).attr("name","openSourceDetailPage");
 	}
 	
 	//分页
