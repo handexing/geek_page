@@ -27,50 +27,6 @@
             margin: 0;
         }
 	</style>
-	<script language="javascript" type="text/javascript"> 
-	
-		function dyniframesize(down) { 
-			var pTar = null; 
-			if (document.getElementById){ 
-				pTar = document.getElementById(down); 
-			} else { 
-				eval('pTar = ' + down + ';'); 
-			} 
-			
-			//var name = $("#m_Iframe").attr("name");
-			
-//			if(name == "indexPage"){
-//				if (pTar && !window.opera){ 
-//					//begin resizing iframe 
-//					pTar.style.display="block" 
-//					if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){ 
-//						//ns6 syntax 
-//						pTar.height = pTar.contentDocument.body.offsetHeight +20; 
-//						pTar.width = pTar.contentDocument.body.scrollWidth+20; 
-//					} else if (pTar.Document && pTar.Document.body.scrollHeight){ 
-//						//ie5+ syntax 
-//						pTar.height = pTar.Document.body.scrollHeight; 
-//						pTar.width = pTar.Document.body.scrollWidth; 
-//					} 
-//				} 
-//			} else {
-				if (pTar && !window.opera){ 
-					//begin resizing iframe 
-					pTar.style.display="block" 
-					if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){ 
-						//ns6 syntax 
-						pTar.height = pTar.contentDocument.body.offsetHeight +20; 
-						pTar.width = pTar.contentDocument.body.scrollWidth+20; 
-					} else if (pTar.Document && pTar.Document.body.scrollHeight){ 
-						//ie5+ syntax 
-						pTar.height = pTar.Document.body.scrollHeight; 
-						pTar.width = pTar.Document.body.scrollWidth; 
-					} 
-				} 
-//			}
-			
-		}
-	</script> 
 	
 	</head>
 	
@@ -235,10 +191,9 @@
 		</div>
 		
 		<div class="mdui-container" style="margin-top: 10px;padding: 0px;">
-			<iframe id="m_Iframe" onload="javascript:dyniframesize('m_Iframe');" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 100%;"></iframe>
+			<iframe id="m_Iframe" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" style="width: 100%;"></iframe>
   		</div>
   		
-  		<!--onload="javascript:dyniframesize('m_Iframe');"-->
   		<div id="footer" class="mdui-color-white">
   			<div class="mdui-container" style="padding: 0px;">
 	  			<div style="float: left;">

@@ -11,8 +11,7 @@
 		<link rel="stylesheet" href="../css/common.css" />
 		
 	</head>
-	<body>
-		<!--<div class="mdui-card" style="padding-bottom: 20px;">-->
+	<body id="indexPage">
 		<div class="mdui-row">
   			<div class="mdui-col-xs-12 mdui-col-sm-8" id="notice">
   				<div class="flicker-example" style="height: 300px;">
@@ -44,26 +43,7 @@
 		<div id="blog" class="mdui-m-t-1">
 			<div class="mdui-card small_card">
   				<div class="crad_title">『热门文章』</div>
-				<div class="mdui-row-xs-4" id="blogList">
-				  	<!--<div class="mdui-col mdui-m-t-2">
-				  		<div class="mdui-card mdui-hoverable">
-						  	<div class="mdui-card-media">
-						    	<img src="../img/test.png" width="100" height="200"/>
-							    <div class="mdui-card-media-covered mdui-card-media-covered-top">
-							      	<div class="mdui-card-primary">
-							        	<div class="mdui-card-primary-title">java从入门到放弃</div>
-							        	<div class="mdui-card-primary-subtitle">一篇学习Java入门的奇书！</div>
-							      	</div>
-							    </div>
-						  	</div>
-						  	<div class="mdui-card-actions mdui-float-right">
-						    	<i class="Hui-iconfont" style="color: #3F3F3F;font-size: 25px;">&#xe725;</i><span style="font-size: 12px;color: grey;">56</span>&nbsp;&nbsp;&nbsp;
-						    	<i class="Hui-iconfont" style="color: #3F3F3F;font-size: 25px;">&#xe69e;</i><span style="font-size: 12px;color: grey;">89</span>&nbsp;&nbsp;&nbsp;
-						    	<i class="Hui-iconfont" style="color: #3F3F3F;font-size: 25px;">&#xe622;</i><span style="font-size: 12px;color: grey;">33</span>
-						  	</div>
-						</div>
-				  	</div>-->
-				</div>
+				<div class="mdui-row-xs-4" id="blogList"></div>
 				<div class="mdui-valign">
 				  	<button class="mdui-center mdui-btn mdui-color-grey-300 mdui-ripple mdui-m-t-2 more_blog" style="width: 400px;">加载更多<i class="mdui-icon material-icons">&#xe5d3;</i></button>
 				</div>
@@ -162,7 +142,6 @@
 			</div>-->
 
 		</div>
-		<!--</div>-->
 	</body>
 	
 	<script type="text/javascript" src="../js/jquery.min.js" ></script>
@@ -189,6 +168,8 @@
 	            flick_animation 		: 'transform-slide'
         	});
         	
+        	var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#indexPage").height());
 		});
 		
 	</script>

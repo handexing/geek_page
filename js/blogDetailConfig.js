@@ -193,6 +193,10 @@ function blogDetailConfig(){
 				self.pageable(blogId,data.totalPageNumber);
 			}
 			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#blogDetailPage").height()+20);
+			
 		});
 		
         

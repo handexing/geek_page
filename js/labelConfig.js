@@ -52,6 +52,10 @@ function labelConfig(){
 				});
 				
 			}
+			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#lablePage").height()+20);
 		});
 	}
 	

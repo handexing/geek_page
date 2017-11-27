@@ -29,8 +29,7 @@ function openSourcesConfig(){
 				var name=result[index].lableName;
 				tab = "<a href='#tab_"+id+"' onclick=\"open_sources_config.switchTab("+id+")\" class=\"mdui-ripple\" data-id="+id+">"+name+"</a>";
 				$(".mdui-tab").append(tab);
-				//<div class=\"crad_title\">本类推荐</div><div class=\"mdui-row-xs-4 mdui-m-t-1\" id='recommend_"+id+"'></div><div class=\"line mdui-m-t-1\"></div>
-				tabContent = "<div id='tab_"+id+"'><ul class=\"mdui-list\"></ul></div>";
+				tabContent = "<div id='tab_"+id+"'><div class=\"crad_title\">本类推荐</div><div class=\"mdui-row-xs-4 mdui-m-t-1\" id='recommend_"+id+"'></div><div class=\"line mdui-m-t-1\"></div><ul class=\"mdui-list\"></ul></div>";
 				$("#tab_content").append(tabContent);
 				
 				if(index == 10){//显示10条
@@ -86,7 +85,7 @@ function openSourcesConfig(){
 					html += "<div class=\"mdui-list-item-content\">";
       				html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
       				html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
-      				//html += "<img src=\"../img/tt.png\" width=\"50%\" height=\"50%\"/>";
+        				html += "<img src=\"../img/tt.png\" width=\"50%\" height=\"50%\"/>";
 	      			html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
 					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
 					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
@@ -105,7 +104,11 @@ function openSourcesConfig(){
 				self.pageable(labelId,data.totalPageNumber);
 			}
 
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#opensource").height()+20);
 		});
+		
 	}
 	
 	//开源详情页

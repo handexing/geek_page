@@ -11,8 +11,8 @@
 		<link rel="stylesheet" href="../css/openSourcePage.css" />
 		
 	</head>
-	<body>
-			<div class="mdui-card small_card" style="min-height: 1500px;">
+	<body id="opensource">
+			<div class="mdui-card small_card">
 	  			<div class="crad_title">『开源』</div>
 	  			<div class="mdui-tab mdui-tab-full-width"></div>
 				<div id="tab_content" class="mdui-m-t-1"></div>
@@ -255,8 +255,10 @@
 		
 		$(function(){
 			open_sources_config = new openSourcesConfig();
+//			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+//			m_Iframe.height($(document).height());
+//			console.log($("#opensource").height());
 		});
-		
 		
 	</script>
 
