@@ -7,7 +7,7 @@ function settingConfig(){
 	var user;
 	var colors = new Array("pink","red","orange","blue","brown","purple","teal","green","cyan","amber","deep-orange","lime");
 	var modifyPersonAvatar = new mdui.Dialog("#uploadPhotoDialog");
-	
+       	
 	this.init=function(){
 		
 		self.settingUserInfo();
@@ -55,6 +55,11 @@ function settingConfig(){
         $(".uploadSave").bind('click',function(){
         	self.uploadSavePhoto(this);
         });
+        
+        //动态设置高度
+		var m_Iframe = $(window.parent.document).find("#m_Iframe");
+		m_Iframe.height(1140);
+			
 	}
 	
 	/**
@@ -272,7 +277,9 @@ function settingConfig(){
 			if(flag){
 				self.pageable(id,data.totalPageNumber);
 			}
-			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#settingPage").height()+20);
 		});
 	}
 	
@@ -318,7 +325,7 @@ function settingConfig(){
 		$("#webSiteUrl").val(user.webSiteUrl);
 		$("#gitHubUrl").val(user.gitHubUrl);
 		$("#headImage").val(user.headImgUrl);
-		$(".head_img_url").attr("src","../"+user.headImgUrl);
+		$(".head_img_url").attr("src",IMAGE_URL+user.headImgUrl);
 		
 		var user_info_html = "";
 		
@@ -351,7 +358,7 @@ function settingConfig(){
 		}
 		
 		$(".user_info").html(user_info_html);
-		
+
 	}
 	
 	/**
