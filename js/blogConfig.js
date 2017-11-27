@@ -87,6 +87,10 @@ function blogConfig(){
 			}
 			
 			$(".timeago").timeago();
+			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#blogPage").height()+20);
 		});
 	}
 	

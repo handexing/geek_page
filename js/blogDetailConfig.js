@@ -89,7 +89,6 @@ function blogDetailConfig(){
 	 */
 	this.initContent=function(blogId){
        $.post(HOST_URL+"/blog/getBlogById",{"id":blogId},function(data){
-       	console.log(data);
 			if(data.success){
 				$("#title").text(data.data.title);
 				$("#subTitle").text(data.data.subtitle);
@@ -192,6 +191,10 @@ function blogDetailConfig(){
 			if(flag){
 				self.pageable(blogId,data.totalPageNumber);
 			}
+			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#blogDetailPage").height()+20);
 			
 		});
 		

@@ -97,6 +97,10 @@ function questionAnswersConfig(){
 			}
 			
 			$(".timeago").timeago();
+			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#questionAnswersPage").height()+20);
 		});
 	}
 	

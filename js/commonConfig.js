@@ -11,7 +11,6 @@
 var HOST_URL = "http://127.0.0.1:8888";
 var IMAGE_URL = "http://39.106.56.107/images/";
 
-
 function getUrlVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');

@@ -154,7 +154,7 @@ function indexPage(){
 				var subtitle=result[index].subtitle;
 				var imgPath=result[index].imgPath;
 				
-				htmlContent += "<div class=\"mdui-col mdui-m-t-1 mdui-hoverable\">";
+				htmlContent += "<div class=\"mdui-col mdui-m-t-1 mdui-hoverable\" style=\"cursor: pointer;padding:0px;padding-left: 5px;\">";
 				htmlContent += "<div class=\"mdui-grid-tile\">";
 				htmlContent += "<img src=\"http://fakeimg.pl/350x255/?text=geekHome&font=lobster\" />";
 				htmlContent += "<div class=\"mdui-grid-tile-actions\">";

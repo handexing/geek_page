@@ -1,47 +1,23 @@
 /**
- * 问与答详情页
+ * 开源详情页
  */
-function questionAnswersDetailConfig(){
+function openSourceDetailConfig(){
 	
 	var self=this;
 	var m_Editor;
 	var c_Editor;
-	var questionId;
+	var opensourceId;
 	
 	this.init=function(){
 		
-		questionId = getUrlVars()['id'];
+		opensourceId = getUrlVars()['id'];
 		
-		self.initContent(questionId);
+		self.initContent(opensourceId);
+		self.browseCnt(opensourceId);
 		
-		self.browseCnt(questionId);
-		self.initCommentContent(questionId,0,true);
+		self.initCommentContent(opensourceId,0,true);
 		
-		/**
-         * 存为草稿
-         */
-        $('#collectBtn').bind('click',function(){
-          	var id = $('#collectBtn').attr("data-id");
-          	/*<i class="mdui-icon material-icons">&#xe87e;</i>    空心
-          	<i class="mdui-icon material-icons">&#xe87d;</i>*/
-          	
-          	$('#collectBtn').html("<i class=\"mdui-icon material-icons\">&#xe87d;</i>");
-        });
-        
-        $('#comment_editormd').bind('keyup',function(event){
-          	if (event.shiftKey &&event.keyCode == 50){
-          		var index = c_Editor.getCursor();
-          		var leftValue = index.ch * 8;
-          		document.getElementById('typeTree').style.top = '-175px';
-				document.getElementById('typeTree').style.left = leftValue+'px';
-				var liLength = $("#userList li").length;
-				if(liLength != 0){
-					$("#typeTree").show();
-				}
-	        } 
-        });
-        
-        $('#commentBtn').bind('click',function(){
+     	$('#commentBtn').bind('click',function(){
           	
 			var themeId = $("#title").attr("data-id");
 			var content = c_Editor.getMarkdown();
@@ -64,7 +40,7 @@ function questionAnswersDetailConfig(){
 			comment.userId = user.id;
 			comment.content = content;
 			comment.themeId = themeId;
-			comment.type = 2;
+			comment.type = 1;
 			
 			$.ajax({
 				url:HOST_URL+'/comment/saveComment',  
@@ -80,7 +56,7 @@ function questionAnswersDetailConfig(){
 				data:JSON.stringify(comment),
 				success:function(responseData, status){
 					if(responseData.success){
-						self.initCommentContent(questionId,0,true);
+						self.initCommentContent(opensourceId,0,true);
 						c_Editor.setValue("");
 					}else{
 						layer.msg('操作失败！', {icon: 5});
@@ -105,17 +81,16 @@ function questionAnswersDetailConfig(){
             path   : '../plugins/editor/lib/'
         });
         
-        self.initCommentUserList(questionId)
-        
 	}
 
 	/**
 	 * 初始化页面内容
 	 */
-	this.initContent=function(questionId){
-       $.post(HOST_URL+"/questionAnswers/getQuestionAnswersById",{"id":questionId},function(data){
+	this.initContent=function(opensourceId){
+       $.post(HOST_URL+"/openSource/getOpenSourceDetailById",{"id":opensourceId},function(data){
 			if(data.success){
 				$("#title").text(data.data.title);
+				$("#subTitle").text(data.data.subtitle);
 				$("#userName").text(data.data.userName);
 				$("#createTime").text(data.data.createTime);
 				$("#head_img").attr("src",IMAGE_URL+data.data.headImgUrl)
@@ -123,7 +98,7 @@ function questionAnswersDetailConfig(){
 				$("#title").attr("data-id",data.data.id)
 				$("#browseCount").text(data.data.browseCount+"次点击");
 				$("#content").val(data.data.content);
-				$("#labelName").text(data.data.labelName);
+				$("#typeName").text(data.data.lableName);
 				self.initMarkdown();
 			}
 		});
@@ -131,32 +106,8 @@ function questionAnswersDetailConfig(){
 	
 	
 	this.selectUser=function(userId,name){
-		c_Editor.insertValue(name+" ");
-		$("#replyUserIds").val($("#replyUserIds").val()+userId+",");
+		c_Editor.insertValue(name);
         $("#typeTree").hide();
-	}
-	
-	/**
-	 * 初始化评论用户列表
-	 */
-	this.initCommentUserList=function(questionId){
-		
-		$.post(HOST_URL+"/comment/getCommentUserList",{"themeId":questionId,"type":2},function(data){
-			
-			var result = data.data;
-			var htmlContent = "";
-			
-			$.each(result, function(index, itemobj) {
-				var id=result[index].id;  
-				var userName=result[index].userName;
-				htmlContent += "<li onclick=\"question_answers_detail_config.selectUser("+id+",'"+userName+"')\" class=\"mdui-list-item mdui-ripple\">"+userName+"</li>";
-			});
-			
-			$("#userList").html(htmlContent);
-			
-		});
-		
-        
 	}
 	
 	/**
@@ -177,9 +128,9 @@ function questionAnswersDetailConfig(){
 	/**
 	 * 初始化评论
 	 */
-	this.initCommentContent=function(questionId,pageNum,flag){
+	this.initCommentContent=function(opensourceId,pageNum,flag){
 		
-		$.post(HOST_URL+"/comment/commentList",{"id":questionId,"type":2,"page":pageNum,"rows":10},function(data){
+		$.post(HOST_URL+"/comment/commentList",{"id":opensourceId,"type":1,"page":pageNum,"rows":10},function(data){
 			
 			var result = data.data;
 			var htmlContent = "";
@@ -235,14 +186,13 @@ function questionAnswersDetailConfig(){
 				$("#comment_ul_content").html(htmlContent);
 			}
 			
-			
 			if(flag){
-				self.pageable(questionId,data.totalPageNumber);
+				self.pageable(opensourceId,data.totalPageNumber);
 			}
 			
 			//动态设置高度
 			var m_Iframe = $(window.parent.document).find("#m_Iframe");
-			m_Iframe.height($("#questionsAnswersDetailPage").height()+20);
+			m_Iframe.height($("#openSourceDetailPage").height()+20);
 			
 		});
 		
@@ -252,14 +202,13 @@ function questionAnswersDetailConfig(){
 	/**
 	 * 浏览量+1
 	 */
-	this.browseCnt=function(questionId){
-       $.post(HOST_URL+"/questionAnswers/addQuestionAnswersBrowseCnt",{"id":questionId},function(data){
-			
+	this.browseCnt=function(opensourceId){
+       $.post(HOST_URL+"/openSource/addBrowseCnt",{"id":opensourceId},function(data){
 		});
 	}
 	
 	//分页
-	this.pageable=function(questionId,totalPageNumber){
+	this.pageable=function(opensourceId,totalPageNumber){
 		layui.use(['laypage', 'layer'], function(){
   			var laypage = layui.laypage;
   			layer = layui.layer;
@@ -267,7 +216,7 @@ function questionAnswersDetailConfig(){
 		    	cont: 'paging',
 		    	pages: totalPageNumber, //得到总页数
 		    	jump: function(obj){
-					self.initCommentContent(questionId,obj.curr-1,false);
+					self.initCommentContent(opensourceId,obj.curr-1,false);
 		    	}
 		  	});
   
