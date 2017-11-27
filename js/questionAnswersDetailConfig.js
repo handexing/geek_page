@@ -240,6 +240,10 @@ function questionAnswersDetailConfig(){
 				self.pageable(questionId,data.totalPageNumber);
 			}
 			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#questionsAnswersDetailPage").height()+20);
+			
 		});
 		
         
