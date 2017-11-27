@@ -11,6 +11,9 @@ function addOpenSourceConfig(){
 	
 	this.init=function(){
 		
+		user = $.cookie('geek_home_user'); 
+        user = $.parseJSON(user);
+		
 		self.initMarkdown();
 		
 		$('#addTypeBtn').bind('click',function(){
@@ -71,6 +74,7 @@ function addOpenSourceConfig(){
 		openSource.subtitle = subTitle;
 		openSource.content = content;
 		openSource.status = status;
+		openSource.userId = user.id;
 		
 		$.ajax({
 			url:HOST_URL+'/openSource/saveOpenSource',  
