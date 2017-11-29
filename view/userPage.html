@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="../css/settingPage.css" />
 		
 	</head>
-	<body>
+	<body id="userPage">
 		<div class="mdui-card small_card mdui-p-b-4">
 	  		<div class="q_a_title">『TA的主页』</div>
   				<ul class="mdui-list">
@@ -74,6 +74,9 @@
 		
 		$(function(){
 			//setting_config = new settingConfig();
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#userPage").height()+20);
 		});
 		
 	</script>

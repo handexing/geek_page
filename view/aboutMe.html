@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="../css/aboutMePage.css" />
 		
 	</head>
-	<body>
+	<body id="aboutMePage">
 		<div class="mdui-card small_card" style="min-height: 1000px;">
 	  		<div class="q_a_title">『关于极客屋』</div>
 	  		<br />
@@ -44,5 +44,13 @@
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
 	
-
+	<script type="application/javascript">
+		
+		$(function(){
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#aboutMePage").height()+20);
+		});
+		
+	</script>
 </html>

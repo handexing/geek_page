@@ -103,12 +103,42 @@ function openSourcesConfig(){
 			if(flag){
 				self.pageable(labelId,data.totalPageNumber);
 			}
+			
+			self.recommendList(labelId);
+			
 
 			//动态设置高度
 			var m_Iframe = $(window.parent.document).find("#m_Iframe");
 			m_Iframe.height($("#opensource").height()+20);
 		});
 		
+	}
+	
+	//开源推荐
+	this.recommendList=function(labelId){
+		$.post(HOST_URL+"/openSource/getRecommendList",{"labelId":labelId},function(data){
+			
+			var result = data.data;
+			var html="";
+			
+			console.log(result);
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var bannerImg=result[index].bannerImg;
+				var title=result[index].title;
+				
+				html += "<div class=\"mdui-col\" onclick=\"open_sources_config.openSourceDetail("+id+")\">";
+				html += "<div class=\"mdui-grid-tile\">";
+				html += "<a href=\"javascript:;\"><img src=\"http://fakeimg.pl/350x225/?text=geekHome&font=lobster\" /></a>";
+				html += "<div class=\"mdui-grid-tile-actions\">";
+				html += "<div class=\"mdui-grid-tile-text\">";
+				html += "<div class=\"mdui-grid-tile-title\">"+title+"</div>";
+				html += "</div></div></div></div>";
+					
+			});
+			
+			$("#recommend_"+labelId).html(html);
+		});
 	}
 	
 	//开源详情页
