@@ -11,8 +11,8 @@
 		<link rel="stylesheet" href="../css/aboutMePage.css" />
 		
 	</head>
-	<body>
-		<div class="mdui-card small_card" style="min-height: 500px;">
+	<body id="ourMissionPage">
+		<div class="mdui-card small_card" style="min-height: 550px;">
 	  		<div class="q_a_title">『我们的愿景』</div>
 	  		<br />
 			<span class="motto mdui-m-l-4">极客屋 的使命是为极客们打造一个最好的社区，他们在这里可以获得灵感，分享想法，找到伙伴。</span>
@@ -24,5 +24,13 @@
 	<script type="text/javascript" src="../plugins/layui/layui.js"></script>
 	<script type="text/javascript" src="../js/commonConfig.js" ></script>
 	
-
+	<script type="application/javascript">
+		
+		$(function(){
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#ourMissionPage").height()+20);
+		});
+		
+	</script>
 </html>
