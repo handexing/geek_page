@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
 		
 	</head>
-	<body>
+	<body id="addBlogPage">
 			<div class="mdui-card small_card">
 	  			<div class="q_a_title">
 	  				编写blog
@@ -62,6 +62,10 @@
 		
 		$(function(){
 			add_blog_config = new addBlogConfig();
+			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#addBlogPage").height()+20);
 		});
 		
 	</script>
