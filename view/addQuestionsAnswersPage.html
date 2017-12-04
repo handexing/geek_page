@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
 		
 	</head>
-	<body>
+	<body id="addQuestionsAnswersPage">
 			<div class="mdui-card small_card">
 	  			<div class="q_a_title">
 	  				问与答讨论添加
@@ -49,6 +49,9 @@
 		
 		$(function(){
 			new addQuestionAnswersConfig();
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#addQuestionsAnswersPage").height()+20);
 		});
 		
 	</script>

@@ -1,22 +1,21 @@
 /**
- * blog详情页
+ * 开源详情页
  */
-function blogDetailConfig(){
+function openSourceDetailConfig(){
 	
 	var self=this;
 	var m_Editor;
 	var c_Editor;
-	var blogId;
-	//var inst = new mdui.Menu('#comment_editormd', '#userList');
+	var opensourceId;
 	
 	this.init=function(){
 		
-		blogId = getUrlVars()['id'];
+		opensourceId = getUrlVars()['id'];
 		
-		self.initContent(blogId);
-		self.browseCnt(blogId);
+		self.initContent(opensourceId);
+		self.browseCnt(opensourceId);
 		
-		self.initCommentContent(blogId,0,true);
+		self.initCommentContent(opensourceId,0,true);
 		
      	$('#commentBtn').bind('click',function(){
           	
@@ -41,7 +40,7 @@ function blogDetailConfig(){
 			comment.userId = user.id;
 			comment.content = content;
 			comment.themeId = themeId;
-			comment.type = 3;
+			comment.type = 1;
 			
 			$.ajax({
 				url:HOST_URL+'/comment/saveComment',  
@@ -57,7 +56,7 @@ function blogDetailConfig(){
 				data:JSON.stringify(comment),
 				success:function(responseData, status){
 					if(responseData.success){
-						self.initCommentContent(blogId,0,true);
+						self.initCommentContent(opensourceId,0,true);
 						c_Editor.setValue("");
 					}else{
 						layer.msg('操作失败！', {icon: 5});
@@ -87,8 +86,8 @@ function blogDetailConfig(){
 	/**
 	 * 初始化页面内容
 	 */
-	this.initContent=function(blogId){
-       $.post(HOST_URL+"/blog/getBlogById",{"id":blogId},function(data){
+	this.initContent=function(opensourceId){
+       $.post(HOST_URL+"/openSource/getOpenSourceDetailById",{"id":opensourceId},function(data){
 			if(data.success){
 				$("#title").text(data.data.title);
 				$("#subTitle").text(data.data.subtitle);
@@ -99,7 +98,7 @@ function blogDetailConfig(){
 				$("#title").attr("data-id",data.data.id)
 				$("#browseCount").text(data.data.browseCount+"次点击");
 				$("#content").val(data.data.content);
-				$("#typeName").text(data.data.typeName);
+				$("#typeName").text(data.data.lableName);
 				self.initMarkdown();
 			}
 		});
@@ -129,9 +128,9 @@ function blogDetailConfig(){
 	/**
 	 * 初始化评论
 	 */
-	this.initCommentContent=function(blogId,pageNum,flag){
+	this.initCommentContent=function(opensourceId,pageNum,flag){
 		
-		$.post(HOST_URL+"/comment/commentList",{"id":blogId,"type":3,"page":pageNum,"rows":10},function(data){
+		$.post(HOST_URL+"/comment/commentList",{"id":opensourceId,"type":1,"page":pageNum,"rows":10},function(data){
 			
 			var result = data.data;
 			var htmlContent = "";
@@ -187,14 +186,13 @@ function blogDetailConfig(){
 				$("#comment_ul_content").html(htmlContent);
 			}
 			
-			
 			if(flag){
-				self.pageable(blogId,data.totalPageNumber);
+				self.pageable(opensourceId,data.totalPageNumber);
 			}
 			
 			//动态设置高度
 			var m_Iframe = $(window.parent.document).find("#m_Iframe");
-			m_Iframe.height($("#blogDetailPage").height()+20);
+			m_Iframe.height($("#openSourceDetailPage").height()+20);
 			
 		});
 		
@@ -204,14 +202,13 @@ function blogDetailConfig(){
 	/**
 	 * 浏览量+1
 	 */
-	this.browseCnt=function(blogId){
-       $.post(HOST_URL+"/blog/addBlogBrowseCnt",{"id":blogId},function(data){
-			
+	this.browseCnt=function(opensourceId){
+       $.post(HOST_URL+"/openSource/addBrowseCnt",{"id":opensourceId},function(data){
 		});
 	}
 	
 	//分页
-	this.pageable=function(blogId,totalPageNumber){
+	this.pageable=function(opensourceId,totalPageNumber){
 		layui.use(['laypage', 'layer'], function(){
   			var laypage = layui.laypage;
   			layer = layui.layer;
@@ -219,7 +216,7 @@ function blogDetailConfig(){
 		    	cont: 'paging',
 		    	pages: totalPageNumber, //得到总页数
 		    	jump: function(obj){
-					self.initCommentContent(blogId,obj.curr-1,false);
+					self.initCommentContent(opensourceId,obj.curr-1,false);
 		    	}
 		  	});
   

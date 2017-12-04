@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="../css/questionsAnswersPage.css" />
 		
 	</head>
-	<body>
+	<body id="addOpenSourcePage">
 			<div class="mdui-card small_card">
 	  			<div class="q_a_title">
 	  				添加open source
@@ -58,6 +58,9 @@
 		
 		$(function(){
 			add_open_source_config = new addOpenSourceConfig();
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#addOpenSourcePage").height()+20);
 		});
 		
 	</script>

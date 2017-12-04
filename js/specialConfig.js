@@ -41,7 +41,10 @@ function specialConfig(){
 			});
 			
 			$("#specialList").html(htmlContent);
-				
+			
+			//动态设置高度
+			var m_Iframe = $(window.parent.document).find("#m_Iframe");
+			m_Iframe.height($("#specialPage").height()+20);
 		});
 	}
 	

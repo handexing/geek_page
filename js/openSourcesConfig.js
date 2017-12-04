@@ -81,11 +81,11 @@ function openSourcesConfig(){
 					var commentCnt=result[index].commentCnt;
 					var bannerImg=result[index].bannerImg;
 					
-					html += "<li class=\"mdui-list-item mdui-ripple\">";
+					html += "<li class=\"mdui-list-item mdui-ripple\" onclick=\"open_sources_config.openSourceDetail("+id+")\">";
 					html += "<div class=\"mdui-list-item-content\">";
       				html += "<div class=\"mdui-list-item-title\">"+title+"</div>";
       				html += "<div class=\"mdui-list-item-text mdui-list-item-one-line\">"+subtitle+"</div>";
-        				html += "<img src=\"../img/tt.png\" width=\"50%\" height=\"50%\"/>";
+        			//html += "<img src=\"../img/tt.png\" width=\"50%\" height=\"50%\"/>";
 	      			html += "<div class=\"mdui-card-actions mdui-m-t-1\">";
 					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe725;</i><span style=\"font-size: 12px;color: grey;\">"+browseCount+"</span>&nbsp;&nbsp;&nbsp;";
 					html += "<i class=\"Hui-iconfont\" style=\"color: #3F3F3F;font-size: 25px;\">&#xe69e;</i><span style=\"font-size: 12px;color: grey;\">"+collectCount+"</span>&nbsp;&nbsp;&nbsp;";
@@ -103,6 +103,9 @@ function openSourcesConfig(){
 			if(flag){
 				self.pageable(labelId,data.totalPageNumber);
 			}
+			
+			self.recommendList(labelId);
+			
 
 			//动态设置高度
 			var m_Iframe = $(window.parent.document).find("#m_Iframe");
@@ -111,9 +114,36 @@ function openSourcesConfig(){
 		
 	}
 	
+	//开源推荐
+	this.recommendList=function(labelId){
+		$.post(HOST_URL+"/openSource/getRecommendList",{"labelId":labelId},function(data){
+			
+			var result = data.data;
+			var html="";
+			
+			console.log(result);
+			$.each(result, function(index, itemobj) {
+				var id=result[index].id;  
+				var bannerImg=result[index].bannerImg;
+				var title=result[index].title;
+				
+				html += "<div class=\"mdui-col\" onclick=\"open_sources_config.openSourceDetail("+id+")\">";
+				html += "<div class=\"mdui-grid-tile\">";
+				html += "<a href=\"javascript:;\"><img src=\"http://fakeimg.pl/350x225/?text=geekHome&font=lobster\" /></a>";
+				html += "<div class=\"mdui-grid-tile-actions\">";
+				html += "<div class=\"mdui-grid-tile-text\">";
+				html += "<div class=\"mdui-grid-tile-title\">"+title+"</div>";
+				html += "</div></div></div></div>";
+					
+			});
+			
+			$("#recommend_"+labelId).html(html);
+		});
+	}
+	
 	//开源详情页
-	this.openSourceDetail=function(){
-		$(window.parent.document).find("#m_Iframe").attr("src","view/openSourceDetailPage.html").attr("name","openSourceDetailPage");
+	this.openSourceDetail=function(id){
+		$(window.parent.document).find("#m_Iframe").attr("src","view/openSourceDetailPage.html?id="+id).attr("name","openSourceDetailPage");
 	}
 	
 	//分页
