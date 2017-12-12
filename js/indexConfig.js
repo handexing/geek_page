@@ -24,6 +24,8 @@ function indexConfig(){
 		
 		self.checkUser();
 		
+		self.timedExecution();
+		
 		$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
 		
 		$('.logoBtn').bind('click',function(){
@@ -41,6 +43,10 @@ function indexConfig(){
 		
 		$('#questionsAnswersPage').bind('click',function(){
 			$("#m_Iframe").attr("src","view/questionsAnswersPage.html").attr("name","questionsAnswersPage");
+		});
+		
+		$('#pointsMall').bind('click',function(){
+			$("#m_Iframe").attr("src","view/pointsMall.html").attr("name","pointsMall");
 		});
 		
 		$('#openSourcePage').bind('click',function(){
@@ -172,8 +178,51 @@ function indexConfig(){
         	$(window.parent.document).find("#m_Iframe").attr("src","view/ourMission.html").attr("name","ourMission");
         });
         
-        
-        
+        $('.sinaweiboLogin').bind('click',function(){
+        	window.open("https://api.weibo.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://127.0.0.1:8020/geek_page/index.html#&mdui-dialog");
+        });
+	}
+	
+	/**
+	 * 定时发送
+	 */
+	this.timedExecution = function()
+	{
+		setInterval(function(){
+		    websocketInit();
+		},10000);
+	}
+	
+	/**
+	 * websocket初始化
+	 */
+	function websocketInit()
+	{
+		var ws = new WebSocket('ws:	//localhost:8888/websocket');
+		ws.onopen = function()
+		{  
+			var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
+		  	ws.send(geekHomeUser.userName);
+		};
+		ws.onmessage = function(evt)
+		{
+		  	var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
+		  	geekHomeUser.signUpState = evt.data;
+		  	$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});
+		  	if(evt.data == 0){
+		  		console.log($.parseJSON($.cookie('geek_home_user')));
+		  		$("#m_Iframe").contents().find("#signOrNot").text("签到");
+		  	}
+		  	
+		};
+		ws.onclose = function(evt)
+		{
+		  	console.log("WebSocketClosed!");
+		};
+		ws.onerror = function(evt)
+		{
+		  	console.log("WebSocketError!");
+		};
 	}
 	
 	/**
@@ -429,9 +478,7 @@ function indexConfig(){
 				$("#phone").val(result.phone);
 				$("#createTime").val(result.createTime);
 				$(".head_img_url").attr("src",IMAGE_URL+result.headImgUrl);
-				
 				$.cookie('geek_home_user',JSON.stringify(result), {expires: 7});
-				
 				loginDialog.close();
 				$(".headImg").unbind("click");
 			} else{
