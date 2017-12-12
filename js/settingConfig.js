@@ -11,6 +11,10 @@ function settingConfig(){
 	this.init=function(){
 		
 		self.settingUserInfo();
+		
+		$('.check_in_lead_points').bind('click',function(){
+			self.check_in_lead_points();
+		});
        	
        	$('.modifyPersonInfo').bind('click',function(){
         	self.modifyPersonInfo();
@@ -60,6 +64,48 @@ function settingConfig(){
 		var m_Iframe = $(window.parent.document).find("#m_Iframe");
 		m_Iframe.height(1140);
 			
+	}
+	
+	/**
+	 * 签到领积分
+	 */
+	this.check_in_lead_points = function()
+	{
+		user = $.parseJSON($.cookie('geek_home_user'));//获取cookie中的用户信息
+		var currentIntegral = $('#personalPoints').text();//获取当前用户积分
+		
+		$.ajax({
+			url:HOST_URL+"/integral/signInForIntegral",  
+	        type: "POST",
+	        dataType: "json",//跨域ajax请求,返回数据格式为json
+	        cache: false,
+	        timeout: 10000,//请求超时时间,单位为毫秒
+	        async: true,
+	        global: false,//禁用Jquery全局事件
+	        scriptCharset: 'UTF-8',
+	        //processData : false,         // 告诉jQuery不要去处理发送的数据
+	        contentType: 'application/x-www-form-urlencoded' ,//请求内容的MIMEType
+			data:{"userName":user.userName,"currentIntegral":currentIntegral},
+			xhrFields:{withCredentials:true},
+			success:function(responseData, status){
+				if(responseData.data.id == null && responseData.success == false)
+				{
+					layer.msg('今日已签到！', {icon: 5});
+					return;
+				}
+				var result = responseData.data;//积分信息
+				var current_integral = result.integral;//签到后积分
+				$("#personalPoints").text(current_integral);//修改页面信息
+				$("#signOrNot").text("今日已签到");//修改按钮为已签到
+				var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
+				geekHomeUser.integral = current_integral;//修改缓存后的信息
+				geekHomeUser.signUpState = 1; //修改为已签到
+				$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});			
+			},
+			error: function () {
+			      	layer.msg('签到失败！', {icon: 5});
+			    } 
+		});
 	}
 	
 	/**
@@ -325,6 +371,18 @@ function settingConfig(){
 		$("#gitHubUrl").val(user.gitHubUrl);
 		$("#headImage").val(user.headImgUrl);
 		$(".head_img_url").attr("src",IMAGE_URL+user.headImgUrl);
+		if($("#personalPoints") == null){
+			$("#personalPoints").text(0);
+		}else{
+			$("#personalPoints").text(user.integral);
+		}
+		if(user.signUpState == 0){
+			$("#signOrNot").text("签到");
+		}else{
+			$("#signOrNot").text("今日已签到");
+		}
+		
+		
 		
 		var user_info_html = "";
 		

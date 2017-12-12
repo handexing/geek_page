@@ -7,6 +7,7 @@ function indexPage(){
 	
 	this.init=function(){
 		
+		
 		$('.more_blog').bind('click',function(){
 			$(window.parent.document).find("#m_Iframe").attr("src","view/blogPage.html").attr("name","blogPage");
 		});
@@ -25,6 +26,7 @@ function indexPage(){
 		self.initBlogData();
 		self.initSpeicalList();
 	}
+	
 	
 	/**
 	 * 初始化blog
