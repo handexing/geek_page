@@ -22,9 +22,15 @@ function indexConfig(){
 	
 	this.init=function(){
 		
+//		 QC.Login({btnId:"qqLoginBtn"});
+		
 		self.checkUser();
 		
 		self.timedExecution();
+		
+		$('.toLogin').bind('click',function(){
+			self.toLogin();
+		});
 		
 		$("#m_Iframe").attr("src","view/indexPage.html").attr("name","indexPage");
 		
@@ -181,6 +187,21 @@ function indexConfig(){
         $('.sinaweiboLogin').bind('click',function(){
         	window.open("https://api.weibo.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=http://127.0.0.1:8020/geek_page/index.html#&mdui-dialog");
         });
+        
+	}
+	
+	/**
+	 * QQ登录
+	 */
+	this.toLogin = function()
+	{
+		var param = {};
+		param.response_type = 'code';
+		
+		var A=window.open("oauth/index.php","TencentLogin", "width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+		$.get('https://graph.qq.com/oauth2.0/authorize', param, function(dom) {
+			alert("success"); 
+		}) ; // 发送并显示返回内容
 	}
 	
 	/**
