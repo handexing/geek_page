@@ -71,7 +71,7 @@ function settingConfig(){
 	 */
 	this.check_in_lead_points = function()
 	{
-		user = $.parseJSON($.cookie('geek_home_user'));//获取cookie中的用户信息
+		user = $.parseJSON(parent.$.cookie('geek_home_user'));//获取cookie中的用户信息
 		var currentIntegral = $('#personalPoints').text();//获取当前用户积分
 		
 		$.ajax({
@@ -97,10 +97,10 @@ function settingConfig(){
 				var current_integral = result.integral;//签到后积分
 				$("#personalPoints").text(current_integral);//修改页面信息
 				$("#signOrNot").text("今日已签到");//修改按钮为已签到
-				var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
+				var geekHomeUser = $.parseJSON(parent.$.cookie('geek_home_user'));
 				geekHomeUser.integral = current_integral;//修改缓存后的信息
 				geekHomeUser.signUpState = 1; //修改为已签到
-				$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});			
+				parent.$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});			
 			},
 			error: function () {
 			      	layer.msg('签到失败！', {icon: 5});
@@ -165,7 +165,7 @@ function settingConfig(){
 			var imageName = imageNames[imageNames.length - 1];
 			formData.append('croppedImage', blob);
 			formData.append('imageName',imageName);
-			formData.append('userName',$.parseJSON($.cookie('geek_home_user')).userName);
+			formData.append('userName',$.parseJSON(parent.$.cookie('geek_home_user')).userName);
 			$.ajax(HOST_URL+'/user/modifyAvatar', {
 			    method: "POST",
 			    data: formData,
@@ -174,11 +174,11 @@ function settingConfig(){
 			    global: false,//禁用Jquery全局事件
 			    success: function (responseData,status) {
 			    	if(responseData.success == 1){
-			    		var geekHomeUser = $.parseJSON($.cookie('geek_home_user'));
+			    		var geekHomeUser = $.parseJSON(parent.$.cookie('geek_home_user'));
 			    		geekHomeUser.headImgUrl = responseData.url;
 			    		$(".head_img_url").attr("src","../"+responseData.url);
 			    		parent.$('.headImg').children().attr('src',responseData.url);
-			    		$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});
+			    		parent.$.cookie('geek_home_user',JSON.stringify(geekHomeUser), {expires: 7});
 			    	}
 			    	layer.msg('修改成功！');
 			    	modifyPersonAvatar.close();
@@ -356,8 +356,7 @@ function settingConfig(){
 	 */
 	this.settingUserInfo=function(){
 		
-		user = $.parseJSON($.cookie('geek_home_user'));
-		
+		user = $.parseJSON(parent.$.cookie('geek_home_user'));
 		$("#userName").text(user.userName);
 		$("#userNum").text(user.id);
 		$("#createTime").text(user.createTime);
@@ -471,6 +470,8 @@ function settingConfig(){
 	 */
 	this.modifyPersonInfo=function(){
 		
+		var cookieUser = $.parseJSON(parent.$.cookie('geek_home_user'));
+		
 		var id = $("#userNum").text();
 		var userName = $("#userName").text();
 		var email = $.trim($("#email").val());
@@ -491,7 +492,16 @@ function settingConfig(){
 		user.address = address;
 		user.gitHubUrl = gitHubUrl;
 		user.brief = brief;
-		user.headImgUrl = $("#headImage").val();;
+		user.headImgUrl = $("#headImage").val();
+		user.integralId = cookieUser.integralId;
+		user.integral = cookieUser.integral;
+		if($('#signOrNot').text() == '签到')
+		{
+			user.signUpState = 0;
+		}else{
+			user.signUpState = 1;
+		}
+		
 		
 		$.ajax({
 			url:HOST_URL+'/user/modifyPersonInfo',  
@@ -507,7 +517,7 @@ function settingConfig(){
 			data:JSON.stringify(user),
 			success:function(responseData, status){
 				if(responseData.data.id!=null){
-					$.cookie('geek_home_user',JSON.stringify(responseData.data), {expires: 7});
+					parent.$.cookie('geek_home_user',JSON.stringify(responseData.data), {expires: 7});
 					self.settingUserInfo();
 					layer.msg('修改成功！');
 				}else{
